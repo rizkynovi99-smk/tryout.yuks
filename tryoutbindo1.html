@@ -47,10 +47,10 @@
             </div>
             <div class="flex items-center space-x-3 md:space-x-4">
                 <div id="timer-box" class="bg-teal-900/80 border border-teal-700/60 px-3.5 py-1.5 rounded-xl font-mono text-sm md:text-base font-bold tracking-wider flex items-center space-x-2 text-teal-200 shadow-inner">
-                    <span>⏱️</span>
+                    <span>⏱️️</span>
                     <span id="time-display">90:00</span>
                 </div>
-                <button onclick="confirmSubmit()" class="bg-emerald-500 hover:bg-emerald-600 active:scale-95 text-white font-bold px-4 py-2 rounded-xl text-xs md:text-sm shadow-lg shadow-emerald-600/25 transition-all duration-200 flex items-center space-x-1">
+                <button type="button" onclick="confirmSubmit()" class="bg-emerald-500 hover:bg-emerald-600 active:scale-95 text-white font-bold px-4 py-2 rounded-xl text-xs md:text-sm shadow-lg shadow-emerald-600/25 transition-all duration-200 flex items-center space-x-1">
                     <span>Kumpul Ujian</span>
                 </button>
             </div>
@@ -88,7 +88,7 @@
                     </ul>
                 </div>
 
-                <button type="submit" class="w-full bg-teal-700 hover:bg-teal-800 active:scale-[0.98] text-white font-bold py-3.5 rounded-2xl transition-all shadow-xl shadow-teal-700/25 flex items-center justify-center space-x-2 text-sm tracking-wide">
+                <button type="submit" id="btn-start-exam" class="w-full bg-teal-700 hover:bg-teal-800 active:scale-[0.98] text-white font-bold py-3.5 rounded-2xl transition-all shadow-xl shadow-teal-700/25 flex items-center justify-center space-x-2 text-sm tracking-wide cursor-pointer">
                     <span>Mulai Tryout Sekarang</span>
                     <span>→</span>
                 </button>
@@ -120,10 +120,10 @@
 
                 <!-- Navigasi Bawah Soal -->
                 <div class="flex justify-between items-center pt-5 border-t border-slate-100 mt-auto">
-                    <button onclick="prevQuestion()" id="btn-prev" class="px-5 py-2.5 rounded-2xl border border-slate-200 bg-white text-slate-700 font-bold text-sm hover:bg-slate-50 active:scale-95 disabled:opacity-30 disabled:cursor-not-allowed transition-all shadow-sm">
+                    <button type="button" onclick="prevQuestion()" id="btn-prev" class="px-5 py-2.5 rounded-2xl border border-slate-200 bg-white text-slate-700 font-bold text-sm hover:bg-slate-50 active:scale-95 disabled:opacity-30 disabled:cursor-not-allowed transition-all shadow-sm">
                         ← Sebelumnya
                     </button>
-                    <button onclick="nextQuestion()" id="btn-next" class="px-6 py-2.5 rounded-2xl bg-teal-700 hover:bg-teal-800 active:scale-95 text-white font-bold text-sm shadow-lg shadow-teal-700/20 transition-all">
+                    <button type="button" onclick="nextQuestion()" id="btn-next" class="px-6 py-2.5 rounded-2xl bg-teal-700 hover:bg-teal-800 active:scale-95 text-white font-bold text-sm shadow-lg shadow-teal-700/20 transition-all">
                         Selanjutnya →
                     </button>
                 </div>
@@ -179,7 +179,7 @@
                     </div>
                 </div>
 
-                <button onclick="location.reload()" class="bg-slate-900 hover:bg-slate-800 active:scale-95 text-white font-bold px-8 py-3.5 rounded-2xl transition-all shadow-xl shadow-slate-900/10 text-sm">
+                <button type="button" onclick="location.reload()" class="bg-slate-900 hover:bg-slate-800 active:scale-95 text-white font-bold px-8 py-3.5 rounded-2xl transition-all shadow-xl shadow-slate-900/10 text-sm cursor-pointer">
                     Ulangi Simulasi Tryout
                 </button>
             </div>
@@ -203,8 +203,8 @@
             <h3 class="text-xl font-black text-slate-900 mb-2">Konfirmasi Pengumpulan Tryout</h3>
             <p id="submit-modal-text" class="text-sm text-slate-600 mb-6 leading-relaxed">Apakah Anda yakin ingin menyelesaikan dan mengumpulkan lembar jawaban TKA Bahasa Indonesia Anda?</p>
             <div class="flex space-x-3">
-                <button onclick="closeSubmitModal()" class="flex-1 bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold py-3 rounded-2xl text-sm transition-all">Periksa Lagi</button>
-                <button onclick="executeFinalSubmit()" class="flex-1 bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-3 rounded-2xl text-sm transition-all shadow-lg shadow-emerald-600/25">Ya, Kumpulkan</button>
+                <button type="button" onclick="closeSubmitModal()" class="flex-1 bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold py-3 rounded-2xl text-sm transition-all cursor-pointer">Periksa Lagi</button>
+                <button type="button" onclick="executeFinalSubmit()" class="flex-1 bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-3 rounded-2xl text-sm transition-all shadow-lg shadow-emerald-600/25 cursor-pointer">Ya, Kumpulkan</button>
             </div>
         </div>
     </div>
@@ -271,7 +271,7 @@
             {
                 id: 5, type: "pg",
                 stimulus: "Pementasan teater 'Bukan Senja Biasa' yang dibawakan oleh kelompok Teater Mahardika berhasil memukau penonton. Tata panggung minimalis berpadu harmonis dengan pencahayaan dramatis, menciptakan atmosfer sunyi yang merasuk ke dalam jiwa setiap penonton yang hadir.",
-                question: "Penulisan kalimat kritik sastra yang paling objektif dan santun terhadap pementasan tersebut adalah...",
+                question: "Penulisan kritik sastra yang paling objektif dan santun terhadap pementasan tersebut adalah...",
                 options: [
                     "Pementasan teater ini sangat buruk karena tata panggungnya terlalu sederhana dan membosankan.",
                     "Kelompok Teater Mahardika gagal total dalam membangun atmosfer sunyi karena pencahayaannya berlebihan.",
@@ -285,7 +285,7 @@
             { id: 6, type: "pg", question: "Dalam ragam bahasa baku, penulisan gabungan kata di bawah ini yang benar adalah...", options: ["Tanggung jawab", "Kacamata", "Pascasarjana", "Semua jawaban benar", "Peribahasa"], answer: "Semua jawaban benar", discussion: "Kata majemuk seperti tanggung jawab, kacamata, pascasarjana, dan peribahasa telah diserap dan ditulis sesuai kaidah EYD yang berlaku." },
             { id: 7, type: "pg", question: "Cermati kalimat berikut: 'Meskipun hari hujan lebat, namun para siswa tetap antusias mengikuti upacara bendera.' Perbaikan kalimat tidak efektif tersebut agar menjadi baku adalah...", options: ["Menghilangkan kata 'namun'", "Mengubah 'meskipun' menjadi 'karena'", "Menambahkan kata 'tetapi' di akhir", "Mengganti 'para siswa' menjadi 'siswi-siswi'", "Mengubah 'mengikuti' menjadi 'diikuti'"], answer: "Menghilangkan kata 'namun'", discussion: "Konjungsi subordinatif konsesif 'meskipun' tidak boleh disandingkan secara bersamaan dengan konjungsi korelatif 'namun' dalam satu kalimat." },
             { id: 8, type: "pg", question: "Penggunaan tanda baca titik dua (:) yang tepat terdapat pada kalimat...", options: ["Ibu membeli sayuran: bayam, kangkung, dan bayam.", "Kelompok kami terdiri atas: Andi, Siska, dan Budi.", "Syarat pendaftaran beasiswa meliputi: fotokopi rapor, pasfoto, dan surat rekomendasi.", "Dalam rapat dibahas tiga hal penting yaitu: anggaran, jadwal, dan lokasi.", "Pemenang lomba esai adalah: Rian dari kelas XII."], answer: "Syarat pendaftaran beasiswa meliputi: fotokopi rapor, pasfoto, dan surat rekomendasi.", "discussion: "Tanda titik dua digunakan pada akhir suatu pernyataan lengkap yang diikuti rincian atau penjelasan." },
-            { id: 9, type: "pg", question: "Istilah teknis 'algoritma' dalam bidang ilmu komputer memilikipadanan makna dengan...", options: ["Prosedur sistematis langkah demi langkah", "Jaringan nirkabel jarak jauh", "Kumpulan data mentah", "Perangkat keras penyimpanan", "Sistem operasi ganda"], answer: "Prosedur sistematis langkah demi langkah", "discussion: "Algoritma secara etimologis dan leksikal adalah urutan langkah logis penyelesaian masalah yang disusun secara sistematis." },
+            { id: 9, type: "pg", question: "Istilah teknis 'algoritma' dalam bidang ilmu komputer memiliki padanan makna dengan...", options: ["Prosedur sistematis langkah demi langkah", "Jaringan nirkabel jarak jauh", "Kumpulan data mentah", "Perangkat keras penyimpanan", "Sistem operasi ganda"], answer: "Prosedur sistematis langkah demi langkah", "discussion: "Algoritma secara etimologis dan leksikal adalah urutan langkah logis penyelesaian masalah yang disusun secara sistematis." },
             { id: 10, type: "pg", question: "Novel sejarah 'Bumi Manusia' karya Pramoedya Ananta Toer berlatar belakang masa kebangkitan nasional awal abad ke-20. Unsur ekstrinsik dominan dalam karya sastra tersebut adalah...", options: ["Sosial dan historis", "Psikologis pengarang", "Struktur kebahasaan", "Estetika sampul buku", "Jumlah bab cerita"], answer: "Sosial dan historis", "discussion: "Latar belakang penciptaan karya sastra berlatar sejarah sangat dipengaruhi oleh kondisi sosial kemasyarakatan dan peristiwa historis pada masa itu." },
             { id: 11, type: "pg", question: "Kalimat penjelas yang sumbang (tidak koheren) dalam sebuah paragraf padu biasanya ditandai oleh...", options: ["Gagasan utama yang berulang", "Topik pembicaraan yang menyimpang dari kalimat utama", "Penggunaan konjungsi antar-kalimat yang terlalu sering", "Jumlah kata yang terlalu sedikit", "Tidak adanya tanda baca titik di akhir kalimat"], answer: "Topik pembicaraan yang menyimpang dari kalimat utama", "discussion: "Kalimat sumbang adalah kalimat yang keluar dari fokus pembahasan atau ide pokok yang sedang dikembangkan dalam paragraf." },
             { id: 12, type: "pg", question: "Penulisan unsur serapan dari bahasa asing yang tidak sesuai dengan kaidah EYD terdapat pada kata...", options: ["Analisis - analisa", "Sistem - sistim", "Kuitansi - kwitansi", "Jadwal - jadual", "Apotik - apotek"], answer: "Sistem - sistim", "discussion: "Bentuk baku yang benar adalah 'sistem', bukan 'sistim'. Demikian pula 'analisis', 'kuitansi', 'jadwal', dan 'apotek'." },
@@ -343,7 +343,10 @@
             studentData.name = nameInput.value.trim();
             studentData.schoolName = schoolInput.value.trim();
 
-            if(!studentData.name || !studentData.schoolName) return;
+            if(!studentData.name || !studentData.schoolName) {
+                alert("Mohon lengkapi Nama dan Asal Sekolah terlebih dahulu.");
+                return;
+            }
 
             const stepIdentity = document.getElementById("step-identity");
             const stepExam = document.getElementById("step-exam");
@@ -363,6 +366,7 @@
         }
 
         function startTimer() {
+            if (timerInterval) clearInterval(timerInterval);
             timerInterval = setInterval(() => {
                 timeLeft--;
                 let m = Math.floor(timeLeft / 60);
@@ -390,9 +394,10 @@
             container.innerHTML = "";
             questions.forEach((q, idx) => {
                 let btn = document.createElement("button");
+                btn.type = "button";
                 btn.id = `grid-btn-${idx}`;
                 btn.innerText = q.id;
-                btn.className = "h-10 rounded-xl font-bold text-xs border border-slate-200 bg-slate-50 text-slate-700 hover:bg-slate-100 transition-all shadow-sm";
+                btn.className = "h-10 rounded-xl font-bold text-xs border border-slate-200 bg-slate-50 text-slate-700 hover:bg-slate-100 transition-all shadow-sm cursor-pointer";
                 btn.onclick = () => loadQuestion(idx);
                 container.appendChild(btn);
             });
