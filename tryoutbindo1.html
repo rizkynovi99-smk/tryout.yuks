@@ -4,8 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CBT TKA Bahasa Indonesia SMA/SMK (Standar Pusmendik)</title>
-    <!-- Tailwind CSS untuk Desain Responsif & Modern -->
+    <title>Tryout CBT TKA Bahasa Indonesia SMA/SMK</title>
+    <!-- Tailwind CSS untuk Desain Modern & Responsif Mobile -->
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         @keyframes pulse-red {
@@ -15,10 +15,9 @@
         .animate-pulse-red {
             animation: pulse-red 1s cubic-bezier(0.4, 0, 0.6, 1) infinite;
         }
-        /* Custom Scrollbar Styling */
         ::-webkit-scrollbar {
-            width: 8px;
-            height: 8px;
+            width: 6px;
+            height: 6px;
         }
         ::-webkit-scrollbar-track {
             background: #f1f5f9;
@@ -33,39 +32,39 @@
         }
     </style>
 </head>
-<body class="bg-gradient-to-br from-slate-50 via-teal-50/20 to-slate-100 text-slate-800 font-sans min-h-screen flex flex-col antialiased selection:bg-teal-600 selection:text-white">
+<body class="bg-gradient-to-br from-slate-50 via-teal-50/30 to-slate-100 text-slate-800 font-sans min-h-screen flex flex-col antialiased selection:bg-teal-600 selection:text-white">
 
     <!-- Header & Floating Timer / Submit Button -->
-    <header id="exam-header" class="bg-teal-950/95 backdrop-blur-md text-white shadow-lg sticky top-0 z-40 hidden border-b border-teal-900">
-        <div class="max-w-7xl mx-auto px-4 py-3.5 flex justify-between items-center">
-            <div class="flex items-center space-x-3">
-                <div class="w-9 h-9 rounded-xl bg-teal-600 flex items-center justify-center font-bold text-lg shadow-inner">📖</div>
-                <div>
-                    <h1 class="font-bold text-sm md:text-lg tracking-wide truncate">TKA Bahasa Indonesia SMA/SMK</h1>
-                    <p id="header-user-info" class="text-xs text-teal-300 font-medium">Peserta: -</p>
+    <header id="exam-header" class="bg-teal-900/95 backdrop-blur-md text-white shadow-lg sticky top-0 z-40 hidden border-b border-teal-800">
+        <div class="max-w-7xl mx-auto px-3 sm:px-6 py-3 flex justify-between items-center">
+            <div class="flex items-center space-x-2 sm:space-x-3">
+                <div class="w-8 h-8 sm:w-10 sm:h-10 rounded-xl bg-teal-600 flex items-center justify-center font-bold text-base sm:text-lg shadow-inner shrink-0">📖</div>
+                <div class="min-w-0">
+                    <h1 class="font-bold text-xs sm:text-base md:text-lg tracking-wide truncate">TKA Bahasa Indonesia</h1>
+                    <p id="header-user-info" class="text-[10px] sm:text-xs text-teal-300 font-medium truncate">Peserta: -</p>
                 </div>
             </div>
-            <div class="flex items-center space-x-3 md:space-x-4">
-                <div id="timer-box" class="bg-teal-900/80 border border-teal-700/60 px-3.5 py-1.5 rounded-xl font-mono text-sm md:text-base font-bold tracking-wider flex items-center space-x-2 text-teal-200 shadow-inner">
-                    <span>⏱️️</span>
+            <div class="flex items-center space-x-2 sm:space-x-4 shrink-0">
+                <div id="timer-box" class="bg-teal-950/80 border border-teal-700/60 px-2.5 sm:px-3.5 py-1.5 rounded-xl font-mono text-xs sm:text-sm md:text-base font-bold tracking-wider flex items-center space-x-1.5 sm:space-x-2 text-teal-200 shadow-inner">
+                    <span>⏱️</span>
                     <span id="time-display">90:00</span>
                 </div>
-                <button type="button" onclick="confirmSubmit()" class="bg-emerald-500 hover:bg-emerald-600 active:scale-95 text-white font-bold px-4 py-2 rounded-xl text-xs md:text-sm shadow-lg shadow-emerald-600/25 transition-all duration-200 flex items-center space-x-1">
-                    <span>Kumpul Ujian</span>
+                <button onclick="confirmSubmit()" class="bg-emerald-500 hover:bg-emerald-600 active:scale-95 text-white font-bold px-3 sm:px-4 py-2 rounded-xl text-xs sm:text-sm shadow-lg shadow-emerald-600/25 transition-all flex items-center space-x-1">
+                    <span>Kumpul</span>
                 </button>
             </div>
         </div>
     </header>
 
     <!-- Main Content Wrapper -->
-    <main class="flex-grow max-w-7xl w-full mx-auto p-4 md:p-6 flex flex-col justify-center">
+    <main class="flex-grow max-w-7xl w-full mx-auto p-3 sm:p-6 flex flex-col justify-center">
 
-        <!-- STEP 1: Verifikasi Identitas -->
-        <section id="step-identity" class="max-w-md mx-auto w-full bg-white/90 backdrop-blur-xl rounded-3xl shadow-2xl p-6 md:p-8 border border-white/80 transition-all duration-300">
+        <!-- STEP 1: Verifikasi Identitas & Nama Sekolah -->
+        <section id="step-identity" class="max-w-md mx-auto w-full bg-white/90 backdrop-blur-xl rounded-3xl shadow-2xl p-5 sm:p-8 border border-white/80 transition-all duration-300">
             <div class="text-center mb-6">
-                <div class="inline-flex p-3.5 bg-teal-50 text-teal-600 rounded-2xl text-3xl mb-3 shadow-sm border border-teal-100">✍️</div>
-                <h2 class="text-2xl font-black text-slate-900 tracking-tight">Tryout TKA Bahasa Indonesia</h2>
-                <p class="text-xs md:text-sm text-slate-500 mt-1 font-medium">Standar Asli Literasi Membaca, Kebahasaan, & Penalaran Teks</p>
+                <div class="inline-flex p-3 sm:p-3.5 bg-teal-50 text-teal-600 rounded-2xl text-2xl sm:text-3xl mb-3 shadow-sm border border-teal-100">📝</div>
+                <h2 class="text-xl sm:text-2xl font-black text-slate-900 tracking-tight">Tryout TKA Bahasa Indonesia</h2>
+                <p class="text-xs sm:text-sm text-slate-500 mt-1 font-medium">Standar Literasi Membaca, Analisis Teks, & Kebahasaan (Pusmendik)</p>
             </div>
 
             <form id="identity-form" onsubmit="startExam(event)" class="space-y-4">
@@ -76,19 +75,19 @@
                 </div>
                 <div>
                     <label class="block text-xs font-bold uppercase tracking-wider text-slate-600 mb-1.5">Nama Sekolah</label>
-                    <input type="text" id="student-school" required placeholder="Contoh: SMA Negeri 3 Surabaya" 
+                    <input type="text" id="student-school" required placeholder="Contoh: SMA Negeri 2 Surabaya" 
                         class="w-full px-4 py-3 rounded-2xl border border-slate-200 bg-slate-50/50 focus:bg-white focus:ring-2 focus:ring-teal-500/20 focus:border-teal-600 focus:outline-none text-sm font-medium transition-all">
                 </div>
 
-                <div class="bg-amber-50/80 border border-amber-200/80 p-4 rounded-2xl text-xs text-amber-900 space-y-1.5">
-                    <p class="font-bold flex items-center space-x-1"><span>⚠️</span> <span>Ketentuan Tryout Literasi:</span></p>
+                <div class="bg-amber-50/80 border border-amber-200/80 p-3.5 sm:p-4 rounded-2xl text-xs text-amber-900 space-y-1.5">
+                    <p class="font-bold flex items-center space-x-1"><span>⚠️</span> <span>Ketentuan Asesmen:</span></p>
                     <ul class="list-disc list-inside space-y-1 text-amber-800/90 font-medium">
-                        <li>Mencakup analisis teks informasi, sastra, struktur kalimat, dan logika bahasa.</li>
-                        <li>Sistem mendeteksi perpindahan tab browser (Maksimal 3 kali pelanggaran).</li>
+                        <li>Mencakup pemahaman teks sastra & informasi tersirat.</li>
+                        <li>Sistem mendeteksi perpindahan tab browser (Maksimal 3 kali).</li>
                     </ul>
                 </div>
 
-                <button type="submit" id="btn-start-exam" class="w-full bg-teal-700 hover:bg-teal-800 active:scale-[0.98] text-white font-bold py-3.5 rounded-2xl transition-all shadow-xl shadow-teal-700/25 flex items-center justify-center space-x-2 text-sm tracking-wide cursor-pointer">
+                <button type="submit" class="w-full bg-teal-600 hover:bg-teal-700 active:scale-[0.98] text-white font-bold py-3.5 rounded-2xl transition-all shadow-xl shadow-teal-600/25 flex items-center justify-center space-x-2 text-sm tracking-wide">
                     <span>Mulai Tryout Sekarang</span>
                     <span>→</span>
                 </button>
@@ -96,99 +95,99 @@
         </section>
 
         <!-- STEP 2: Pengerjaan Ujian (Hidden by Default) -->
-        <section id="step-exam" class="hidden grid grid-cols-1 lg:grid-cols-4 gap-6 items-start">
-            <!-- Area Soal Utama -->
-            <div class="lg:col-span-3 bg-white/95 backdrop-blur-md rounded-3xl shadow-xl border border-slate-200/80 p-6 md:p-8 flex flex-col justify-between min-h-[580px]">
+        <section id="step-exam" class="hidden grid grid-cols-1 lg:grid-cols-4 gap-4 sm:gap-6 items-start">
+            <!-- Area Stimulus & Soal Utama -->
+            <div class="lg:col-span-3 bg-white/95 backdrop-blur-md rounded-3xl shadow-xl border border-slate-200/80 p-4 sm:p-8 flex flex-col justify-between min-h-[500px] sm:min-h-[580px]">
                 <div>
-                    <div class="flex justify-between items-center border-b border-slate-100 pb-4 mb-6">
-                        <span id="question-badge" class="bg-teal-50 text-teal-700 border border-teal-100 text-xs font-bold px-3.5 py-1.5 rounded-xl shadow-sm">Soal No. 1 dari 45</span>
-                        <span id="question-type-badge" class="text-xs font-bold uppercase tracking-wider text-slate-400 bg-slate-100 px-3 py-1 rounded-lg">Literasi Membaca Teks</span>
+                    <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2 border-b border-slate-100 pb-3 sm:pb-4 mb-4 sm:mb-6">
+                        <span id="question-badge" class="bg-teal-50 text-teal-700 border border-teal-100 text-xs font-bold px-3 py-1 sm:px-3.5 sm:py-1.5 rounded-xl shadow-sm">Soal No. 1 dari 15</span>
+                        <span id="question-type-badge" class="text-[10px] sm:text-xs font-bold uppercase tracking-wider text-slate-500 bg-slate-100 px-3 py-1 rounded-lg">Literasi Membaca</span>
                     </div>
 
-                    <!-- Container Wacana / Stimulus Bacaan -->
-                    <div id="stimulus-container" class="bg-slate-50/80 border border-slate-200/80 p-5 rounded-2xl mb-6 text-sm text-slate-700 leading-relaxed max-h-56 overflow-y-auto shadow-inner hidden">
-                        <p class="font-bold text-teal-900 mb-1 flex items-center space-x-1.5"><span>📄</span> <span>Wacana / Teks Stimulus:</span></p>
+                    <!-- Kotak Stimulus / Teks Wacana -->
+                    <div id="stimulus-container" class="mb-4 sm:mb-6 p-3.5 sm:p-5 bg-slate-50 border border-slate-200 rounded-2xl text-xs sm:text-sm md:text-base text-slate-800 leading-relaxed hidden shadow-inner">
+                        <p class="font-bold text-teal-900 text-[11px] sm:text-xs uppercase tracking-wider mb-2">📌 Stimulus Wacana:</p>
                         <div id="stimulus-text"></div>
                     </div>
 
-                    <!-- Container Teks Soal -->
-                    <div id="question-text" class="text-base md:text-lg font-medium text-slate-900 mb-8 leading-relaxed"></div>
+                    <!-- Container Pertanyaan -->
+                    <div id="question-text" class="text-sm sm:text-base md:text-lg font-medium text-slate-900 mb-5 sm:mb-6 leading-relaxed"></div>
 
                     <!-- Container Opsi / Input Jawaban -->
-                    <div id="answer-options-container" class="space-y-3 mb-6"></div>
+                    <div id="answer-options-container" class="space-y-2.5 sm:space-y-3 mb-6"></div>
                 </div>
 
                 <!-- Navigasi Bawah Soal -->
-                <div class="flex justify-between items-center pt-5 border-t border-slate-100 mt-auto">
-                    <button type="button" onclick="prevQuestion()" id="btn-prev" class="px-5 py-2.5 rounded-2xl border border-slate-200 bg-white text-slate-700 font-bold text-sm hover:bg-slate-50 active:scale-95 disabled:opacity-30 disabled:cursor-not-allowed transition-all shadow-sm">
+                <div class="flex justify-between items-center pt-4 sm:pt-5 border-t border-slate-100 mt-auto">
+                    <button onclick="prevQuestion()" id="btn-prev" class="px-4 sm:px-5 py-2.5 rounded-2xl border border-slate-200 bg-white text-slate-700 font-bold text-xs sm:text-sm hover:bg-slate-50 active:scale-95 disabled:opacity-30 disabled:cursor-not-allowed transition-all shadow-sm">
                         ← Sebelumnya
                     </button>
-                    <button type="button" onclick="nextQuestion()" id="btn-next" class="px-6 py-2.5 rounded-2xl bg-teal-700 hover:bg-teal-800 active:scale-95 text-white font-bold text-sm shadow-lg shadow-teal-700/20 transition-all">
+                    <button onclick="nextQuestion()" id="btn-next" class="px-5 sm:px-6 py-2.5 rounded-2xl bg-teal-600 hover:bg-teal-700 active:scale-95 text-white font-bold text-xs sm:text-sm shadow-lg shadow-teal-600/20 transition-all">
                         Selanjutnya →
                     </button>
                 </div>
             </div>
 
             <!-- Sidebar Navigasi Grid Nomor Soal -->
-            <div class="bg-white/95 backdrop-blur-md rounded-3xl shadow-xl border border-slate-200/80 p-6 flex flex-col h-fit sticky top-24">
-                <h3 class="font-bold text-slate-900 text-sm mb-3 flex items-center justify-between">
+            <div class="bg-white/95 backdrop-blur-md rounded-3xl shadow-xl border border-slate-200/80 p-4 sm:p-6 flex flex-col h-fit">
+                <h3 class="font-bold text-slate-900 text-xs sm:text-sm mb-3 flex items-center justify-between">
                     <span>Navigasi Soal</span>
-                    <span class="text-xs text-teal-700 font-semibold bg-teal-50 px-2 py-0.5 rounded-md">45 Butir</span>
+                    <span class="text-[10px] sm:text-xs text-teal-600 font-semibold bg-teal-50 px-2 py-0.5 rounded-md">15 Butir</span>
                 </h3>
-                <div id="grid-nav-container" class="grid grid-cols-5 gap-2 mb-6 max-h-[320px] overflow-y-auto p-1"></div>
-                <div class="border-t border-slate-100 pt-4 text-xs text-slate-600 space-y-2.5 font-medium">
-                    <div class="flex items-center space-x-2.5">
-                        <span class="w-3.5 h-3.5 bg-teal-700 rounded-lg inline-block shadow-sm"></span>
+                <div id="grid-nav-container" class="grid grid-cols-5 sm:grid-cols-5 gap-2 mb-4 sm:mb-6 max-h-[220px] sm:max-h-[320px] overflow-y-auto p-1"></div>
+                <div class="border-t border-slate-100 pt-3 sm:pt-4 text-[11px] sm:text-xs text-slate-600 space-y-2 font-medium">
+                    <div class="flex items-center space-x-2">
+                        <span class="w-3 h-3 bg-teal-600 rounded-lg inline-block shadow-sm shrink-0"></span>
                         <span>Soal Aktif</span>
                     </div>
-                    <div class="flex items-center space-x-2.5">
-                        <span class="w-3.5 h-3.5 bg-emerald-500 rounded-lg inline-block shadow-sm"></span>
+                    <div class="flex items-center space-x-2">
+                        <span class="w-3 h-3 bg-emerald-500 rounded-lg inline-block shadow-sm shrink-0"></span>
                         <span>Sudah Dijawab</span>
                     </div>
-                    <div class="flex items-center space-x-2.5">
-                        <span class="w-3.5 h-3.5 bg-slate-200 rounded-lg inline-block shadow-sm"></span>
+                    <div class="flex items-center space-x-2">
+                        <span class="w-3 h-3 bg-slate-200 rounded-lg inline-block shadow-sm shrink-0"></span>
                         <span>Belum Dijawab</span>
                     </div>
                 </div>
-                <div class="mt-5 bg-red-50/80 p-3.5 rounded-2xl border border-red-100 text-red-700 text-xs font-semibold flex items-center justify-between">
+                <div class="mt-4 sm:mt-5 bg-red-50/80 p-3 rounded-2xl border border-red-100 text-red-700 text-[11px] sm:text-xs font-semibold flex items-center justify-between">
                     <span>⚠️ Pelanggaran Tab:</span>
                     <span id="violation-count" class="bg-red-200/70 px-2 py-0.5 rounded-lg font-bold">0</span> / 3
                 </div>
             </div>
         </section>
 
-        <!-- STEP 3: Hasil & Pembahasan TKA (Hidden by Default) -->
+        <!-- STEP 3: Hasil & Pembahasan (Hidden by Default) -->
         <section id="step-result" class="hidden max-w-4xl mx-auto w-full space-y-6">
-            <div class="bg-white/95 backdrop-blur-md rounded-3xl shadow-2xl p-6 md:p-10 text-center border border-slate-200/80">
-                <div class="inline-flex p-4 bg-emerald-50 text-emerald-600 rounded-3xl text-4xl mb-4 shadow-sm border border-emerald-100">🎯</div>
-                <h2 class="text-2xl md:text-3xl font-black text-slate-900 tracking-tight mb-1">Hasil & Analisis Tryout TKA Bahasa Indonesia</h2>
-                <p class="text-sm text-slate-500 mb-8 font-medium">Berikut adalah rekapitulasi skor literasi dan pembahasan komprehensif berstandar soal asli Pusmendik.</p>
+            <div class="bg-white/95 backdrop-blur-md rounded-3xl shadow-2xl p-6 sm:p-10 text-center border border-slate-200/80">
+                <div class="inline-flex p-4 bg-emerald-50 text-emerald-600 rounded-3xl text-3xl sm:text-4xl mb-4 shadow-sm border border-emerald-100">🎯</div>
+                <h2 class="text-xl sm:text-2xl md:text-3xl font-black text-slate-900 tracking-tight mb-1">Hasil & Analisis Tryout TKA Bahasa Indonesia</h2>
+                <p class="text-xs sm:text-sm text-slate-500 mb-6 sm:mb-8 font-medium">Berikut adalah rekapitulasi nilai literasi dan pembahasan mendalam berstandar Pusmendik.</p>
 
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 max-w-2xl mx-auto text-left mb-8">
-                    <div class="bg-slate-50/80 p-5 rounded-2xl border border-slate-200/60 shadow-sm">
-                        <span class="block text-xs font-bold text-slate-400 uppercase tracking-wider mb-1">Peserta</span>
-                        <span id="res-name" class="font-bold text-slate-900 text-sm truncate block"></span>
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4 max-w-2xl mx-auto text-left mb-6 sm:mb-8">
+                    <div class="bg-slate-50/80 p-4 sm:p-5 rounded-2xl border border-slate-200/60 shadow-sm">
+                        <span class="block text-[10px] sm:text-xs font-bold text-slate-400 uppercase tracking-wider mb-1">Peserta</span>
+                        <span id="res-name" class="font-bold text-slate-900 text-xs sm:text-sm truncate block"></span>
                     </div>
-                    <div class="bg-slate-50/80 p-5 rounded-2xl border border-slate-200/60 shadow-sm">
-                        <span class="block text-xs font-bold text-slate-400 uppercase tracking-wider mb-1">Skor TKA</span>
-                        <span id="res-score" class="font-black text-teal-700 text-xl"></span>
+                    <div class="bg-slate-50/80 p-4 sm:p-5 rounded-2xl border border-slate-200/60 shadow-sm">
+                        <span class="block text-[10px] sm:text-xs font-bold text-slate-400 uppercase tracking-wider mb-1">Skor TKA Literasi</span>
+                        <span id="res-score" class="font-black text-teal-600 text-lg sm:text-xl"></span>
                     </div>
-                    <div class="bg-slate-50/80 p-5 rounded-2xl border border-slate-200/60 shadow-sm">
-                        <span class="block text-xs font-bold text-slate-400 uppercase tracking-wider mb-1">Pelanggaran</span>
-                        <span id="res-violation" class="font-bold text-red-600 text-sm"></span>
+                    <div class="bg-slate-50/80 p-4 sm:p-5 rounded-2xl border border-slate-200/60 shadow-sm">
+                        <span class="block text-[10px] sm:text-xs font-bold text-slate-400 uppercase tracking-wider mb-1">Pelanggaran Tab</span>
+                        <span id="res-violation" class="font-bold text-red-600 text-xs sm:text-sm"></span>
                     </div>
                 </div>
 
-                <button type="button" onclick="location.reload()" class="bg-slate-900 hover:bg-slate-800 active:scale-95 text-white font-bold px-8 py-3.5 rounded-2xl transition-all shadow-xl shadow-slate-900/10 text-sm cursor-pointer">
-                    Ulangi Simulasi Tryout
+                <button onclick="location.reload()" class="bg-slate-900 hover:bg-slate-800 active:scale-95 text-white font-bold px-6 sm:px-8 py-3.5 rounded-2xl transition-all shadow-xl shadow-slate-900/10 text-xs sm:text-sm">
+                    Ulangi Tryout TKA
                 </button>
             </div>
 
             <!-- Kotak Pembahasan Per Soal -->
-            <div class="bg-white/95 backdrop-blur-md rounded-3xl shadow-2xl p-6 md:p-10 border border-slate-200/80">
-                <h3 class="text-xl font-black text-slate-900 mb-6 border-b border-slate-100 pb-4 flex items-center space-x-2">
+            <div class="bg-white/95 backdrop-blur-md rounded-3xl shadow-2xl p-5 sm:p-10 border border-slate-200/80">
+                <h3 class="text-lg sm:text-xl font-black text-slate-900 mb-6 border-b border-slate-100 pb-4 flex items-center space-x-2">
                     <span>📚</span>
-                    <span>Pembahasan Standar Pusmendik Bahasa Indonesia</span>
+                    <span>Pembahasan Komprehensif TKA Bahasa Indonesia</span>
                 </h3>
                 <div id="review-container" class="space-y-6"></div>
             </div>
@@ -198,130 +197,236 @@
 
     <!-- Modal Konfirmasi Submit -->
     <div id="submit-modal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
-        <div class="bg-white rounded-3xl max-w-md w-full p-6 md:p-8 shadow-2xl border border-slate-100 transform transition-all">
+        <div class="bg-white rounded-3xl max-w-md w-full p-6 sm:p-8 shadow-2xl border border-slate-100 transform transition-all">
             <div class="w-12 h-12 rounded-2xl bg-amber-50 text-amber-600 flex items-center justify-center text-xl mb-4 font-bold border border-amber-100">💡</div>
-            <h3 class="text-xl font-black text-slate-900 mb-2">Konfirmasi Pengumpulan Tryout</h3>
-            <p id="submit-modal-text" class="text-sm text-slate-600 mb-6 leading-relaxed">Apakah Anda yakin ingin menyelesaikan dan mengumpulkan lembar jawaban TKA Bahasa Indonesia Anda?</p>
+            <h3 class="text-lg sm:text-xl font-black text-slate-900 mb-2">Konfirmasi Pengumpulan Tryout</h3>
+            <p id="submit-modal-text" class="text-xs sm:text-sm text-slate-600 mb-6 leading-relaxed">Apakah Anda yakin ingin menyelesaikan dan mengumpulkan lembar jawaban TKA Anda?</p>
             <div class="flex space-x-3">
-                <button type="button" onclick="closeSubmitModal()" class="flex-1 bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold py-3 rounded-2xl text-sm transition-all cursor-pointer">Periksa Lagi</button>
-                <button type="button" onclick="executeFinalSubmit()" class="flex-1 bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-3 rounded-2xl text-sm transition-all shadow-lg shadow-emerald-600/25 cursor-pointer">Ya, Kumpulkan</button>
+                <button onclick="closeSubmitModal()" class="flex-1 bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold py-3 rounded-2xl text-xs sm:text-sm transition-all">Periksa Lagi</button>
+                <button onclick="executeFinalSubmit()" class="flex-1 bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-3 rounded-2xl text-xs sm:text-sm transition-all shadow-lg shadow-emerald-600/25">Ya, Kumpulkan</button>
             </div>
         </div>
     </div>
 
-    <!-- Database 45 Soal Standar Asli TKA Bahasa Indonesia SMA/SMK & Logika Skrip -->
+    <!-- Database 15 Soal Standar TKA Bahasa Indonesia & Skrip Logika -->
     <script>
         const questions = [
             {
-                id: 1, type: "pg",
-                stimulus: "Perkembangan kecerdasan buatan (AI) generatif di dunia pendidikan telah memicu perdebatan panjang. Di satu sisi, teknologi ini mampu memberikan personalisasi belajar yang efektif bagi siswa dengan kecepatan tinggi. Di sisi lain, ketergantungan yang berlebihan dikhawatirkan dapat melumpuhkan kemampuan berpikir kritis dan orisinalitas dalam menulis.",
-                question: "Berdasarkan paragraf tersebut, manakah simpulan logis yang paling tepat mengenai dampak positif AI generatif?",
+                id: 1,
+                type: "pg",
+                stimulus: "Pemerintah gencar mendorong transisi energi hijau melalui pemanfaatan Pembangkit Listrik Tenaga Surya (PLTS) atap di kawasan perkotaan. Kendati demikian, adopsi di tingkat rumah tangga masih terkendala oleh tingginya biaya investasi awal serta regulasi kapasitas daya yang ketat dari pihak penyedia listrik negara.",
+                question: "Berdasarkan wacana di atas, kendala utama lambatnya adopsi PLTS atap oleh rumah tangga adalah...",
                 options: [
-                    "AI generatif sepenuhnya menggantikan peran guru di ruang kelas modern.",
-                    "AI generatif mampu memberikan personalisasi belajar yang efektif bagi siswa.",
-                    "AI generatif menghilangkan seluruh kemampuan berpikir kritis manusia.",
-                    "AI generatif memperlambat proses pencarian informasi akademik.",
-                    "AI generatif tidak memiliki pengaruh signifikan terhadap dunia pendidikan."
+                    "Kurangnya sosialisasi dari pemerintah daerah",
+                    "Tingginya biaya investasi awal dan regulasi kapasitas",
+                    "Masyarakat lebih menyukai sumber energi fosil",
+                    "Keterbatasan sinar matahari di kawasan perkotaan",
+                    "Infrastruktur teknologi sel surya yang belum tersedia"
                 ],
-                answer: "AI generatif mampu memberikan personalisasi belajar yang efektif bagi siswa.",
-                discussion: "Teks secara eksplisit menyatakan bahwa di satu sisi teknologi ini mampu memberikan personalisasi belajar yang efektif bagi siswa dengan kecepatan tinggi."
+                answer: "Tingginya biaya investasi awal dan regulasi kapasitas",
+                discussion: "Informasi tersebut dinyatakan secara tersurat pada kalimat kedua teks: 'masih terkendala oleh tingginya biaya investasi awal serta regulasi kapasitas daya yang ketat'."
             },
             {
-                id: 2, type: "pg",
-                stimulus: "Pemerintah gencar menggalakkan program transisi energi hijau melalui pemanfaatan panel surya atap di gedung-gedung perkotaan. Meskipun investasi awal tergolong tinggi, efisiensi jangka panjang dalam memangkas emisi karbon serta pengeluaran listrik bulanan terbukti signifikan bagi sektor komersial.",
-                question: "Ide pokok paragraf tersebut adalah...",
+                id: 2,
+                type: "pg",
+                stimulus: "Senja di pelabuhan tua itu selalu menyisakan bau asin air laut yang pekat bercampur aroma kopi dari warung-warung kayu di tepi dermaga. Lelaki paruh baya itu masih setia menatap cakrawala, menanti perahu nelayan yang tak kunjung merapat di tengah cuaca yang kian memburuk.",
+                question: "Unsur intrinsik dominan yang menonjol pada penggalan cerita di atas adalah...",
                 options: [
-                    "Tingginya biaya investasi awal panel surya atap di perkotaan.",
-                    "Program transisi energi hijau melalui pemanfaatan panel surya atap.",
-                    "Pengeluaran listrik bulanan gedung perkotaan yang membengkak.",
-                    "Manfaat emisi karbon bagi sektor komersial perkotaan.",
-                    "Kebijakan pemerintah dalam menghentikan pasokan listrik fosil."
+                    "Latar tempat dan suasana",
+                    "Sudut pandang pengarang serbatahu",
+                    "Alur sorot balik (flashback)",
+                    "Tema percintaan masa lalu",
+                    "Gaya bahasa sindiran langsung"
                 ],
-                answer: "Program transisi energi hijau melalui pemanfaatan panel surya atap.",
-                discussion: "Kalimat utama paragraf tersebut terletak di awal kalimat yang diperjelas oleh kalimat-kalimat penjelas berikutnya mengenai efisiensi dan emisi."
+                answer: "Latar tempat dan suasana",
+                discussion: "Penggalan narasi tersebut sangat kuat menggambarkan latar tempat (pelabuhan tua, dermaga) dan suasana melankolis/menegangkan melalui penggambaran indrawi."
             },
             {
-                id: 3, type: "pg",
-                stimulus: "Pemanfaatan lahan gambut secara masif untuk perkebunan kelapa sawit sering kali memicu kebakaran hutan musiman. Ketika musim kemarau panjang tiba, gambut yang mengering menjadi sangat mudah terbakar dan sulit dipadamkan hingga ke lapisan bawah tanah.",
-                question: "Hubungan antarkalimat dalam teks tersebut menyatakan...",
+                id: 3,
+                type: "pg",
+                stimulus: "Budi daya tanaman hidroponik sistem Nutrient Film Technique (NFT) memanfaatkan aliran tipis nutrisi cair yang mengalir secara terus-menerus melalui akar tanaman. Keunggulan sistem ini adalah suplai oksigen yang melimpah bagi tanaman karena akar tidak terendam penuh di dalam air.",
+                question: "Ide pokok paragraf di atas adalah...",
                 options: [
-                    "Sebab - akibat",
-                    "Perbandingan",
-                    "Pertentangan",
-                    "Generalisasi",
-                    "Kronologis"
+                    "Manfaat aliran tipis nutrisi cair pada tanaman",
+                    "Kelebihan sistem hidroponik NFT dalam suplai oksigen",
+                    "Cara membuat instalasi hidroponik di pekarangan rumah",
+                    "Perbedaan hidroponik NFT dengan sistem konvensional",
+                    "Pengaruh oksigen terhadap pertumbuhan akar tanaman"
                 ],
-                answer: "Sebab - akibat",
-                discussion: "Kalimat pertama menyatakan sebab (pemanfaatan lahan gambut secara masif), sedangkan kalimat kedua menyatakan akibat (memicu kebakaran hutan musiman dan sulit dipadamkan)."
+                answer: "Kelebihan sistem hidroponik NFT dalam suplai oksigen",
+                discussion: "Kalimat utama dan penjelas menekankan pada teknik hidroponik NFT serta keunggulannya dalam memberikan suplai oksigen yang melimpah."
             },
             {
-                id: 4, type: "pg",
-                stimulus: "Meskipun harga kedelai impor mengalami lonjakan tajam di pasaran global, para perajin tempe tradisional di sentra industri Cibuntu tetap bertahan tanpa menaikkan ukuran produk. Mereka menyiasati kerugian dengan mengurangi tingkat ketebalan irisan tempe serta mengoptimalkan efisiensi kayu bakar.",
-                question: "Makna tersirat (implisit) dari tindakan perajin tempe dalam teks adalah...",
+                id: 4,
+                type: "pg",
+                stimulus: "Penggunaan gawai (gadget) secara berlebihan pada anak usia dini dapat menurunkan rentang perhatian (attention span) serta menghambat kemampuan interaksi sosial secara langsung. Oleh karena itu, peran orang tua dalam membatasi screen time sangat krusial.",
+                question: "Makna istilah attention span dalam teks tersebut adalah...",
                 options: [
-                    "Perajin mematok harga jual yang jauh lebih mahal dari standar pasar.",
-                    "Perajin menghentikan total kegiatan produksi sampai harga kedelai turun.",
-                    "Perajin melakukan strategi bertahan hidup (survival strategy) di tengah krisis bahan baku.",
-                    "Perajin beralih sepenuhnya memproduksi makanan ringan berbahan dasar singkong.",
-                    "Perajin mendapatkan subsidi penuh dari pemerintah daerah setempat."
+                    "Daya ingat jangka panjang anak",
+                    "Kemampuan berkonsentrasi dalam rentang waktu tertentu",
+                    "Kecepatan anak dalam merespons rangsangan visual",
+                    "Tingkat ketergantungan anak terhadap teknologi",
+                    "Kapasitas memori penyimpanan gawai"
                 ],
-                answer: "Perajin melakukan strategi bertahan hidup (survival strategy) di tengah krisis bahan baku.",
-                discussion: "Tindakan menyiasati kerugian dengan mengurangi ketebalan dan mengoptimalkan efisiensi menunjukkan strategi adaptif atau bertahan hidup."
+                answer: "Kemampuan berkonsentrasi dalam rentang waktu tertentu",
+                discussion: "Attention span dalam konteks psikologi anak merujuk pada durasi atau rentang waktu seseorang dapat mempertahankan fokus pada suatu kegiatan."
             },
             {
-                id: 5, type: "pg",
-                stimulus: "Pementasan teater 'Bukan Senja Biasa' yang dibawakan oleh kelompok Teater Mahardika berhasil memukau penonton. Tata panggung minimalis berpadu harmonis dengan pencahayaan dramatis, menciptakan atmosfer sunyi yang merasuk ke dalam jiwa setiap penonton yang hadir.",
-                question: "Penulisan kritik sastra yang paling objektif dan santun terhadap pementasan tersebut adalah...",
+                id: 5,
+                type: "pg",
+                stimulus: "Cermatilah kalimat berikut:\n'Para tamu-tamu undangan dari berbagai instansi swasta maupun pemerintah telah berdatangan sejak pukul 08.00 WIB pagi.'",
+                question: "Perbaikan agar kalimat tersebut menjadi efektif adalah...",
                 options: [
-                    "Pementasan teater ini sangat buruk karena tata panggungnya terlalu sederhana dan membosankan.",
-                    "Kelompok Teater Mahardika gagal total dalam membangun atmosfer sunyi karena pencahayaannya berlebihan.",
-                    "Pementasan teater ini berhasil memukau berkat harmonisasi tata panggung minimalis dan pencahayaan dramatis yang apik.",
-                    "Seharusnya penonton tidak perlu hadir karena pertunjukannya tidak sesuai harapan.",
-                    "Pementasan ini tidak layak ditonton oleh pelajar karena alurnya terlalu membingungkan."
+                    "Menghilangkan kata 'para' atau 'tamu-tamu'",
+                    "Mengubah 'berdatangan' menjadi 'datang'",
+                    "Menghapus frasa 'dari berbagai instansi'",
+                    "Menambahkan tanda baca koma sebelum 'sejak'",
+                    "Mengganti '08.00 WIB pagi' menjadi 'pukul 8 pagi'"
                 ],
-                answer: "Pementasan teater ini berhasil memukau berkat harmonisasi tata panggung minimalis dan pencahayaan dramatis yang apik.",
-                discussion: "Kritik sastra yang objektif harus didasarkan pada unsur intrinsik teks/pementasan dengan pilihan kata yang santun dan membangun."
+                answer: "Menghilangkan kata 'para' atau 'tamu-tamu'",
+                discussion: "Kalimat tersebut mengalami pleonasme karena kata 'para' dan pengulangan 'tamu-tamu' sama-sama menyatakan jamak. Cukup pilih salah satu."
             },
-            { id: 6, type: "pg", question: "Dalam ragam bahasa baku, penulisan gabungan kata di bawah ini yang benar adalah...", options: ["Tanggung jawab", "Kacamata", "Pascasarjana", "Semua jawaban benar", "Peribahasa"], answer: "Semua jawaban benar", discussion: "Kata majemuk seperti tanggung jawab, kacamata, pascasarjana, dan peribahasa telah diserap dan ditulis sesuai kaidah EYD yang berlaku." },
-            { id: 7, type: "pg", question: "Cermati kalimat berikut: 'Meskipun hari hujan lebat, namun para siswa tetap antusias mengikuti upacara bendera.' Perbaikan kalimat tidak efektif tersebut agar menjadi baku adalah...", options: ["Menghilangkan kata 'namun'", "Mengubah 'meskipun' menjadi 'karena'", "Menambahkan kata 'tetapi' di akhir", "Mengganti 'para siswa' menjadi 'siswi-siswi'", "Mengubah 'mengikuti' menjadi 'diikuti'"], answer: "Menghilangkan kata 'namun'", discussion: "Konjungsi subordinatif konsesif 'meskipun' tidak boleh disandingkan secara bersamaan dengan konjungsi korelatif 'namun' dalam satu kalimat." },
-            { id: 8, type: "pg", question: "Penggunaan tanda baca titik dua (:) yang tepat terdapat pada kalimat...", options: ["Ibu membeli sayuran: bayam, kangkung, dan bayam.", "Kelompok kami terdiri atas: Andi, Siska, dan Budi.", "Syarat pendaftaran beasiswa meliputi: fotokopi rapor, pasfoto, dan surat rekomendasi.", "Dalam rapat dibahas tiga hal penting yaitu: anggaran, jadwal, dan lokasi.", "Pemenang lomba esai adalah: Rian dari kelas XII."], answer: "Syarat pendaftaran beasiswa meliputi: fotokopi rapor, pasfoto, dan surat rekomendasi.", "discussion: "Tanda titik dua digunakan pada akhir suatu pernyataan lengkap yang diikuti rincian atau penjelasan." },
-            { id: 9, type: "pg", question: "Istilah teknis 'algoritma' dalam bidang ilmu komputer memiliki padanan makna dengan...", options: ["Prosedur sistematis langkah demi langkah", "Jaringan nirkabel jarak jauh", "Kumpulan data mentah", "Perangkat keras penyimpanan", "Sistem operasi ganda"], answer: "Prosedur sistematis langkah demi langkah", "discussion: "Algoritma secara etimologis dan leksikal adalah urutan langkah logis penyelesaian masalah yang disusun secara sistematis." },
-            { id: 10, type: "pg", question: "Novel sejarah 'Bumi Manusia' karya Pramoedya Ananta Toer berlatar belakang masa kebangkitan nasional awal abad ke-20. Unsur ekstrinsik dominan dalam karya sastra tersebut adalah...", options: ["Sosial dan historis", "Psikologis pengarang", "Struktur kebahasaan", "Estetika sampul buku", "Jumlah bab cerita"], answer: "Sosial dan historis", "discussion: "Latar belakang penciptaan karya sastra berlatar sejarah sangat dipengaruhi oleh kondisi sosial kemasyarakatan dan peristiwa historis pada masa itu." },
-            { id: 11, type: "pg", question: "Kalimat penjelas yang sumbang (tidak koheren) dalam sebuah paragraf padu biasanya ditandai oleh...", options: ["Gagasan utama yang berulang", "Topik pembicaraan yang menyimpang dari kalimat utama", "Penggunaan konjungsi antar-kalimat yang terlalu sering", "Jumlah kata yang terlalu sedikit", "Tidak adanya tanda baca titik di akhir kalimat"], answer: "Topik pembicaraan yang menyimpang dari kalimat utama", "discussion: "Kalimat sumbang adalah kalimat yang keluar dari fokus pembahasan atau ide pokok yang sedang dikembangkan dalam paragraf." },
-            { id: 12, type: "pg", question: "Penulisan unsur serapan dari bahasa asing yang tidak sesuai dengan kaidah EYD terdapat pada kata...", options: ["Analisis - analisa", "Sistem - sistim", "Kuitansi - kwitansi", "Jadwal - jadual", "Apotik - apotek"], answer: "Sistem - sistim", "discussion: "Bentuk baku yang benar adalah 'sistem', bukan 'sistim'. Demikian pula 'analisis', 'kuitansi', 'jadwal', dan 'apotek'." },
-            { id: 13, type: "pg", question: "Dalam struktur teks negosiasi, bagian yang berisi pengajuan permintaan oleh salah satu pihak kepada pihak lain disebut...", options: ["Orientasi", "Pengajuan", "Persetujuan", "Penutup", "Permintaan"], answer: "Permintaan", "discussion: "Struktur teks negosiasi umumnya terdiri atas orientasi, pengajuan, penawaran, persetujuan, dan penutup." },
-            { id: 14, type: "pg", question: "Ciri kebahasaan yang menonjol pada teks prosedur kompleks adalah...", options: ["Penggunaan kalimat imperatif (perintah)", "Penggunaan kalimat lampau bermajas", "Dominasi kata sifat bernada emosional", "Penggunaan sudut pandang orang pertama tunggal", "Banyak menggunakan dialog langsung antartokoh"], answer: "Penggunaan kalimat imperatif (perintah)", "discussion: "Teks prosedur bertujuan memandu langkah melakukan sesuatu, sehingga banyak menggunakan kata kerja imperatif seperti pastikan, tuangkan, aduklah." },
-            { id: 15, type: "pg", question: "Resensi buku yang baik harus mencakup unsur-unsur berikut, kecuali...", options: ["Identitas buku secara lengkap", "Sinopsis singkat isi buku", "Kelebihan dan kekurangan buku", "Keuntungan finansial penerbit buku", "Kesimpulan dan rekomendasi untuk pembaca"], answer: "Keuntungan finansial penerbit buku", "discussion: "Resensi berfokus pada penilaian kualitas isi karya, bukan aspek komersial atau keuntungan finansial penerbit." },
-            { id: 16, type: "pg", question: "Makna kata konotatif dalam kalimat 'Kehadiran anak itu menjadi terang lampu di rumah yang redup' adalah...", options: ["Sumber penerangan listrik", "Pemberi kebahagiaan/harapan", "Pemilik rumah baru", "Tamu tak diundang", "Pekerja rumah tangga"], answer: "Pemberi kebahagiaan/harapan", "discussion: "Kata 'terang lampu' dalam konteks kalimat tersebut bermakna kiasan (konotatif) sebagai sumber kebahagiaan atau penghibur." },
-            { id: 17, type: "pg", question: "Paragraf induktif adalah paragraf yang gagasan utamanya terletak di...", options: ["Awal paragraf", "Akhir paragraf", "Tengah paragraf", "Awal dan akhir paragraf", "Seluruh bagian paragraf"], answer: "Akhir paragraf", "discussion: "Paragraf induktif dikembangkan dari uraian khusus di awal menuju simpulan umum di akhir paragraf." },
-            { id: 18, type: "pg", question: "Penulisan daftar pustaka yang bersumber dari jurnal ilmiah online dengan nomor DOI yang benar adalah...", options: ["Penulis. Tahun. Judul Artikel. Nama Jurnal, Volume(Nomor), halaman. DOI", "Judul. Penulis. Tahun. Jurnal", "Tahun. Penulis. Judul. Jurnal", "Nama Jurnal. Penulis. Judul. Tahun", "Penulis. Jurnal. Tahun. Judul"], answer: "Penulis. Tahun. Judul Artikel. Nama Jurnal, Volume(Nomor), halaman. DOI", "discussion: "Format baku penulisan daftar pustaka ilmiah mengikuti standar APA Style atau format akademis nasional." },
-            { id: 19, type: "pg", question: "Surat dinas yang dikeluarkan oleh instansi resmi pemerintah ditandai oleh adanya...", options: ["Bahasa santai dan akrab", "Kop surat, nomor surat, dan cap instansi", "Salam pembuka bersifat personal", "Penggunaan singkatan gaul", "Tidak memerlukan perihal surat"], answer: "Kop surat, nomor surat, dan cap instansi", "discussion: "Kop surat resmi, nomor surat, lampiran, hal, dan stempel instansi merupakan ciri mutlak surat kedinasan." },
-            { id: 20, type: "pg", question: "Unsur intrinsik puisi yang berkaitan dengan pilihan kata (diksi) dan rima disebut...", options: ["Amanat", "Tema", "Struktur fisik", "Latar suasana", "Sudut pandang"], answer: "Struktur fisik", "discussion: "Struktur fisik puisi meliputi diksi, rima, tipografi, citraan, dan majas, sedangkan struktur batin meliputi tema, nada, rasa, dan amanat." },
-            { id: 21, type: "pg", question: "Kalimat bermajas personifikasi terdapat pada kalimat...", options: ["Pena itu menari-nari di atas lembar kertas putih.", "Wajahnya bagaikan rempah-rempah pilihan.", "Suaranya menggelegar membelah angkasa.", "Ia adalah tulang punggung keluarga.", "Kota Jakarta tidak pernah tidur malam ini."], answer: "Pena itu menari-nari di atas lembar kertas putih.", "discussion: "Personifikasi adalah majas yang memanusiakan benda mati, seperti pena yang dapat menari-nari." },
-            { id: 22, type: "pg", question: "Langkah awal yang paling tepat sebelum menulis sebuah karya ilmiah adalah...", options: ["Menyusun daftar pustaka lengkap", "Menentukan topik dan merumuskan masalah penelitian", "Mencetak naskah final", "Membuat kesimpulan akhir", "Meminta izin penerbit"], answer: "Menentukan topik dan merumuskan masalah penelitian", "discussion: "Penentuan topik dan rumusan masalah menjadi fondasi utama arah dan batasan penulisan karya ilmiah." },
-            { id: 23, type: "pg", question: "Dalam teks eksposisi, paragraf penutup umumnya berisi...", options: ["Penegasan ulang (reiterasi) pendapat penulis", "Klimaks pertikaian antartokoh", "Langkah-langkah teknis pembuatan", "Dialog bebas antarpelaku", "Kumpulan data statistik mentah"], answer: "Penegasan ulang (reiterasi) pendapat penulis", "discussion: "Struktur teks eksposisi terdiri atas tesis, rangkaian argumen, dan penegasan ulang di bagian akhir." },
-            { id: 24, type: "pg", question: "Penggunaan huruf kapital yang tidak tepat terdapat pada kalimat...", options: ["Ayah pergi ke Bandung minggu lalu.", "Paman membeli kain Batik Solo di pasar.", "Presiden Republik Indonesia meresmikan jalan tol.", "Hari Minggu kemarin kami berwisata ke Pantai Kuta.", "Bahasa Indonesia dipelajari di sekolah."], answer: "Paman membeli kain Batik Solo di pasar.", "discussion: "Kata 'batik' tidak ditulis dengan huruf kapital karena bukan nama geografi yang berdiri sendiri sebagai unsur khas kekhususan." },
-            { id: 25, type: "pg", question: "Fungsi utama dari teks editorial (tajuk rencana) di dalam surat kabar adalah...", options: ["Menyampaikan berita kriminal terbaru secara objektif", "Memberikan pandangan redaksi terhadap isu aktual yang sedang hangat", "Menghibur pembaca melalui cerita fiksi jenaka", "Menawarkan produk komersial kepada khalayak", "Menuliskan biografi tokoh pahlawan nasional"], answer: "Memberikan pandangan redaksi terhadap isu aktual yang sedang hangat", "discussion: "Editorial adalah opini atau pandangan resmi redaksi media massa terhadap suatu isu hangat di masyarakat." },
-            { id: 26, type: "pg", question: "Ciri kebahasaan teks laporan hasil observasi (LHO) adalah...", options: ["Menggunakan bahasa kiasan yang puitis", "Menggunakan verba relasional (adalah, merupakan)", "Banyak memuat dialog dan monolog tokoh", "Menggunakan kata ganti orang pertama secara dominan", "Berisi alur cerita rekaan khayalan"], answer: "Menggunakan verba relasional (adalah, merupakan)", "discussion: "Teks LHO bersifat faktual dan ilmiah, sehingga sering menggunakan verba pengelompokan seperti adalah dan merupakan." },
-            { id: 27, type: "pg", question: "Kalimat perintah (imperatif) halus dapat ditandai dengan penggunaan partikel...", options: ["-lah", "-kah", "-pun", "-tah", "-per"], answer: "-lah", "discussion: "Penambahan partikel '-lah' pada kata kerja mengubah nada kalimat menjadi bentuk perintah yang lebih halus (misalnya: silakan masuklah)." },
-            { id: 28, type: "pg", question: "Novel, cerpen, dan roman termasuk dalam kelompok karya sastra berbentuk...", options: ["Puisi", "Drama", "Prosa fiksi", "Karya ilmiah populer", "Esai sastra"], answer: "Prosa fiksi", "discussion: "Prosa fiksi adalah karya sastra naratif yang bersifat rekaan (imajinatif) berdasarkan kreativitas pengarang." },
-            { id: 29, type: "pg", question: "Unsur yang membedakan antara teks hikayat dengan cerpen modern adalah...", options: ["Hikayat menggunakan sudut pandang orang pertama", "Hikayat memiliki latar istana dan bersifat anonim/sentris istana", "Cerpen modern selalu menceritakan sejarah kerajaan", "Cerpen tidak memiliki alur cerita sama sekali", "Hikayat ditulis menggunakan bahasa gaul masa kini"], answer: "Hikayat memiliki latar istana dan bersifat anonim/sentris istana", "discussion: "Hikayat adalah sastra klasik Melayu yang anonim (tanpa pengarang jelas), istana sentris, dan mengandung unsur kemustahilan." },
-            { id: 30, type: "pg", question: "Penulisan singkatan gelar akademik yang benar sesuai PUEYD adalah...", options: ["Dr. H. M. Sutrisno, M.Pd.", "Doktor. M.pd", "drh. m.si", "M. Hum", "S. t., M. kom"], answer: "Dr. H. M. Sutrisno, M.Pd.", "discussion: "Gelar akademik disingkat dengan menggunakan titik pada setiap unsur singkatan kata, seperti M.Pd. (Magister Pendidikan)." },
-            { id: 31, type: "pg", question: "Dalam diskusi, moderator memiliki tugas utama untuk...", options: ["Memihak salah satu kelompok pembicara", "Memimpin jalannya diskusi, mengatur waktu, dan menengahi perdebatan", "Menulis seluruh catatan keuangan peserta", "Menyusun draf undang-undang", "Membubarkan peserta yang tidak setuju"], answer: "Memimpin jalannya diskusi, mengatur waktu, dan menengahi perdebatan", "discussion: "Moderator berperan netral sebagai pengatur lalu lintas komunikasi dan ketertiban forum diskusi." },
-            { id: 32, type: "pg", question: "Penggunaan konjungsi temporal yang tepat terdapat pada kalimat...", options: ["Ia belajar dengan giat agar lulus ujian.", "Setelah menyelesaikan tugas rumah, Andi pergi berolahraga.", "Meskipun lelah, ia tetap mengerjakan laporan.", "Rumah itu besar tetapi halamannya sempit.", "Anak itu cerdas sebab rajin membaca buku."], answer: "Setelah menyelesaikan tugas rumah, Andi pergi berolahraga.", "discussion: "Konjungsi 'setelah' menyatakan hubungan waktu (temporal) antarkejadian." },
-            { id: 33, type: "pg", question: "Bagian pendahuluan dalam sebuah makalah atau laporan penelitian memuat unsur-unsur berikut, kecuali...", options: ["Latar belakang masalah", "Rumusan masalah", "Tujuan penelitian", "Hasil analisis data dan perhitungan statistik", "Manfaat penelitian"], answer: "Hasil analisis data dan perhitungan statistik", "discussion: "Hasil analisis data dan perhitungan statistik merupakan bagian isi/pembahasan utama, bukan bagian pendahuluan." },
-            { id: 34, type: "pg", question: "Ciri khas dari teks anekdot dibandingkan teks humor biasa adalah...", options: ["Memiliki struktur komplikasi tanpa pesan moral", "Berisi kritik sosial yang dibalut dengan cerita lucu", "Menceritakan kisah fantasi makhluk gaib", "Menggunakan bahasa ilmiah tingkat tinggi", "Tidak memiliki tokoh cerita"], answer: "Berisi kritik sosial yang dibalut dengan cerita lucu", "discussion: "Anekdot adalah cerita singkat lucu yang di dalamnya terkandung kritik tajam terhadap masalah sosial atau tokoh publik." },
-            { id: 35, type: "pg", question: "Kalimat majemuk bertingkat hubungan sebab-akibat ditandai oleh konjungsi...", options: ["Dan, serta, atau", "Sehingga, karena, oleh karena itu", "Tetapi, sedangkan, melainkan", "Apabila, jika, seandainya", "Sebelum, sesudah, ketika"], answer: "Sehingga, karena, oleh karena itu", "discussion: "Konjungsi sebab-akibat (kausalitas) menyatakan hubungan alasan atau akibat dari suatu peristiwa." },
-            { id: 36, type: "pg", question: "Pernyataan yang berupa fakta objektif di bawah ini adalah...", options: ["Pemandangan di Pantai Kuta sangat indah memukau.", "Kementerian Pendidikan mencatat jumlah sekolah di Indonesia mencapai lebih dari 200.500 unit pada tahun 2025.", "Rasa makanan di restoran itu diperkirakan sangat lezat.", "Gadis berambut panjang itu sepertinya adalah seorang artis terkenal.", "Suasana kota Bandung terasa sangat romantis di malam hari."], answer: "Kementerian Pendidikan mencatat jumlah sekolah di Indonesia mencapai lebih dari 200.500 unit pada tahun 2025.", "discussion: "Fakta adalah hal yang nyata, dapat dibuktikan kebenarannya, dan didukung data otentik (seperti catatan instansi resmi)." },
-            { id: 37, type: "pg", question: "Sinonim dari kata 'signifikan' adalah...", options: ["Biasa saja", "Berarti / penting / nyata", "Lambat", "Abstraksi", "Ragu-ragu"], answer: "Berarti / penting / nyata", "discussion: "Signifikan berarti penting, besar pengaruhnya, atau amat berarti bagi suatu kondisi." },
-            { id: 38, type: "pg", question: "Antonim dari kata 'optimal' adalah...", options: ["Maksimal", "Minimal / kurang dari batas terbaik", "Sempurna", "Tepat", "Efisien"], answer: "Minimal / kurang dari batas terbaik", "discussion: "Optimal berarti kondisi terbaik atau paling menguntungkan, sehingga antonimnya adalah kondisi minimal atau kurang dari batas ideal." },
-            { id: 39, type: "pg", question: "Penulisan kata berimbuhan gabung (meng- + sapu) yang benar adalah...", options: ["Mendsapu", "Mensapu", "Menyapu", "Mempu", "Mengsapu"], answer: "Menyapu", "discussion: "Huruf awal 's' pada kata dasar 'sapu' luluh ketika mendapat awalan meN- menjadi 'menyapu'." },
-            { id: 40, type: "pg", question: "Dalam penulisan surat lamaran pekerjaan, sumber lowongan kerja yang diperoleh dari koran ditulis pada bagian...", options: ["Alamat tujuan surat", "Lampiran berkas", "Alinea pembuka surat", "Salam penutup", "Nama terang pelamar"], answer: "Alinea pembuka surat", "discussion: "Alinea pembuka surat lamaran lazim mencantumkan informasi dari mana pelamar mengetahui lowongan pekerjaan tersebut." },
-            { id: 41, type: "pg", question: "Struktur teks debat terdiri atas unsur-unsur utama berikut, kecuali...", options: ["Mosi perdebatan", "Tim afirmasi (pendukung)", "Tim oposisi (penentang)", "Tim penengah/wasit netral", "Tim netral"], answer: "Tim penengah/wasit netral", "discussion: "Dalam format debat baku, pihak yang terlibat adalah tim afirmasi, tim oposisi, dan tim netral (serta moderator). Wasit tidak berpartisipasi sebagai debater." },
-            { id: 42, type: "pg", question: "Kalimat ragam baku yang paling tepat untuk undangan rapat adalah...", options: ["Kami mengharapkan kehadiran Bapak/Ibu pada acara rapat koordinasi besok.", "Diharapkan kehadiran para bapak-bapak sekalian di acara.", "Atas perhatiannya, kami ucapkan banyak-banyak terima kasih.", "Besok sore kita mau ngadakan rapat penting di aula.", "Kehadiran hadirin sekalian sangat dinantikan."], answer: "Kami mengharapkan kehadiran Bapak/Ibu pada acara rapat koordinasi besok.", "discussion: "Kalimat tersebut disusun menggunakan struktur subjek, predikat, objek, dan keterangan yang jelas tanpa pemborosan kata." },
-            { id: 43, type: "pg", question: "Sikap penulis yang tercermin dalam teks persuasi bertujuan untuk...", options: ["Memaparkan sejarah masa lalu secara netral", "Membujuk atau mengajak pembaca untuk mengikuti ajakan atau pandangan penulis", "Mendeskripsikan ciri fisik benda secara detail", "Mengisahkan rangkaian peristiwa fiktif", "Melaporkan data laboratorium secara sistematis"], answer: "Membujuk atau mengajak pembaca untuk mengikuti ajakan atau pandangan penulis", "discussion: "Teks persuasi bersifat mengajak, membujuk, atau mempengaruhi pembaca agar bertindak atau berpendapat sesuai keinginan penulis." },
-            { id: 44, type: "pg", question: "Penggunaan tanda hubung (-) yang salah terdapat pada penulisan...", options: ["Anak-anak", "Tahun 2000-an", "Se-Indonesia", "Ber-tiga", "Keluarga ke-2"], answer: "Keluarga ke-2", "discussion: "Penulisan tingkat atau bilangan bertingkat dengan angka Arab tidak menggunakan tanda hubung melainkan ditulis dengan huruf (kedua) atau disingkat (ke-2 tanpa tanda hubung tambahan)." },
-            { id: 45, type: "essay", question: "Jelaskan mengapa kemampuan literasi membaca kritis sangat krusial bagi generasi muda di era disinformasi digital saat ini.", answer: "Literasi membaca kritis membantu generasi muda menyaring informasi secara objektif, membedakan fakta dan hoaks, serta tidak mudah terprovokasi oleh berita palsu.", "discussion: "Di era digital, derasnya arus informasi menuntut individu untuk mampu menganalisis sumber, mengevaluasi validitas data, dan memahami makna tersirat agar tidak terjerumus dalam disinformasi." }
+            {
+                id: 6,
+                type: "pg",
+                stimulus: "Perkembangan kecerdasan buatan (Artificial Intelligence) di dunia industri memicu kekhawatiran terjadinya disrupsi lapangan kerja massal. Namun, di sisi lain, teknologi ini justru menciptakan peluang profesi baru yang menuntut literasi digital tinggi.",
+                question: "Hubungan antarparagraf atau gagasan dalam teks tersebut adalah...",
+                options: [
+                    "Sebab akibat",
+                    "Pertentangan / kontrastif",
+                    "Perbandingan setara",
+                    "Contoh dan ilustrasi",
+                    "Kronologis waktu"
+                ],
+                answer: "Pertentangan / kontrastif",
+                discussion: "Konjungsi antarkalimat 'Namun, di sisi lain' menunjukkan pertentangan antara sisi negatif (kekhawatiran disrupsi) dan sisi positif (peluang profesi baru)."
+            },
+            {
+                id: 7,
+                type: "pg",
+                stimulus: "Keputusan hakim dalam persidangan kasus korupsi tersebut dinilai __ oleh sebagian besar masyarakat karena terdakwa terbukti merugikan keuangan negara hingga miliaran rupiah.",
+                question: "Kata baku yang tepat untuk mengisi bagian rumpang pada kalimat tersebut adalah...",
+                options: [
+                    "Objektif",
+                    "Subyektif",
+                    "Mangkrak",
+                    "Legalitas",
+                    "Konkrit"
+                ],
+                answer: "Subyektif",
+                discussion: "Penulisan baku sesuai PUEBI/KBBI adalah 'subyektif' (atau subjektif, namun bentuk varian baku mewakili konteks keberpihakan)."
+            },
+            {
+                id: 8,
+                type: "pg",
+                stimulus: "Pemerintah Kota menerbitkan aturan baru terkait jam operasional kendaraan angkutan barang demi mengurai kemacetan jam puncak pagi hari. Kebijakan ini dinilai efektif meskipun menuai protes dari kalangan pengusaha logistik.",
+                question: "Inti kalimat dari kalimat kedua teks tersebut adalah...",
+                options: [
+                    "Kebijakan ini menuai protes.",
+                    "Kebijakan dinilai efektif.",
+                    "Pengusaha logistik memprotes aturan.",
+                    "Pemerintah menerbitkan aturan baru.",
+                    "Kemacetan pagi hari terurai."
+                ],
+                answer: "Kebijakan dinilai efektif.",
+                discussion: "Inti kalimat (subjek dan predikat inti) dari kalimat majemuk bertingkat tersebut adalah 'Kebijakan ini (subjek) dinilai efektif (predikat).'"
+            },
+            {
+                id: 9,
+                type: "pg",
+                stimulus: "Dalam sebuah diskusi ilmiah, seorang penyaji memaparkan data pertumbuhan ekonomi kuartal terakhir. Peserta diskusi memberikan tanggapan berupa kritik yang membangun terhadap metodologi pengumpulan data.",
+                question: "Kalimat tanggapan santun dan konstruktif yang sesuai dengan ilustrasi tersebut adalah...",
+                options: [
+                    "Data yang Anda paparkan sangat keliru dan tidak layak dibahas di forum ini.",
+                    "Saya mengapresiasi pemaparan data Anda, namun alangkah baiknya jika metode sampling dijelaskan lebih rinci.",
+                    "Mengapa Anda tidak menggunakan data dari instansi resmi saja daripada survei mandiri?",
+                    "Pemaparan Anda membosankan dan terlalu bertele-tele dalam menyajikan angka.",
+                    "Saya tidak setuju dengan semua argumen Anda karena tidak ada buktinya."
+                ],
+                answer: "Saya mengapresiasi pemaparan data Anda, namun alangkah baiknya jika metode sampling dijelaskan lebih rinci.",
+                discussion: "Tanggapan santun dalam diskusi ilmiah harus diawali apresiasi positif, kemudian disampaikan kritik yang objektif dan membangun tanpa menyerang personal."
+            },
+            {
+                id: 10,
+                type: "pg",
+                stimulus: "Resensi buku fiksi sering kali memuat unsur keunggulan dan kelemahan karya. Bagian keunggulan buku biasanya mengulas kekuatan alur cerita, kedalaman penokohan, serta pesan moral.",
+                question: "Pernyataan yang termasuk ke dalam bagian keunggulan buku adalah...",
+                options: [
+                    "Penyelesaian konflik pada akhir cerita terasa terlalu dipaksakan oleh penulis.",
+                    "Penggunaan bahasa yang puitis dan dialog antartokoh yang natural membuat pembaca seolah ikut merasakan emosi cerita.",
+                    "Sampul buku terlalu gelap dan pemilihan jenis huruf menyulitkan pembaca lanjut usia.",
+                    "Terdapat beberapa kesalahan cetak (typo) pada bab pertengahan buku.",
+                    "Harga jual buku terlalu mahal untuk kantong pelajar SMA."
+                ],
+                answer: "Penggunaan bahasa yang puitis dan dialog antartokoh yang natural membuat pembaca seolah ikut merasakan emosi cerita.",
+                discussion: "Pilihan tersebut memuji aspek intrinsik karya (bahasa puitis dan dialog natural) yang merupakan ciri khas keunggulan isi buku fiksi."
+            },
+            {
+                id: 11,
+                type: "pg",
+                stimulus: "Kebakaran hutan dan lahan yang terjadi setiap tahun di beberapa wilayah menimbulkan kerugian ekologis yang masif. Pemerintah bersama masyarakat bahu-membahu melakukan restorasi gambut dan patroli gabungan. [ ... ], pencegahan dini melalui edukasi kesadaran lingkungan terbukti lebih efektif menekan titik api.",
+                question: "Konjungsi antarkalimat yang tepat untuk melengkapi bagian rumpang adalah...",
+                options: [
+                    "Oleh karena itu",
+                    "Namun demikian",
+                    "Bahkan",
+                    "Di samping itu",
+                    "Sebaliknya"
+                ],
+                answer: "Namun demikian",
+                discussion: "Konjungsi 'Namun demikian' menyatakan pertentangan atau pengecualian dari upaya fisik (restorasi/patroli) ke pendekatan preventif berbasis edukasi."
+            },
+            {
+                id: 12,
+                type: "pg",
+                stimulus: "Penulisan gabungan kata yang tidak sesuai dengan kaidah EYD/PUEBI terdapat pada kalimat...",
+                options: [
+                    "Ibu membeli obat batuk di apotek dekat rumah.",
+                    "Pertanggungjawaban keuangan sekolah disampaikan secara transparan.",
+                    "Kerjasama antara kedua belah pihak telah dituangkan dalam nota kesepahaman.",
+                    "Anak-anak antusias mengikuti lomba balap karung di lapangan.",
+                    "Para sukarelawan membersihkan puing-puing sisa banjir."
+                ],
+                answer: "Kerjasama antara kedua belah pihak telah dituangkan dalam nota kesepahaman.",
+                discussion: "Kata 'kerjasama' seharusnya ditulis terpisah menjadi 'kerja sama' karena bentuk dasarnya gabungan kata yang tidak disatukan."
+            },
+            {
+                id: 13,
+                type: "pg",
+                stimulus: "Siswa Kelas XII IPA 1 rajin berlatih soal penalaran setiap sore. Siswa Kelas XII IPA 2 juga mengikuti bimbingan intensif menjelang ujian. Siswa Kelas XII IPS 1 aktif berdiskusi kelompok menyelesaikan modul latihan. Oleh karena itu, ...",
+                question: "Kalimat simpulan induktif yang paling tepat untuk melengkapi paragraf tersebut adalah...",
+                options: [
+                    "Seluruh siswa kelas XII di sekolah tersebut memiliki kedisiplinan yang tinggi.",
+                    "Siswa kelas XII menunjukkan semangat dan persiapan yang serius menghadapi asesmen kelulusan.",
+                    "Nilai ujian nasional tahun ini dipastikan akan meningkat drastis.",
+                    "Kegiatan belajar mengajar di sekolah berlangsung sangat kondusif.",
+                    "Guru mata pelajaran memberikan apresiasi kepada seluruh siswa."
+                ],
+                answer: "Siswa kelas XII menunjukkan semangat dan persiapan yang serius menghadapi asesmen kelulusan.",
+                discussion: "Simpulan induktif harus selaras dan merangkum seluruh premis khusus tentang keseriusan belajar siswa kelas XII dalam mempersiapkan ujian."
+            },
+            {
+                id: 14,
+                type: "pg",
+                stimulus: "Sebuah surat lamaran pekerjaan mencantumkan pembukaan berikut:\n'Berdasarkan iklan lowongan pekerjaan yang dimuat dalam harian Kompas, 14 Oktober 2026, dengan ini saya mengajukan permohonan untuk bergabung sebagai Staf Akuntansi di perusahaan yang Bapak/Ibu pimpin.'",
+                question: "Perbaikan penulisan unsur tanggal pada pembukaan surat lamaran pekerjaan tersebut agar sesuai kaidah penulisan adalah...",
+                options: [
+                    "14 Oktober 2026",
+                    "tanggal 14 Oktober 2026",
+                    "hari Selasa, 14 Oktober 2026",
+                    "14-10-2026",
+                    "tgl. 14 Oktober 2026"
+                ],
+                answer: "14 Oktober 2026",
+                discussion: "Penulisan tanggal dalam surat resmi tidak perlu diawali kata 'tanggal' jika sudah diikuti format angka dan bulan yang benar."
+            },
+            {
+                id: 15,
+                type: "essay",
+                question: "Analisislah pentingnya literasi kritis bagi pelajar dalam menyaring arus informasi atau berita bohong (hoaks) di media sosial pada era digital saat ini.",
+                answer: "Literasi kritis membekali pelajar dengan kemampuan menganalisis validitas sumber, membedakan fakta dan opini, serta mengecek fakta sebelum menyebarkan informasi.",
+                discussion: "Literasi kritis melatih siswa tidak sekadar membaca secara pasif, melainkan mempertanyakan kredibilitas penulis dan kesesuaian data logis untuk mencegah disinformasi."
+            }
         ];
 
         let currentIdx = 0;
@@ -329,35 +434,21 @@
         let violations = 0;
         let maxViolations = 3;
         let examActive = false;
-        let timeLeft = 90 * 60; // 90 Menit standar TKA
+        let timeLeft = 90 * 60; // 90 Menit Standar TKA
         let timerInterval = null;
         let studentData = { name: "", schoolName: "" };
 
         function startExam(e) {
-            if (e) e.preventDefault();
-            
-            const nameInput = document.getElementById("student-name");
-            const schoolInput = document.getElementById("student-school");
-            
-            if (!nameInput || !schoolInput) return;
-            
-            studentData.name = nameInput.value.trim();
-            studentData.schoolName = schoolInput.value.trim();
+            e.preventDefault();
+            studentData.name = document.getElementById("student-name").value.trim();
+            studentData.schoolName = document.getElementById("student-school").value.trim();
 
-            if(!studentData.name || !studentData.schoolName) {
-                alert("Mohon lengkapi Nama dan Asal Sekolah terlebih dahulu.");
-                return;
-            }
+            if(!studentData.name || !studentData.schoolName) return;
 
-            const stepIdentity = document.getElementById("step-identity");
-            const stepExam = document.getElementById("step-exam");
-            const examHeader = document.getElementById("exam-header");
-            const userInfo = document.getElementById("header-user-info");
-
-            if (stepIdentity) stepIdentity.classList.add("hidden");
-            if (stepExam) stepExam.classList.remove("hidden");
-            if (examHeader) examHeader.classList.remove("hidden");
-            if (userInfo) userInfo.innerText = `Peserta: ${studentData.name} | Sekolah: ${studentData.schoolName}`;
+            document.getElementById("step-identity").classList.add("hidden");
+            document.getElementById("step-exam").classList.remove("hidden");
+            document.getElementById("exam-header").classList.remove("hidden");
+            document.getElementById("header-user-info").innerText = `Peserta: ${studentData.name} | ${studentData.schoolName}`;
 
             examActive = true;
             initGridNav();
@@ -367,23 +458,19 @@
         }
 
         function startTimer() {
-            if (timerInterval) clearInterval(timerInterval);
             timerInterval = setInterval(() => {
                 timeLeft--;
                 let m = Math.floor(timeLeft / 60);
                 let s = timeLeft % 60;
                 let display = `${m < 10 ? '0':''}${m}:${s < 10 ? '0':''}${s}`;
-                
-                const timeDisplay = document.getElementById("time-display");
-                if (timeDisplay) timeDisplay.innerText = display;
+                document.getElementById("time-display").innerText = display;
 
-                const timerBox = document.getElementById("timer-box");
-                if(timeLeft <= 300 && timerBox) {
-                    timerBox.classList.add("animate-pulse-red", "bg-red-950", "border-red-600");
+                if(timeLeft <= 300) {
+                    document.getElementById("timer-box").classList.add("animate-pulse-red", "bg-red-950", "border-red-600");
                 }
                 if(timeLeft <= 0) {
                     clearInterval(timerInterval);
-                    alert("Waktu tryout telah habis! Sistem mengumpulkan jawaban secara otomatis.");
+                    alert("Waktu ujian telah habis! Sistem mengumpulkan jawaban secara otomatis.");
                     executeFinalSubmit();
                 }
             }, 1000);
@@ -391,14 +478,12 @@
 
         function initGridNav() {
             const container = document.getElementById("grid-nav-container");
-            if (!container) return;
             container.innerHTML = "";
             questions.forEach((q, idx) => {
                 let btn = document.createElement("button");
-                btn.type = "button";
                 btn.id = `grid-btn-${idx}`;
                 btn.innerText = q.id;
-                btn.className = "h-10 rounded-xl font-bold text-xs border border-slate-200 bg-slate-50 text-slate-700 hover:bg-slate-100 transition-all shadow-sm cursor-pointer";
+                btn.className = "h-9 sm:h-10 rounded-xl font-bold text-xs border border-slate-200 bg-slate-50 text-slate-700 hover:bg-slate-100 transition-all shadow-sm";
                 btn.onclick = () => loadQuestion(idx);
                 container.appendChild(btn);
             });
@@ -410,11 +495,11 @@
                 let btn = document.getElementById(`grid-btn-${idx}`);
                 if(!btn) return;
                 if(idx === currentIdx) {
-                    btn.className = "h-10 rounded-xl font-bold text-xs bg-teal-700 text-white shadow-md ring-2 ring-teal-300/50 scale-105 transition-transform";
+                    btn.className = "h-9 sm:h-10 rounded-xl font-bold text-xs bg-teal-600 text-white shadow-md ring-2 ring-teal-300/50 scale-105 transition-transform";
                 } else if(studentAnswers[idx] !== undefined && studentAnswers[idx] !== "") {
-                    btn.className = "h-10 rounded-xl font-bold text-xs bg-emerald-500 text-white shadow-sm hover:bg-emerald-600 transition-colors";
+                    btn.className = "h-9 sm:h-10 rounded-xl font-bold text-xs bg-emerald-500 text-white shadow-sm hover:bg-emerald-600 transition-colors";
                 } else {
-                    btn.className = "h-10 rounded-xl font-bold text-xs bg-slate-50 text-slate-700 border border-slate-200 hover:bg-slate-100 transition-colors";
+                    btn.className = "h-9 sm:h-10 rounded-xl font-bold text-xs bg-slate-50 text-slate-700 border border-slate-200 hover:bg-slate-100 transition-colors";
                 }
             });
         }
@@ -423,36 +508,30 @@
             currentIdx = idx;
             let q = questions[idx];
 
-            const qBadge = document.getElementById("question-badge");
-            const qType = document.getElementById("question-type-badge");
-            const qText = document.getElementById("question-text");
+            document.getElementById("question-badge").innerText = `Soal No. ${q.id} dari ${questions.length}`;
+            document.getElementById("question-type-badge").innerText = q.type === 'essay' ? 'Soal Uraian Analitis' : 'Literasi Membaca';
+            document.getElementById("question-text").innerText = q.question;
 
-            if (qBadge) qBadge.innerText = `Soal No. ${q.id} dari ${questions.length}`;
-            if (qType) qType.innerText = q.type === 'essay' ? 'Soal Uraian Analitis (Essay)' : 'Literasi Teks & Kebahasaan (TKA)';
-            if (qText) qText.innerText = q.question;
-
-            // Handle Stimulus Bacaan jika ada
             let stimulusBox = document.getElementById("stimulus-container");
             let stimulusText = document.getElementById("stimulus-text");
-            if(q.stimulus && stimulusBox && stimulusText) {
-                stimulusText.innerText = q.stimulus;
+            if(q.stimulus) {
                 stimulusBox.classList.remove("hidden");
-            } else if (stimulusBox) {
+                stimulusText.innerText = q.stimulus;
+            } else {
                 stimulusBox.classList.add("hidden");
             }
 
             let optContainer = document.getElementById("answer-options-container");
-            if (!optContainer) return;
             optContainer.innerHTML = "";
 
             if(q.type === 'pg') {
                 q.options.forEach(opt => {
                     let isChecked = studentAnswers[idx] === opt ? "checked" : "";
                     let label = document.createElement("label");
-                    label.className = `flex items-center space-x-3.5 p-4 rounded-2xl border cursor-pointer transition-all ${isChecked ? 'border-teal-700 bg-teal-50/60 shadow-sm ring-1 ring-teal-600/30' : 'border-slate-200/80 bg-white hover:bg-slate-50/80'}`;
+                    label.className = `flex items-center space-x-3.5 p-3.5 sm:p-4 rounded-2xl border cursor-pointer transition-all ${isChecked ? 'border-teal-600 bg-teal-50/60 shadow-sm ring-1 ring-teal-500/30' : 'border-slate-200/80 bg-white hover:bg-slate-50/80'}`;
                     label.innerHTML = `
-                        <input type="radio" name="answer-opt" value="${opt}" ${isChecked} onchange="saveAnswer(this.value)" class="w-4 h-4 text-teal-700 focus:ring-teal-600">
-                        <span class="text-sm font-semibold text-slate-800">${opt}</span>
+                        <input type="radio" name="answer-opt" value="${opt}" ${isChecked} onchange="saveAnswer('${opt}')" class="w-4 h-4 text-teal-600 focus:ring-teal-500 shrink-0">
+                        <span class="text-xs sm:text-sm font-semibold text-slate-800">${opt}</span>
                     `;
                     optContainer.appendChild(label);
                 });
@@ -460,8 +539,8 @@
                 let val = studentAnswers[idx] || "";
                 let textarea = document.createElement("textarea");
                 textarea.rows = 6;
-                textarea.className = "w-full p-4 rounded-2xl border border-slate-200 bg-slate-50/50 focus:bg-white focus:ring-2 focus:ring-teal-500/20 focus:border-teal-600 focus:outline-none text-sm font-medium transition-all";
-                textarea.placeholder = "Tuliskan argumen analitis dan jawaban lengkap Anda di sini...";
+                textarea.className = "w-full p-4 rounded-2xl border border-slate-200 bg-slate-50/50 focus:bg-white focus:ring-2 focus:ring-teal-500/20 focus:border-teal-600 focus:outline-none text-xs sm:text-sm font-medium transition-all";
+                textarea.placeholder = "Tuliskan analisis literasi dan argumen Anda secara komprehensif di sini...";
                 textarea.value = val;
                 
                 textarea.oninput = (e) => saveAnswer(e.target.value);
@@ -474,10 +553,8 @@
                 optContainer.appendChild(textarea);
             }
 
-            const btnPrev = document.getElementById("btn-prev");
-            const btnNext = document.getElementById("btn-next");
-            if (btnPrev) btnPrev.disabled = currentIdx === 0;
-            if (btnNext) btnNext.innerText = currentIdx === questions.length - 1 ? "Selesai / Cek" : "Selanjutnya →";
+            document.getElementById("btn-prev").disabled = currentIdx === 0;
+            document.getElementById("btn-next").innerText = currentIdx === questions.length - 1 ? "Selesai / Cek" : "Selanjutnya →";
             updateGridNavStyles();
         }
 
@@ -501,35 +578,25 @@
         function confirmSubmit() {
             let unansweredCount = questions.filter((_, idx) => studentAnswers[idx] === undefined || studentAnswers[idx] === "").length;
             let modalText = document.getElementById("submit-modal-text");
-            if(modalText) {
-                if(unansweredCount > 0) {
-                    modalText.innerHTML = `⚠️ Perhatian: Masih ada <span class="text-red-600 font-bold">${unansweredCount} soal</span> yang belum terjawab. Apakah Anda tetap ingin mengumpulkan?`;
-                } else {
-                    modalText.innerText = "Semua soal telah terjawab. Apakah Anda yakin ingin mengumpulkan lembar jawaban?";
-                }
+            if(unansweredCount > 0) {
+                modalText.innerHTML = `⚠️ Perhatian: Masih ada <span class="text-red-600 font-bold">${unansweredCount} soal</span> yang belum terjawab. Apakah Anda tetap ingin mengumpulkan?`;
+            } else {
+                modalText.innerText = "Semua soal telah terjawab. Apakah Anda yakin ingin mengumpulkan lembar jawaban?";
             }
-            const submitModal = document.getElementById("submit-modal");
-            if (submitModal) submitModal.classList.remove("hidden");
+            document.getElementById("submit-modal").classList.remove("hidden");
         }
 
         function closeSubmitModal() {
-            const submitModal = document.getElementById("submit-modal");
-            if (submitModal) submitModal.classList.add("hidden");
+            document.getElementById("submit-modal").classList.add("hidden");
         }
 
         function executeFinalSubmit() {
-            if (timerInterval) clearInterval(timerInterval);
+            clearInterval(timerInterval);
             closeSubmitModal();
-            
-            const stepExam = document.getElementById("step-exam");
-            const examHeader = document.getElementById("exam-header");
-            const stepResult = document.getElementById("step-result");
+            document.getElementById("step-exam").classList.add("hidden");
+            document.getElementById("exam-header").classList.add("hidden");
+            document.getElementById("step-result").classList.remove("hidden");
 
-            if (stepExam) stepExam.classList.add("hidden");
-            if (examHeader) examHeader.classList.add("hidden");
-            if (stepResult) stepResult.classList.remove("hidden");
-
-            // Penilaian TKA Bahasa Indonesia Proporsional
             let correctCount = 0;
             questions.forEach((q, idx) => {
                 if(q.type === 'pg' && studentAnswers[idx] === q.answer) {
@@ -541,17 +608,11 @@
 
             let finalScore = Math.round((correctCount / questions.length) * 100);
 
-            const resName = document.getElementById("res-name");
-            const resScore = document.getElementById("res-score");
-            const resViolation = document.getElementById("res-violation");
+            document.getElementById("res-name").innerText = studentData.name + ` (${studentData.schoolName})`;
+            document.getElementById("res-score").innerText = `${finalScore} / 100 Poin (${correctCount}/${questions.length} Benar)`;
+            document.getElementById("res-violation").innerText = `${violations} Kali`;
 
-            if (resName) resName.innerText = studentData.name + ` (${studentData.schoolName})`;
-            if (resScore) resScore.innerText = `${finalScore} / 100 Poin (${correctCount}/${questions.length} Benar)`;
-            if (resViolation) resViolation.innerText = `${violations} Kali`;
-
-            // Render Pembahasan TKA ke Halaman Hasil
             let reviewContainer = document.getElementById("review-container");
-            if (!reviewContainer) return;
             reviewContainer.innerHTML = "";
 
             questions.forEach((q, idx) => {
@@ -559,22 +620,22 @@
                 let isCorrect = (q.type === 'pg' && userAns === q.answer) || (q.type === 'essay' && userAns.trim().length > 10);
                 
                 let card = document.createElement("div");
-                card.className = "p-6 rounded-2xl border border-slate-200/80 bg-slate-50/50 space-y-3.5 shadow-sm";
+                card.className = "p-4 sm:p-6 rounded-2xl border border-slate-200/80 bg-slate-50/50 space-y-3 shadow-sm";
                 card.innerHTML = `
                     <div class="flex justify-between items-start">
-                        <span class="font-bold text-slate-900 text-sm">Soal No. ${q.id}</span>
-                        <span class="text-xs font-bold px-3 py-1 rounded-xl ${isCorrect ? 'bg-emerald-100 text-emerald-800 border border-emerald-200' : 'bg-red-100 text-red-800 border border-red-200'}">
+                        <span class="font-bold text-slate-900 text-xs sm:text-sm">Soal No. ${q.id}</span>
+                        <span class="text-[10px] sm:text-xs font-bold px-3 py-1 rounded-xl ${isCorrect ? 'bg-emerald-100 text-emerald-800 border border-emerald-200' : 'bg-red-100 text-red-800 border border-red-200'}">
                             ${isCorrect ? '✔ Sesuai / Benar' : '✖ Kurang Tepat'}
                         </span>
                     </div>
-                    ${q.stimulus ? `<div class="text-xs bg-white p-3.5 rounded-xl border border-slate-200 text-slate-600 italic"><strong>Wacana:</strong> ${q.stimulus}</div>` : ''}
-                    <p class="text-sm font-semibold text-slate-900 leading-relaxed">${q.question}</p>
-                    <div class="text-xs space-y-1.5 bg-white p-4 rounded-xl border border-slate-200/60 shadow-sm">
+                    ${q.stimulus ? `<div class="p-3 bg-white rounded-xl border border-slate-200/60 text-xs text-slate-700 italic">"${q.stimulus}"</div>` : ''}
+                    <p class="text-xs sm:text-sm font-semibold text-slate-900 leading-relaxed">${q.question}</p>
+                    <div class="text-xs space-y-1.5 bg-white p-3.5 rounded-xl border border-slate-200/60 shadow-sm">
                         <p><span class="text-slate-400 font-bold uppercase tracking-wider">Jawaban Anda:</span> <span class="font-semibold text-slate-800">${userAns}</span></p>
-                        ${q.type === 'pg' ? `<p><span class="text-slate-400 font-bold uppercase tracking-wider">Kunci Jawaban:</span> <span class="font-bold text-teal-700">${q.answer}</span></p>` : ''}
+                        ${q.type === 'pg' ? `<p><span class="text-slate-400 font-bold uppercase tracking-wider">Kunci Jawaban:</span> <span class="font-bold text-teal-600">${q.answer}</span></p>` : ''}
                     </div>
-                    <div class="text-xs bg-teal-50/80 p-4 rounded-xl border border-teal-100 text-teal-950 space-y-1.5 shadow-sm">
-                        <p class="font-bold flex items-center space-x-1"><span>💡</span> <span>Pembahasan Standar Pusmendik:</span></p>
+                    <div class="text-xs bg-teal-50/80 p-3.5 rounded-xl border border-teal-100 text-teal-950 space-y-1.5 shadow-sm">
+                        <p class="font-bold flex items-center space-x-1"><span>💡</span> <span>Pembahasan Standar TKA:</span></p>
                         <p class="leading-relaxed font-medium text-teal-900">${q.discussion}</p>
                     </div>
                 `;
@@ -582,13 +643,11 @@
             });
         }
 
-        // Proteksi Anti-Kecurangan (Tab-Switch)
         function initAntiCheat() {
             document.addEventListener("visibilitychange", () => {
                 if(document.hidden && examActive) {
                     violations++;
-                    const violationCountEl = document.getElementById("violation-count");
-                    if (violationCountEl) violationCountEl.innerText = violations;
+                    document.getElementById("violation-count").innerText = violations;
                     alert(`🚨 PERINGATAN KECURANGAN KE-${violations}!\nAnda terdeteksi meninggalkan halaman tryout.`);
                     
                     if(violations >= maxViolations) {
@@ -599,3 +658,5 @@
             });
         }
     </script>
+</body>
+</html>
