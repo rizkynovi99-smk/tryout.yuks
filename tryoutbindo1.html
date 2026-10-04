@@ -84,7 +84,7 @@
                 <div class="bg-amber-50/80 border border-amber-200/80 p-3.5 rounded-2xl text-xs text-amber-900 space-y-1.5">
                     <p class="font-bold flex items-center space-x-1"><span>⚠️</span> <span>Ketentuan & Tata Tertib:</span></p>
                     <ul class="list-disc list-inside space-y-1 text-amber-800/90 font-medium">
-                        <li>Fokus materi: Teks informasi, teks fiksi, inferensi, & evaluasi.</li>
+                        <li>Fokus materi: Teks informasi, teks fiksi, inferensi, & evaluasi (30 Soal Pilihan Ganda).</li>
                         <li>Sistem mendeteksi perpindahan tab browser (Maksimal 3 kali).</li>
                     </ul>
                 </div>
@@ -103,7 +103,7 @@
                 <div>
                     <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center border-b border-slate-100 pb-3 mb-4 sm:mb-6 gap-2">
                         <span id="question-badge" class="bg-teal-50 text-teal-700 border border-teal-100 text-xs font-bold px-3 py-1.5 rounded-xl shadow-sm">Soal No. 1 dari 30</span>
-                        <span id="question-type-badge" class="text-xs font-bold uppercase tracking-wider text-slate-500 bg-slate-100 px-3 py-1 rounded-lg">Literasi Membaca (Pemahaman Tekstual)</span>
+                        <span id="question-type-badge" class="text-xs font-bold uppercase tracking-wider text-slate-500 bg-slate-100 px-3 py-1 rounded-lg">Literasi Membaca (Pilihan Ganda)</span>
                     </div>
 
                     <!-- Kotak Stimulus Wacana -->
@@ -189,7 +189,7 @@
             <div class="bg-white/95 backdrop-blur-md rounded-3xl shadow-2xl p-6 sm:p-10 border border-slate-200/80">
                 <h3 class="text-lg sm:text-xl font-black text-slate-900 mb-6 border-b border-slate-100 pb-4 flex items-center space-x-2">
                     <span>📚</span>
-                    <span>Pembahasan Komprehensif TKA Bahasa Indonesia (30 Soal)</span>
+                    <span>Pembahasan Komprehensif TKA Bahasa Indonesia (30 Soal Pilihan Ganda)</span>
                 </h3>
                 <div id="review-container" class="space-y-6"></div>
             </div>
@@ -210,7 +210,7 @@
         </div>
     </div>
 
-    <!-- Database 30 Soal Standar TKA Bahasa Indonesia SMA/SMK & Skrip Logika -->
+    <!-- Database 30 Soal Pilihan Ganda Standar TKA Bahasa Indonesia SMA/SMK & Skrip Logika -->
     <script>
         const questions = [
             {
@@ -592,10 +592,18 @@
                 discussion: "Amanat tersebut tersirat jelas dari metafora 'ketakutan adalah penjara paling kejam yang diciptakan oleh pikiran'."
             },
             {
-                id: 30, type: "essay", category: "Analisis Kritis & Literasi",
-                question: "Analisislah pentingnya literasi kritis bagi pelajar dalam menyaring arus informasi atau berita bohong (hoaks) di media sosial pada era digital saat ini.",
-                answer: "Literasi kritis membekali pelajar dengan kemampuan menganalisis validitas sumber, membedakan fakta dan opini, serta mengecek fakta sebelum menyebarkan informasi.",
-                discussion: "Literasi kritis melatih siswa tidak sekadar membaca secara pasif, melainkan mempertanyakan kredibilitas penulis dan motif penyebaran informasi untuk mencegah disinformasi."
+                id: 30, type: "pg", category: "Analisis Kritis & Literasi",
+                stimulus: "Perkembangan disinformasi di media sosial menuntut setiap warga negara memiliki kepekaan analitis yang memadai agar tidak mudah terprovokasi oleh judul berita yang provokatif.",
+                question: "Manfaat utama dari penerapan berpikir kritis terhadap informasi digital adalah...",
+                options: [
+                    "Membatasi akses komunikasi antarindividu di dunia maya",
+                    "Memastikan kebenaran data dan menghindari penyebaran berita bohong",
+                    "Mempercepat penyebaran informasi tanpa melalui proses saring",
+                    "Menghilangkan seluruh konten hiburan di platform sosial",
+                    "Mempermudah pengunduhan file berukuran besar"
+                ],
+                answer: "Memastikan kebenaran data dan menghindari penyebaran berita bohong",
+                discussion: "Berpikir kritis berfungsi untuk menyeleksi fakta, memverifikasi sumber, dan mencegah disinformasi di masyarakat."
             }
         ];
 
@@ -679,7 +687,7 @@
             let q = questions[idx];
 
             document.getElementById("question-badge").innerText = `Soal No. ${q.id} dari ${questions.length}`;
-            document.getElementById("question-type-badge").innerText = q.category || (q.type === 'essay' ? 'Soal Uraian Analitis' : 'Literasi Membaca');
+            document.getElementById("question-type-badge").innerText = q.category || 'Literasi Membaca (Pilihan Ganda)';
             document.getElementById("question-text").innerText = q.question;
 
             // Handle Stimulus
@@ -695,34 +703,16 @@
             let optContainer = document.getElementById("answer-options-container");
             optContainer.innerHTML = "";
 
-            if(q.type === 'pg') {
-                q.options.forEach(opt => {
-                    let isChecked = studentAnswers[idx] === opt ? "checked" : "";
-                    let label = document.createElement("label");
-                    label.className = `flex items-center space-x-3 p-3.5 sm:p-4 rounded-2xl border cursor-pointer transition-all ${isChecked ? 'border-teal-600 bg-teal-50/70 shadow-sm ring-1 ring-teal-500/30' : 'border-slate-200/80 bg-white hover:bg-slate-50/80'}`;
-                    label.innerHTML = `
-                        <input type="radio" name="answer-opt" value="${opt}" ${isChecked} onchange="saveAnswer('${opt}')" class="w-4 h-4 text-teal-600 focus:ring-teal-500 shrink-0">
-                        <span class="text-xs sm:text-sm font-semibold text-slate-800">${opt}</span>
-                    `;
-                    optContainer.appendChild(label);
-                });
-            } else if(q.type === 'essay') {
-                let val = studentAnswers[idx] || "";
-                let textarea = document.createElement("textarea");
-                textarea.rows = 5;
-                textarea.className = "w-full p-4 rounded-2xl border border-slate-200 bg-slate-50/50 focus:bg-white focus:ring-2 focus:ring-teal-500/20 focus:border-teal-600 focus:outline-none text-xs sm:text-sm font-medium transition-all";
-                textarea.placeholder = "Tuliskan analisis literasi dan argumen Anda secara komprehensif di sini...";
-                textarea.value = val;
-                
-                textarea.oninput = (e) => saveAnswer(e.target.value);
-                textarea.onpaste = (e) => {
-                    e.preventDefault();
-                    alert("⚠️ Peringatan TKA: Fitur Paste (Tempel) dinonaktifkan pada kolom uraian.");
-                };
-                textarea.oncontextmenu = (e) => e.preventDefault();
-
-                optContainer.appendChild(textarea);
-            }
+            q.options.forEach(opt => {
+                let isChecked = studentAnswers[idx] === opt ? "checked" : "";
+                let label = document.createElement("label");
+                label.className = `flex items-center space-x-3 p-3.5 sm:p-4 rounded-2xl border cursor-pointer transition-all ${isChecked ? 'border-teal-600 bg-teal-50/70 shadow-sm ring-1 ring-teal-500/30' : 'border-slate-200/80 bg-white hover:bg-slate-50/80'}`;
+                label.innerHTML = `
+                    <input type="radio" name="answer-opt" value="${opt}" ${isChecked} onchange="saveAnswer('${opt}')" class="w-4 h-4 text-teal-600 focus:ring-teal-500 shrink-0">
+                    <span class="text-xs sm:text-sm font-semibold text-slate-800">${opt}</span>
+                `;
+                optContainer.appendChild(label);
+            });
 
             document.getElementById("btn-prev").disabled = currentIdx === 0;
             document.getElementById("btn-next").innerText = currentIdx === questions.length - 1 ? "Selesai / Cek" : "Selanjutnya →";
@@ -750,7 +740,7 @@
             let unansweredCount = questions.filter((_, idx) => studentAnswers[idx] === undefined || studentAnswers[idx] === "").length;
             let modalText = document.getElementById("submit-modal-text");
             if(unansweredCount > 0) {
-                modalText.innerHTML = `⚠️️ Perhatian: Masih ada <span class="text-red-600 font-bold">${unansweredCount} soal</span> yang belum terjawab. Apakah Anda tetap ingin mengumpulkan?`;
+                modalText.innerHTML = `⚠️ Perhatian: Masih ada <span class="text-red-600 font-bold">${unansweredCount} soal</span> yang belum terjawab. Apakah Anda tetap ingin mengumpulkan?`;
             } else {
                 modalText.innerText = "Semua soal telah terjawab. Apakah Anda yakin ingin mengumpulkan lembar jawaban?";
             }
@@ -768,12 +758,10 @@
             document.getElementById("exam-header").classList.add("hidden");
             document.getElementById("step-result").classList.remove("hidden");
 
-            // Penilaian TKA Proporsional 30 Soal
+            // Penilaian TKA 30 Soal Pilihan Ganda
             let correctCount = 0;
             questions.forEach((q, idx) => {
-                if(q.type === 'pg' && studentAnswers[idx] === q.answer) {
-                    correctCount++;
-                } else if(q.type === 'essay' && studentAnswers[idx] && studentAnswers[idx].trim().length > 10) {
+                if(studentAnswers[idx] === q.answer) {
                     correctCount++;
                 }
             });
@@ -790,7 +778,7 @@
 
             questions.forEach((q, idx) => {
                 let userAns = studentAnswers[idx] || "(Tidak dijawab)";
-                let isCorrect = (q.type === 'pg' && userAns === q.answer) || (q.type === 'essay' && userAns.trim().length > 10);
+                let isCorrect = (userAns === q.answer);
                 
                 let card = document.createElement("div");
                 card.className = "p-5 sm:p-6 rounded-2xl border border-slate-200/80 bg-slate-50/50 space-y-3 shadow-sm";
@@ -805,7 +793,7 @@
                     <p class="text-xs sm:text-sm font-semibold text-slate-900 leading-relaxed">${q.question}</p>
                     <div class="text-xs space-y-1.5 bg-white p-3.5 rounded-xl border border-slate-200/60 shadow-sm">
                         <p><span class="text-slate-400 font-bold uppercase tracking-wider">Jawaban Anda:</span> <span class="font-semibold text-slate-800">${userAns}</span></p>
-                        ${q.type === 'pg' ? `<p><span class="text-slate-400 font-bold uppercase tracking-wider">Kunci Jawaban:</span> <span class="font-bold text-teal-600">${q.answer}</span></p>` : ''}
+                        <p><span class="text-slate-400 font-bold uppercase tracking-wider">Kunci Jawaban:</span> <span class="font-bold text-teal-600">${q.answer}</span></p>
                     </div>
                     <div class="text-xs bg-teal-50/80 p-3.5 rounded-xl border border-teal-100 text-teal-950 space-y-1.5 shadow-sm">
                         <p class="font-bold flex items-center space-x-1"><span>💡</span> <span>Pembahasan Standar TKA:</span></p>
