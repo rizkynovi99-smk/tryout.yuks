@@ -334,7 +334,8 @@
         let studentData = { name: "", schoolName: "" };
 
         function startExam(e) {
-            e.preventDefault();
+            if (e) e.preventDefault();
+            
             const nameInput = document.getElementById("student-name");
             const schoolInput = document.getElementById("student-school");
             
@@ -450,7 +451,7 @@
                     let label = document.createElement("label");
                     label.className = `flex items-center space-x-3.5 p-4 rounded-2xl border cursor-pointer transition-all ${isChecked ? 'border-teal-700 bg-teal-50/60 shadow-sm ring-1 ring-teal-600/30' : 'border-slate-200/80 bg-white hover:bg-slate-50/80'}`;
                     label.innerHTML = `
-                        <input type="radio" name="answer-opt" value="${opt}" ${isChecked} onchange="saveAnswer('${opt.replace(/'/g, "\\'")}')" class="w-4 h-4 text-teal-700 focus:ring-teal-600">
+                        <input type="radio" name="answer-opt" value="${opt}" ${isChecked} onchange="saveAnswer(this.value)" class="w-4 h-4 text-teal-700 focus:ring-teal-600">
                         <span class="text-sm font-semibold text-slate-800">${opt}</span>
                     `;
                     optContainer.appendChild(label);
@@ -598,5 +599,3 @@
             });
         }
     </script>
-</body>
-</html>
