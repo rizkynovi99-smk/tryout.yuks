@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="id">
 <head>
@@ -334,15 +335,25 @@
 
         function startExam(e) {
             e.preventDefault();
-            studentData.name = document.getElementById("student-name").value.trim();
-            studentData.schoolName = document.getElementById("student-school").value.trim();
+            const nameInput = document.getElementById("student-name");
+            const schoolInput = document.getElementById("student-school");
+            
+            if (!nameInput || !schoolInput) return;
+            
+            studentData.name = nameInput.value.trim();
+            studentData.schoolName = schoolInput.value.trim();
 
             if(!studentData.name || !studentData.schoolName) return;
 
-            document.getElementById("step-identity").classList.add("hidden");
-            document.getElementById("step-exam").classList.remove("hidden");
-            document.getElementById("exam-header").classList.remove("hidden");
-            document.getElementById("header-user-info").innerText = `Peserta: ${studentData.name} | Sekolah: ${studentData.schoolName}`;
+            const stepIdentity = document.getElementById("step-identity");
+            const stepExam = document.getElementById("step-exam");
+            const examHeader = document.getElementById("exam-header");
+            const userInfo = document.getElementById("header-user-info");
+
+            if (stepIdentity) stepIdentity.classList.add("hidden");
+            if (stepExam) stepExam.classList.remove("hidden");
+            if (examHeader) examHeader.classList.remove("hidden");
+            if (userInfo) userInfo.innerText = `Peserta: ${studentData.name} | Sekolah: ${studentData.schoolName}`;
 
             examActive = true;
             initGridNav();
@@ -357,10 +368,13 @@
                 let m = Math.floor(timeLeft / 60);
                 let s = timeLeft % 60;
                 let display = `${m < 10 ? '0':''}${m}:${s < 10 ? '0':''}${s}`;
-                document.getElementById("time-display").innerText = display;
+                
+                const timeDisplay = document.getElementById("time-display");
+                if (timeDisplay) timeDisplay.innerText = display;
 
-                if(timeLeft <= 300) {
-                    document.getElementById("timer-box").classList.add("animate-pulse-red", "bg-red-950", "border-red-600");
+                const timerBox = document.getElementById("timer-box");
+                if(timeLeft <= 300 && timerBox) {
+                    timerBox.classList.add("animate-pulse-red", "bg-red-950", "border-red-600");
                 }
                 if(timeLeft <= 0) {
                     clearInterval(timerInterval);
@@ -372,6 +386,7 @@
 
         function initGridNav() {
             const container = document.getElementById("grid-nav-container");
+            if (!container) return;
             container.innerHTML = "";
             questions.forEach((q, idx) => {
                 let btn = document.createElement("button");
@@ -402,21 +417,26 @@
             currentIdx = idx;
             let q = questions[idx];
 
-            document.getElementById("question-badge").innerText = `Soal No. ${q.id} dari ${questions.length}`;
-            document.getElementById("question-type-badge").innerText = q.type === 'essay' ? 'Soal Uraian Analitis (Essay)' : 'Literasi Teks & Kebahasaan (TKA)';
-            document.getElementById("question-text").innerText = q.question;
+            const qBadge = document.getElementById("question-badge");
+            const qType = document.getElementById("question-type-badge");
+            const qText = document.getElementById("question-text");
+
+            if (qBadge) qBadge.innerText = `Soal No. ${q.id} dari ${questions.length}`;
+            if (qType) qType.innerText = q.type === 'essay' ? 'Soal Uraian Analitis (Essay)' : 'Literasi Teks & Kebahasaan (TKA)';
+            if (qText) qText.innerText = q.question;
 
             // Handle Stimulus Bacaan jika ada
             let stimulusBox = document.getElementById("stimulus-container");
             let stimulusText = document.getElementById("stimulus-text");
-            if(q.stimulus) {
+            if(q.stimulus && stimulusBox && stimulusText) {
                 stimulusText.innerText = q.stimulus;
                 stimulusBox.classList.remove("hidden");
-            } else {
+            } else if (stimulusBox) {
                 stimulusBox.classList.add("hidden");
             }
 
             let optContainer = document.getElementById("answer-options-container");
+            if (!optContainer) return;
             optContainer.innerHTML = "";
 
             if(q.type === 'pg') {
@@ -425,7 +445,7 @@
                     let label = document.createElement("label");
                     label.className = `flex items-center space-x-3.5 p-4 rounded-2xl border cursor-pointer transition-all ${isChecked ? 'border-teal-700 bg-teal-50/60 shadow-sm ring-1 ring-teal-600/30' : 'border-slate-200/80 bg-white hover:bg-slate-50/80'}`;
                     label.innerHTML = `
-                        <input type="radio" name="answer-opt" value="${opt}" ${isChecked} onchange="saveAnswer('${opt}')" class="w-4 h-4 text-teal-700 focus:ring-teal-600">
+                        <input type="radio" name="answer-opt" value="${opt}" ${isChecked} onchange="saveAnswer('${opt.replace(/'/g, "\\'")}')" class="w-4 h-4 text-teal-700 focus:ring-teal-600">
                         <span class="text-sm font-semibold text-slate-800">${opt}</span>
                     `;
                     optContainer.appendChild(label);
@@ -448,8 +468,10 @@
                 optContainer.appendChild(textarea);
             }
 
-            document.getElementById("btn-prev").disabled = currentIdx === 0;
-            document.getElementById("btn-next").innerText = currentIdx === questions.length - 1 ? "Selesai / Cek" : "Selanjutnya →";
+            const btnPrev = document.getElementById("btn-prev");
+            const btnNext = document.getElementById("btn-next");
+            if (btnPrev) btnPrev.disabled = currentIdx === 0;
+            if (btnNext) btnNext.innerText = currentIdx === questions.length - 1 ? "Selesai / Cek" : "Selanjutnya →";
             updateGridNavStyles();
         }
 
@@ -473,24 +495,33 @@
         function confirmSubmit() {
             let unansweredCount = questions.filter((_, idx) => studentAnswers[idx] === undefined || studentAnswers[idx] === "").length;
             let modalText = document.getElementById("submit-modal-text");
-            if(unansweredCount > 0) {
-                modalText.innerHTML = `⚠️ Perhatian: Masih ada <span class="text-red-600 font-bold">${unansweredCount} soal</span> yang belum terjawab. Apakah Anda tetap ingin mengumpulkan?`;
-            } else {
-                modalText.innerText = "Semua soal telah terjawab. Apakah Anda yakin ingin mengumpulkan lembar jawaban?";
+            if(modalText) {
+                if(unansweredCount > 0) {
+                    modalText.innerHTML = `⚠️ Perhatian: Masih ada <span class="text-red-600 font-bold">${unansweredCount} soal</span> yang belum terjawab. Apakah Anda tetap ingin mengumpulkan?`;
+                } else {
+                    modalText.innerText = "Semua soal telah terjawab. Apakah Anda yakin ingin mengumpulkan lembar jawaban?";
+                }
             }
-            document.getElementById("submit-modal").classList.remove("hidden");
+            const submitModal = document.getElementById("submit-modal");
+            if (submitModal) submitModal.classList.remove("hidden");
         }
 
         function closeSubmitModal() {
-            document.getElementById("submit-modal").classList.add("hidden");
+            const submitModal = document.getElementById("submit-modal");
+            if (submitModal) submitModal.classList.add("hidden");
         }
 
         function executeFinalSubmit() {
-            clearInterval(timerInterval);
+            if (timerInterval) clearInterval(timerInterval);
             closeSubmitModal();
-            document.getElementById("step-exam").classList.add("hidden");
-            document.getElementById("exam-header").classList.add("hidden");
-            document.getElementById("step-result").classList.remove("hidden");
+            
+            const stepExam = document.getElementById("step-exam");
+            const examHeader = document.getElementById("exam-header");
+            const stepResult = document.getElementById("step-result");
+
+            if (stepExam) stepExam.classList.add("hidden");
+            if (examHeader) examHeader.classList.add("hidden");
+            if (stepResult) stepResult.classList.remove("hidden");
 
             // Penilaian TKA Bahasa Indonesia Proporsional
             let correctCount = 0;
@@ -504,12 +535,17 @@
 
             let finalScore = Math.round((correctCount / questions.length) * 100);
 
-            document.getElementById("res-name").innerText = studentData.name + ` (${studentData.schoolName})`;
-            document.getElementById("res-score").innerText = `${finalScore} / 100 Poin (${correctCount}/${questions.length} Benar)`;
-            document.getElementById("res-violation").innerText = `${violations} Kali`;
+            const resName = document.getElementById("res-name");
+            const resScore = document.getElementById("res-score");
+            const resViolation = document.getElementById("res-violation");
+
+            if (resName) resName.innerText = studentData.name + ` (${studentData.schoolName})`;
+            if (resScore) resScore.innerText = `${finalScore} / 100 Poin (${correctCount}/${questions.length} Benar)`;
+            if (resViolation) resViolation.innerText = `${violations} Kali`;
 
             // Render Pembahasan TKA ke Halaman Hasil
             let reviewContainer = document.getElementById("review-container");
+            if (!reviewContainer) return;
             reviewContainer.innerHTML = "";
 
             questions.forEach((q, idx) => {
@@ -545,7 +581,8 @@
             document.addEventListener("visibilitychange", () => {
                 if(document.hidden && examActive) {
                     violations++;
-                    document.getElementById("violation-count").innerText = violations;
+                    const violationCountEl = document.getElementById("violation-count");
+                    if (violationCountEl) violationCountEl.innerText = violations;
                     alert(`🚨 PERINGATAN KECURANGAN KE-${violations}!\nAnda terdeteksi meninggalkan halaman tryout.`);
                     
                     if(violations >= maxViolations) {
