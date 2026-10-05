@@ -704,13 +704,27 @@
             optContainer.innerHTML = "";
 
             q.options.forEach(opt => {
-                let isChecked = studentAnswers[idx] === opt ? "checked" : "";
+                let isChecked = studentAnswers[idx] === opt;
                 let label = document.createElement("label");
                 label.className = `flex items-center space-x-3 p-3.5 sm:p-4 rounded-2xl border cursor-pointer transition-all ${isChecked ? 'border-teal-600 bg-teal-50/70 shadow-sm ring-1 ring-teal-500/30' : 'border-slate-200/80 bg-white hover:bg-slate-50/80'}`;
-                label.innerHTML = `
-                    <input type="radio" name="answer-opt" value="${opt}" ${isChecked} onchange="saveAnswer('${opt}')" class="w-4 h-4 text-teal-600 focus:ring-teal-500 shrink-0">
-                    <span class="text-xs sm:text-sm font-semibold text-slate-800">${opt}</span>
-                `;
+                
+                let input = document.createElement("input");
+                input.type = "radio";
+                input.name = "answer-opt";
+                input.value = opt;
+                input.checked = isChecked;
+                input.className = "w-4 h-4 text-teal-600 focus:ring-teal-500 shrink-0";
+                
+                // Gunakan event onchange & onclick terpusat yang aman
+                input.onchange = () => saveAnswer(idx, opt);
+                input.onclick = () => saveAnswer(idx, opt);
+
+                let span = document.createElement("span");
+                span.className = "text-xs sm:text-sm font-semibold text-slate-800";
+                span.innerText = opt;
+
+                label.appendChild(input);
+                label.appendChild(span);
                 optContainer.appendChild(label);
             });
 
@@ -719,9 +733,19 @@
             updateGridNavStyles();
         }
 
-        function saveAnswer(val) {
-            studentAnswers[currentIdx] = val;
+        function saveAnswer(idx, val) {
+            studentAnswers[idx] = val;
             updateGridNavStyles();
+            // Refresh visual selection highlight tanpa reload seluruh kontainer jika diinginkan
+            const inputs = document.querySelectorAll('input[name="answer-opt"]');
+            inputs.forEach(inp => {
+                const parent = inp.closest('label');
+                if (inp.checked) {
+                    parent.className = "flex items-center space-x-3 p-3.5 sm:p-4 rounded-2xl border border-teal-600 bg-teal-50/70 shadow-sm ring-1 ring-teal-500/30 cursor-pointer transition-all";
+                } else {
+                    parent.className = "flex items-center space-x-3 p-3.5 sm:p-4 rounded-2xl border border-slate-200/80 bg-white hover:bg-slate-50/80 cursor-pointer transition-all";
+                }
+            });
         }
 
         function prevQuestion() {
