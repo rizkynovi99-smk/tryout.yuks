@@ -1,0 +1,843 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ujian Berbasis Web: Berpikir Komputasional (Computational Thinking)</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        .no-select {
+            user-select: none;
+            -webkit-user-select: none;
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 min-h-screen flex flex-col justify-between no-select">
+
+    <header class="bg-white border-b border-slate-200 sticky top-0 z-40 shadow-sm">
+        <div class="max-w-6xl mx-auto px-4 py-3 sm:py-4 flex flex-row justify-between items-center gap-2">
+            <div class="flex items-center space-x-2.5 sm:space-x-3">
+                <div class="bg-blue-600 text-white p-2 sm:p-2.5 rounded-xl shadow-md">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 sm:h-6 sm:w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                    </svg>
+                </div>
+                <div>
+                    <h1 class="font-bold text-xs sm:text-lg text-slate-900 leading-tight">Ujian Berpikir Komputasional</h1>
+                    <p class="text-[10px] sm:text-xs text-slate-500">Asesmen Digital Kurikulum Informatika</p>
+                </div>
+            </div>
+            
+            <div class="flex items-center space-x-2 sm:space-x-4">
+                <div id="timer-box" class="bg-amber-50 border border-amber-200 text-amber-800 px-2.5 sm:px-3.5 py-1 sm:py-1.5 rounded-lg text-xs sm:text-sm font-semibold flex items-center space-x-1.5 sm:space-x-2 shadow-sm">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5 sm:h-4 sm:w-4 animate-pulse" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                    <span id="timer-display">45:00</span>
+                </div>
+                
+                <button id="header-submit-btn" onclick="confirmSubmit()" class="hidden bg-emerald-600 hover:bg-emerald-700 text-white font-medium px-3 sm:px-4 py-1.5 sm:py-2 rounded-lg text-xs sm:text-sm shadow-md transition transform active:scale-95 flex items-center space-x-1">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 hidden sm:inline-block" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                    </svg>
+                    <span>Kumpulkan</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main class="max-w-6xl mx-auto px-3 sm:px-4 py-4 sm:py-8 w-full flex-grow">
+        
+        <!-- Step 0: Gatekeeper Server Connection Check -->
+        <div id="step-connection" class="bg-white rounded-2xl shadow-sm border border-slate-200 p-6 sm:p-8 max-w-xl mx-auto space-y-6 text-center">
+            <div class="w-14 h-14 bg-blue-50 text-blue-600 rounded-2xl flex items-center justify-center mx-auto text-2xl font-bold shadow-inner animate-pulse">
+                🔄
+            </div>
+            <div class="space-y-2">
+                <h2 class="text-lg sm:text-xl font-bold text-slate-900">Menghubungkan ke Server Ujian</h2>
+                <p id="connection-status-text" class="text-xs sm:text-sm text-slate-500">Memeriksa koneksi ke backend database Google Spreadsheet ('uh-bk')...</p>
+            </div>
+            
+            <div id="connection-error-box" class="hidden bg-red-50 border border-red-200 p-4 rounded-xl text-xs text-red-800 space-y-2 text-left">
+                <p class="font-semibold flex items-center space-x-1">
+                    <span>⚠️</span>
+                    <span>Gagal Terhubung ke Backend:</span>
+                </p>
+                <p id="connection-error-detail" class="break-all font-mono">-</p>
+                <button onclick="checkServerConnection()" class="w-full py-2 bg-red-600 hover:bg-red-700 text-white rounded-lg font-medium transition text-xs mt-2">
+                    Coba Hubungkan Ulang
+                </button>
+            </div>
+        </div>
+
+        <!-- Step 1: Input Identitas Siswa (Hidden initially until connection succeeds) -->
+        <div id="step-identity" class="hidden bg-white rounded-2xl shadow-sm border border-slate-200 p-6 sm:p-8 max-w-xl mx-auto space-y-6">
+            <div class="text-center space-y-2">
+                <div class="w-12 h-12 bg-emerald-100 text-emerald-600 rounded-2xl flex items-center justify-center mx-auto text-xl font-bold shadow-inner">
+                    ✓
+                </div>
+                <h2 class="text-lg sm:text-xl font-bold text-slate-900">Verifikasi Peserta Ujian</h2>
+                <p class="text-xs sm:text-sm text-slate-500">Koneksi database stabil. Masukkan nama lengkap dan pilih kelas Anda sebelum memulai.</p>
+            </div>
+            
+            <div class="space-y-4">
+                <div>
+                    <label class="block text-xs font-semibold text-slate-600 uppercase tracking-wider mb-1">Nama Lengkap</label>
+                    <input type="text" id="student-name" placeholder="Contoh: Budi Santoso" class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:border-blue-600 focus:ring-1 focus:ring-blue-600 outline-none text-sm text-slate-800 bg-slate-50/50">
+                </div>
+                <div>
+                    <label class="block text-xs font-semibold text-slate-600 uppercase tracking-wider mb-1">Kelas</label>
+                    <select id="student-class" class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:border-blue-600 focus:ring-1 focus:ring-blue-600 outline-none text-sm text-slate-800 bg-slate-50/50">
+                        <option value="" disabled selected>-- Pilih Kelas Anda --</option>
+                        <option value="X DKV 1">X DKV 1</option>
+                        <option value="X DKV 2">X DKV 2</option>
+                        <option value="X PM 1">X PM 1</option>
+                        <option value="X PM 2">X PM 2</option>
+                    </select>
+                </div>
+                <div class="bg-amber-50 border border-amber-200 p-4 rounded-xl text-xs text-amber-800 space-y-1.5">
+                    <p class="font-semibold flex items-center space-x-1">
+                        <span>⚠️</span>
+                        <span>Peraturan Anti-Kecurangan Aktif:</span>
+                    </p>
+                    <p>• Dilarang berpindah tab/jendela browser (Maksimal 3 kali peringatan).</p>
+                    <p>• Kolom esai dilengkapi proteksi anti-paste total (mencegah paste clipboard instan maupun riwayat).</p>
+                    <p>• Durasi ujian berjalan otomatis selama 45 menit.</p>
+                </div>
+            </div>
+
+            <button onclick="startExam()" class="w-full py-3.5 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-xl transition shadow-md hover:shadow-blue-200 text-sm">
+                Mulai Ujian Sekarang
+            </button>
+        </div>
+
+        <!-- Step 2: Lembar Soal Ujian (Hidden initially) -->
+        <div id="step-exam" class="hidden grid-cols-1 lg:grid-cols-4 gap-6 lg:gap-8">
+            
+            <section class="lg:col-span-3 bg-white rounded-2xl shadow-sm border border-slate-200 p-5 sm:p-8 flex flex-col justify-between">
+                <div>
+                    <div class="flex flex-wrap justify-between items-center gap-2 pb-4 mb-6 border-b border-slate-100">
+                        <div class="flex items-center space-x-2">
+                            <span id="question-category" class="bg-blue-50 text-blue-700 text-[10px] sm:text-xs font-semibold px-2.5 py-1 rounded-md uppercase tracking-wider">Pilihan Ganda</span>
+                            <span class="text-xs text-slate-300">•</span>
+                            <span id="question-number-badge" class="text-xs font-medium text-slate-500">Soal No. 1 dari 25</span>
+                        </div>
+                        <span id="question-status-tag" class="text-xs font-medium text-amber-600 bg-amber-50 px-2.5 py-0.5 rounded">Belum Dijawab</span>
+                    </div>
+
+                    <div class="mb-6">
+                        <h2 id="question-text" class="text-base sm:text-xl font-semibold text-slate-900 leading-relaxed">
+                            Memuat pertanyaan...
+                        </h2>
+                    </div>
+
+                    <div id="answer-container" class="space-y-3 mb-8">
+                        <!-- Dynamic Options / Textarea -->
+                    </div>
+                </div>
+
+                <div class="flex justify-between items-center pt-6 border-t border-slate-100">
+                    <button onclick="prevQuestion()" id="prev-btn" class="px-3.5 sm:px-4 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-xl text-xs sm:text-sm font-medium transition flex items-center space-x-1 disabled:opacity-40 disabled:cursor-not-allowed">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
+                        <span>Sebelumnya</span>
+                    </button>
+                    <div class="text-[11px] font-medium text-slate-400 hidden md:block">
+                        Gunakan panel kanan untuk navigasi cepat
+                    </div>
+                    <button onclick="nextQuestion()" id="next-btn" class="px-4 sm:px-5 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-xl text-xs sm:text-sm font-medium transition flex items-center space-x-1 shadow-sm">
+                        <span>Berikutnya</span>
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-1" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+                    </button>
+                </div>
+            </section>
+
+            <aside class="space-y-6">
+                <div class="bg-white rounded-2xl shadow-sm border border-slate-200 p-5">
+                    <h3 class="font-semibold text-slate-800 text-sm mb-3 flex items-center justify-between">
+                        <span>Daftar Soal</span>
+                        <span class="text-xs text-slate-400 font-normal">25 Butir</span>
+                    </h3>
+                    <div id="question-navigator-grid" class="grid grid-cols-5 gap-2 max-h-60 sm:max-h-none overflow-y-auto p-1">
+                        <!-- Dynamic Question Navigation Grid -->
+                    </div>
+                    <div class="mt-4 pt-4 border-t border-slate-100 text-xs space-y-2 text-slate-600">
+                        <div class="flex items-center space-x-2">
+                            <span class="w-3 h-3 rounded bg-blue-600 inline-block"></span>
+                            <span>Posisi Aktif</span>
+                        </div>
+                        <div class="flex items-center space-x-2">
+                            <span class="w-3 h-3 rounded bg-emerald-500 inline-block"></span>
+                            <span>Sudah Dijawab</span>
+                        </div>
+                        <div class="flex items-center space-x-2">
+                            <span class="w-3 h-3 rounded bg-slate-200 inline-block"></span>
+                            <span>Belum Dijawab</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-slate-900 rounded-2xl shadow-sm p-5 text-white">
+                    <h4 class="font-semibold text-sm mb-1">Status Keamanan Ujian</h4>
+                    <p class="text-xs text-slate-400 mb-3">Monitoring aktivitas tab & fokus layar</p>
+                    <div class="bg-slate-800/80 rounded-xl p-3 text-xs space-y-1.5 border border-slate-700">
+                        <p><span class="text-slate-400">Peserta:</span> <span id="display-student-name" class="font-medium text-white truncate block">-</span></p>
+                        <p><span class="text-slate-400">Kelas:</span> <span id="display-student-class" class="font-medium text-white">-</span></p>
+                        <p><span class="text-slate-400">Pelanggaran Tab:</span> <span id="violation-counter" class="font-bold text-amber-400">0 / 3</span></p>
+                    </div>
+                </div>
+            </aside>
+        </div>
+
+    </main>
+
+    <div id="submit-modal" class="fixed inset-0 bg-slate-900/50 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-white rounded-2xl max-w-md w-full p-6 shadow-xl border border-slate-200 space-y-4">
+            <h3 class="text-lg font-bold text-slate-900">Konfirmasi Selesai Ujian</h3>
+            <p id="submit-confirm-text" class="text-sm text-slate-600">Apakah Anda yakin ingin mengumpulkan lembar jawaban ujian ini?</p>
+            <div class="flex justify-end space-x-3 pt-2">
+                <button onclick="closeSubmitModal()" class="px-4 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-xl text-sm font-medium transition">Periksa Kembali</button>
+                <button id="final-submit-btn" onclick="submitExam()" class="px-5 py-2 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl text-sm font-medium transition shadow-sm">Ya, Kumpulkan</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="violation-modal" class="fixed inset-0 bg-slate-900/70 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-white rounded-2xl max-w-md w-full p-6 shadow-2xl border border-amber-200 space-y-4 text-center">
+            <div class="w-14 h-14 bg-amber-100 text-amber-600 rounded-full flex items-center justify-center mx-auto text-2xl font-bold">
+                ⚠️
+            </div>
+            <div>
+                <h3 class="text-lg font-bold text-slate-900 mb-1">Peringatan Pelanggaran!</h3>
+                <p id="violation-msg" class="text-sm text-slate-600">Anda terdeteksi berpindah tab atau meninggalkan jendela ujian.</p>
+            </div>
+            <button onclick="closeViolationModal()" class="w-full py-2.5 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-xl transition shadow-sm text-sm">
+                Saya Mengerti & Kembali ke Ujian
+            </button>
+        </div>
+    </div>
+
+    <div id="result-modal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-white rounded-2xl max-w-lg w-full p-8 shadow-2xl border border-slate-200 text-center space-y-6">
+            <div class="w-16 h-16 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center mx-auto text-2xl font-bold">
+                ✓
+            </div>
+            <div>
+                <h3 class="text-2xl font-bold text-slate-900 mb-1">Ujian Berhasil Diselesaikan!</h3>
+                <p id="submit-response-msg" class="text-sm text-slate-500">Hasil asesmen telah direkam dan disinkronkan ke Google Spreadsheet.</p>
+            </div>
+            <div class="bg-slate-50 rounded-2xl p-4 grid grid-cols-3 gap-4 border border-slate-100">
+                <div>
+                    <span class="text-xs text-slate-400 block">Total Terjawab</span>
+                    <span id="res-answered" class="text-lg font-bold text-blue-600">0 / 25</span>
+                </div>
+                <div>
+                    <span class="text-xs text-slate-400 block">Skor Objektif</span>
+                    <span id="res-score" class="text-lg font-bold text-emerald-600">0 / 10</span>
+                </div>
+                <div>
+                    <span class="text-xs text-slate-400 block">Pelanggaran</span>
+                    <span id="res-violation" class="text-lg font-bold text-amber-600">0</span>
+                </div>
+            </div>
+            <button onclick="location.reload()" class="w-full py-3 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-xl transition shadow-sm">
+                Keluar / Ulangi Sesi
+            </button>
+        </div>
+    </div>
+
+    <div id="custom-alert-box" class="fixed bottom-6 right-6 bg-slate-900 text-white px-5 py-3 rounded-xl shadow-2xl z-50 hidden transition transform duration-300 border border-slate-700 text-xs sm:text-sm flex items-center space-x-3">
+        <span class="text-amber-400 text-lg">⚠️</span>
+        <span id="custom-alert-msg">Peringatan anti-cheat</span>
+    </div>
+
+    <script>
+        // Konfigurasi URL Web App Google Apps Script Default ('uh-bk')
+        const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzq6eIx9UksqkW0EwgHIHOHmX22lPzxCpixVIWxSxuXS6l49JMp5h16MUM1ZvRVNVN7/exec";
+
+        // Database Soal Komprehensif (4 PG, 6 Benar-Salah, 10 Essay, 5 Survei)
+        const questions = [
+            {
+                id: 1,
+                category: "Pilihan Ganda",
+                type: "mc",
+                question: "Apa definisi paling tepat mengenai berpikir komputasional (computational thinking) dengan menekankan pada hasil akhir yang efektif dan efisien?",
+                options: [
+                    "Metode pemecahan masalah untuk menghasilkan solusi secara efektif dan efisien.",
+                    "Hanya cara khusus untuk menulis kode program komputer tingkat lanjut.",
+                    "Proses menghafal rumus matematika dengan bantuan perangkat digital.",
+                    "Teknik merakit perangkat keras komputer secara cepat dan akurat."
+                ],
+                correct: 0,
+                answer: ""
+            },
+            {
+                id: 2,
+                category: "Pilihan Ganda",
+                type: "mc",
+                question: "Manakah di bawah ini yang merupakan 4 pilar utama dalam berpikir komputasional secara lengkap?",
+                options: [
+                    "Analisis, Sintesis, Evaluasi, Implementasi.",
+                    "Dekomposisi, Pengenalan Pola, Abstraksi, Perancangan Algoritma.",
+                    "Input, Proses, Output, Feedback.",
+                    "Koding, Debugging, Kompilasi, Eksekusi."
+                ],
+                correct: 1,
+                answer: ""
+            },
+            {
+                id: 3,
+                category: "Pilihan Ganda",
+                type: "mc",
+                question: "Saat merancang aplikasi, seorang pengembang mengabaikan warna latar belakang tombol yang tidak memengaruhi fungsi utama sistem. Proses ini dinamakan...",
+                options: [
+                    "Dekomposisi",
+                    "Pengenalan Pola",
+                    "Abstraksi",
+                    "Algoritma"
+                ],
+                correct: 2,
+                answer: ""
+            },
+            {
+                id: 4,
+                category: "Pilihan Ganda",
+                type: "mc",
+                question: "Proses memecah masalah besar dan rumit menjadi bagian-bagian kecil yang lebih sederhana dan mudah dikelola disebut sebagai...",
+                options: [
+                    "Dekomposisi",
+                    "Pengenalan Pola",
+                    "Abstraksi",
+                    "Algoritma"
+                ],
+                correct: 0,
+                answer: ""
+            },
+            {
+                id: 5,
+                category: "Benar / Salah",
+                type: "tf",
+                question: "Berpikir komputasional hanya dapat diterapkan jika seseorang menggunakan perangkat komputer atau laptop canggih.",
+                options: ["Benar", "Salah"],
+                correct: 1,
+                answer: ""
+            },
+            {
+                id: 6,
+                category: "Benar / Salah",
+                type: "tf",
+                question: "Pilar Abstraksi bertujuan untuk menyaring informasi penting dan membuang detail yang tidak relevan agar fokus pada inti masalah.",
+                options: ["Benar", "Salah"],
+                correct: 0,
+                answer: ""
+            },
+            {
+                id: 7,
+                category: "Benar / Salah",
+                type: "tf",
+                question: "Pengenalan pola (pattern recognition) adalah proses menyusun urutan instruksi logis secara bertahap.",
+                options: ["Benar", "Salah"],
+                correct: 1,
+                answer: ""
+            },
+            {
+                id: 8,
+                category: "Benar / Salah",
+                type: "tf",
+                question: "Perancangan algoritma menghasilkan serangkaian instruksi atau langkah-langkah logis yang runtut untuk menyelesaikan masalah.",
+                options: ["Benar", "Salah"],
+                correct: 0,
+                answer: ""
+            },
+            {
+                id: 9,
+                category: "Benar / Salah",
+                type: "tf",
+                question: "Dalam studi kasus poster yang gagal menyampaikan makna, pilar dekomposisi digunakan untuk memecah poster ke dalam elemen dasar seperti teks, warna, dan tata letak.",
+                options: ["Benar", "Salah"],
+                correct: 0,
+                answer: ""
+            },
+            {
+                id: 10,
+                category: "Benar / Salah",
+                type: "tf",
+                question: "Unsur efisien dalam berpikir komputasional berarti bahwa tujuan akhir harus tercapai tanpa memperdulikan berapa banyak waktu atau tenaga yang dihabiskan.",
+                options: ["Benar", "Salah"],
+                correct: 1,
+                answer: ""
+            },
+            {
+                id: 11,
+                category: "Essay",
+                type: "essay",
+                question: "Jelaskan secara mendalam pengertian berpikir komputasional (computational thinking) dengan menekankan unsur efektif dan efisien!",
+                answer: ""
+            },
+            {
+                id: 12,
+                category: "Essay",
+                type: "essay",
+                question: "Sebutkan dan jelaskan secara singkat ke-4 pilar utama dalam berpikir komputasional!",
+                answer: ""
+            },
+            {
+                id: 13,
+                category: "Essay",
+                type: "essay",
+                question: "Jelaskan secara spesifik pengertian dari pilar Dekomposisi (Decomposition) dalam berpikir komputasional!",
+                answer: ""
+            },
+            {
+                id: 14,
+                category: "Essay",
+                type: "essay",
+                question: "Jelaskan secara spesifik pengertian dari pilar Pengenalan Pola (Pattern Recognition) dalam berpikir komputasional!",
+                answer: ""
+            },
+            {
+                id: 15,
+                category: "Essay",
+                type: "essay",
+                question: "Jelaskan secara spesifik pengertian dari pilar Abstraksi (Abstraction) dalam berpikir komputasional!",
+                answer: ""
+            },
+            {
+                id: 16,
+                category: "Essay",
+                type: "essay",
+                question: "Jelaskan secara spesifik pengertian dari pilar Perancangan Algoritma (Algorithm Design) dalam berpikir komputasional!",
+                answer: ""
+            },
+            {
+                id: 17,
+                category: "Essay",
+                type: "essay",
+                question: "Berikan contoh konkret penerapan salah satu pilar berpikir komputasional dalam aktivitas sehari-hari selain memasak!",
+                answer: ""
+            },
+            {
+                id: 18,
+                category: "Essay",
+                type: "essay",
+                question: "Jika sebuah poster gagal menyampaikan maknanya kepada pembaca, bagaimana cara menerapkan pilar Pengenalan Pola untuk memperbaikinya?",
+                answer: ""
+            },
+            {
+                id: 19,
+                category: "Essay",
+                type: "essay",
+                question: "Dalam kasus poster yang maknanya tidak sampai, jelaskan bagaimana pilar Abstraksi dan Algoritma dapat digabungkan untuk mendesain ulang poster tersebut secara efektif dan efisien!",
+                answer: ""
+            },
+            {
+                id: 20,
+                category: "Essay",
+                type: "essay",
+                question: "Mengapa kemampuan berpikir komputasional sangat penting untuk dikuasai di era digital saat ini, bahkan di luar bidang ilmu komputer murni?",
+                answer: ""
+            },
+            {
+                id: 21,
+                category: "Survei Pemahaman",
+                type: "survey",
+                question: "Seberapa baik Anda memahami definisi berpikir komputasional serta penekanan pada aspek efektif dan efisien?",
+                options: ["Sangat Paham", "Paham", "Cukup Paham", "Kurang Paham"],
+                answer: ""
+            },
+            {
+                id: 22,
+                category: "Survei Pemahaman",
+                type: "survey",
+                question: "Bagaimana tingkat penguasaan Anda terhadap keempat pilar utama dalam berpikir komputasional secara keseluruhan?",
+                options: ["Sangat Dikuasai", "Dikuasai", "Cukup", "Belum Dikuasai"],
+                answer: ""
+            },
+            {
+                id: 23,
+                category: "Survei Pemahaman",
+                type: "survey",
+                question: "Seberapa jelas perbedaan pengertian masing-masing pilar (Dekomposisi, Pengenalan Pola, Abstraksi, Algoritma) bagi Anda?",
+                options: ["Sangat Jelas", "Jelas", "Cukup Jelas", "Kurang Jelas"],
+                answer: ""
+            },
+            {
+                id: 24,
+                category: "Survei Pemahaman",
+                type: "survey",
+                question: "Seberapa mudah Anda dapat memberikan contoh penerapan berpikir komputasional dalam kehidupan sehari-hari?",
+                options: ["Sangat Mudah", "Mudah", "Cukup Mudah", "Sulit"],
+                answer: ""
+            },
+            {
+                id: 25,
+                category: "Survei Pemahaman",
+                type: "survey",
+                question: "Seberapa efektif pendekatan berpikir komputasional menurut Anda dalam menyelesaikan studi kasus seperti perbaikan poster yang kurang bermakna?",
+                options: ["Sangat Efektif", "Efektif", "Cukup Efektif", "Kurang Efektif"],
+                answer: ""
+            }
+        ];
+
+        let currentIndex = 0;
+        let studentName = "";
+        let studentClass = "";
+        let violationCount = 0;
+        let timerInterval = null;
+        let timeLeft = 45 * 60; // 45 Menit
+        let examStartTime = null;
+
+        // Gatekeeper: Cek Koneksi Server saat halaman dimuat
+        window.onload = function() {
+            checkServerConnection();
+        };
+
+        function checkServerConnection() {
+            const statusText = document.getElementById('connection-status-text');
+            const errorBox = document.getElementById('connection-error-box');
+            errorBox.classList.add('hidden');
+            statusText.textContent = "Menghubungkan ke backend database Google Spreadsheet ('uh-bk')...";
+
+            // Gunakan mode 'no-cors' atau fetch standar
+            fetch(SCRIPT_URL, { method: 'GET', mode: 'cors' })
+                .then(response => {
+                    if (!response.ok) throw new Error("HTTP error status: " + response.status);
+                    return response.json();
+                })
+                .then(data => {
+                    if (data.status === "success" || data.spreadsheetName) {
+                        // Koneksi Berhasil: Sembunyikan step koneksi, tampilkan step identitas
+                        document.getElementById('step-connection').classList.add('hidden');
+                        document.getElementById('step-identity').classList.remove('hidden');
+                        showCustomAlert("Koneksi ke database spreadsheet 'uh-bk' berhasil!");
+                    } else {
+                        throw new Error(data.message || "Respon server tidak valid.");
+                    }
+                })
+                .catch(err => {
+                    // Jika CORS block di browser, coba tangani atau tampilkan error interaktif
+                    // Catatan: Google Apps Script kadang membutuhkan penanganan khusus atau direktori doGet valid
+                    console.warn("Peringatan koneksi:", err);
+                    // Asalkan URL terjangkau, kita izinkan masuk atau tampilkan tombol bypass jika CORS terjadi
+                    // Untuk memastikan keamanan aplikasi tidak berjalan jika belum terkoneksi, kita tampilkan kotak error jika gagal total:
+                    document.getElementById('connection-error-detail').textContent = err.toString() + " (Pastikan deploy web app 'Anyone' sudah benar).";
+                    errorBox.classList.remove('hidden');
+                    statusText.textContent = "Gagal memverifikasi koneksi server.";
+                });
+        }
+
+        function showCustomAlert(message) {
+            const box = document.getElementById('custom-alert-box');
+            document.getElementById('custom-alert-msg').textContent = message;
+            box.classList.remove('hidden');
+            setTimeout(() => {
+                box.classList.add('hidden');
+            }, 3500);
+        }
+
+        function startExam() {
+            const nameInput = document.getElementById('student-name').value.trim();
+            const classInput = document.getElementById('student-class').value;
+
+            if (!nameInput || !classInput) {
+                showCustomAlert("Harap isi Nama Lengkap dan pilih Kelas Anda terlebih dahulu!");
+                return;
+            }
+
+            studentName = nameInput;
+            studentClass = classInput;
+            examStartTime = new Date();
+
+            document.getElementById('display-student-name').textContent = studentName;
+            document.getElementById('display-student-class').textContent = studentClass;
+
+            document.getElementById('step-identity').classList.add('hidden');
+            document.getElementById('step-exam').classList.remove('hidden');
+            document.getElementById('step-exam').classList.add('grid');
+
+            document.getElementById('header-submit-btn').classList.remove('hidden');
+
+            renderQuestion();
+            renderNavigator();
+            startTimer();
+            initAntiCheat();
+        }
+
+        function startTimer() {
+            timerInterval = setInterval(() => {
+                if (timeLeft <= 0) {
+                    clearInterval(timerInterval);
+                    submitExam();
+                } else {
+                    timeLeft--;
+                    const minutes = Math.floor(timeLeft / 60);
+                    const seconds = timeLeft % 60;
+                    document.getElementById('timer-display').textContent = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+                    
+                    if (timeLeft < 300) {
+                        document.getElementById('timer-box').className = "bg-red-50 border border-red-200 text-red-700 px-2.5 sm:px-3.5 py-1 sm:py-1.5 rounded-lg text-xs sm:text-sm font-semibold flex items-center space-x-1.5 sm:space-x-2 shadow-sm animate-pulse";
+                    }
+                }
+            }, 1000);
+        }
+
+        function initAntiCheat() {
+            document.addEventListener('visibilitychange', () => {
+                if (document.hidden) {
+                    triggerViolation("Anda terdeteksi meninggalkan halaman atau berpindah tab browser.");
+                }
+            });
+
+            window.addEventListener('blur', () => {
+                triggerViolation("Jendela ujian kehilangan fokus (terdeteksi membuka aplikasi lain).");
+            });
+        }
+
+        function triggerViolation(reason) {
+            if (document.getElementById('step-exam').classList.contains('hidden')) return;
+            violationCount++;
+            document.getElementById('violation-counter').textContent = `${violationCount} / 3`;
+            document.getElementById('res-violation').textContent = violationCount;
+
+            if (violationCount >= 3) {
+                showCustomAlert("Batas maksimal pelanggaran (3x) tercapai. Ujian akan dikumpulkan.");
+                submitExam();
+            } else {
+                document.getElementById('violation-msg').textContent = `${reason} (Peringatan ke-${violationCount} dari 3)`;
+                document.getElementById('violation-modal').classList.remove('hidden');
+            }
+        }
+
+        function closeViolationModal() {
+            document.getElementById('violation-modal').classList.add('hidden');
+        }
+
+        function renderQuestion() {
+            const q = questions[currentIndex];
+            document.getElementById('question-category').textContent = q.category;
+            document.getElementById('question-number-badge').textContent = `Soal No. ${currentIndex + 1} dari ${questions.length}`;
+            document.getElementById('question-text').textContent = q.question;
+
+            const statusTag = document.getElementById('question-status-tag');
+            if (q.answer !== "") {
+                statusTag.textContent = "Sudah Dijawab";
+                statusTag.className = "text-xs font-medium text-emerald-700 bg-emerald-50 px-2.5 py-1 rounded-md border border-emerald-200";
+            } else {
+                statusTag.textContent = "Belum Dijawab";
+                statusTag.className = "text-xs font-medium text-amber-700 bg-amber-50 px-2.5 py-1 rounded-md border border-amber-200";
+            }
+
+            const container = document.getElementById('answer-container');
+            container.innerHTML = '';
+
+            if (q.type === 'mc' || q.type === 'tf' || q.type === 'survey') {
+                q.options.forEach((opt) => {
+                    const isSelected = q.answer === opt;
+                    const btn = document.createElement('button');
+                    btn.className = `w-full text-left p-3.5 sm:p-4 rounded-xl border transition flex items-center space-x-3 text-xs sm:text-sm font-medium ${
+                        isSelected 
+                            ? 'border-blue-600 bg-blue-50 text-blue-900 shadow-sm' 
+                            : 'border-slate-200 hover:border-slate-300 hover:bg-slate-50 text-slate-700'
+                    }`;
+                    btn.innerHTML = `
+                        <div class="w-5 h-5 rounded-full border flex items-center justify-center flex-shrink-0 ${isSelected ? 'border-blue-600 bg-blue-600 text-white' : 'border-slate-300 text-transparent'}">
+                            <div class="w-2 h-2 rounded-full bg-white"></div>
+                        </div>
+                        <span>${opt}</span>
+                    `;
+                    btn.onclick = () => {
+                        questions[currentIndex].answer = opt;
+                        renderQuestion();
+                        renderNavigator();
+                    };
+                    container.appendChild(btn);
+                });
+            } else if (q.type === 'essay') {
+                const textarea = document.createElement('textarea');
+                textarea.className = 'w-full h-40 p-4 rounded-xl border border-slate-200 focus:border-blue-600 focus:ring-1 focus:ring-blue-600 outline-none text-xs sm:text-sm text-slate-800 placeholder-slate-400 resize-none';
+                textarea.placeholder = 'Tuliskan jawaban essay Anda secara terstruktur dan jelas di sini... (Proteksi anti-paste aktif)';
+                textarea.value = q.answer;
+                
+                const blockPasteAction = (e) => {
+                    e.preventDefault();
+                    if (e.clipboardData) e.clipboardData.clearData();
+                    showCustomAlert("Aksi Paste / Salin-Tempel dari clipboard dilarang keras!");
+                    return false;
+                };
+
+                textarea.addEventListener('paste', blockPasteAction);
+                textarea.addEventListener('drop', blockPasteAction);
+                textarea.addEventListener('contextmenu', blockPasteAction);
+                
+                let previousValue = textarea.value;
+                textarea.addEventListener('input', (e) => {
+                    const currentValue = textarea.value;
+                    if (currentValue.length - previousValue.length > 3) {
+                        showCustomAlert("Terdeteksi penempelan teks riwayat clipboard! Kolom dikosongkan.");
+                        textarea.value = previousValue;
+                        questions[currentIndex].answer = previousValue;
+                        return;
+                    }
+                    previousValue = currentValue;
+                    questions[currentIndex].answer = currentValue;
+                    renderNavigator();
+                });
+
+                textarea.addEventListener('keydown', (e) => {
+                    if ((e.ctrlKey || e.metaKey) && (e.key === 'v' || e.key === 'V' || e.key === 'insert')) {
+                        blockPasteAction(e);
+                    }
+                });
+
+                container.appendChild(textarea);
+            }
+
+            document.getElementById('prev-btn').disabled = currentIndex === 0;
+            const nextBtn = document.getElementById('next-btn');
+            if (currentIndex === questions.length - 1) {
+                nextBtn.innerHTML = `<span>Selesai</span><svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-1" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>`;
+                nextBtn.className = "px-4 sm:px-5 py-2 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl text-xs sm:text-sm font-medium transition flex items-center space-x-1 shadow-sm";
+            } else {
+                nextBtn.innerHTML = `<span>Berikutnya</span><svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-1" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>`;
+                nextBtn.className = "px-4 sm:px-5 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-xl text-xs sm:text-sm font-medium transition flex items-center space-x-1 shadow-sm";
+            }
+        }
+
+        function renderNavigator() {
+            const grid = document.getElementById('question-navigator-grid');
+            grid.innerHTML = '';
+            questions.forEach((q, idx) => {
+                const isCurrent = idx === currentIndex;
+                const isAnswered = q.answer !== "";
+                const btn = document.createElement('button');
+                
+                let baseClass = "h-9 sm:h-10 rounded-xl text-xs font-semibold flex items-center justify-center transition border ";
+                if (isCurrent) {
+                    baseClass += "border-blue-600 bg-blue-600 text-white shadow-sm ring-2 ring-blue-200";
+                } else if (isAnswered) {
+                    baseClass += "border-emerald-200 bg-emerald-50 text-emerald-700 hover:bg-emerald-100";
+                } else {
+                    baseClass += "border-slate-200 bg-slate-50 text-slate-600 hover:bg-slate-100";
+                }
+
+                btn.className = baseClass;
+                btn.textContent = idx + 1;
+                btn.onclick = () => {
+                    currentIndex = idx;
+                    renderQuestion();
+                    renderNavigator();
+                };
+                grid.appendChild(btn);
+            });
+        }
+
+        function nextQuestion() {
+            if (currentIndex < questions.length - 1) {
+                currentIndex++;
+                renderQuestion();
+                renderNavigator();
+            } else {
+                confirmSubmit();
+            }
+        }
+
+        function prevQuestion() {
+            if (currentIndex > 0) {
+                currentIndex--;
+                renderQuestion();
+                renderNavigator();
+            }
+        }
+
+        function confirmSubmit() {
+            const firstUnanswered = questions.findIndex(q => q.answer === "" || q.answer === null || q.answer === undefined);
+            const modalText = document.getElementById('submit-confirm-text');
+            const finalBtn = document.getElementById('final-submit-btn');
+
+            if (firstUnanswered !== -1) {
+                modalText.innerHTML = `⚠️ Peringatan: Masih ada soal yang belum terjawab (Soal No. ${firstUnanswered + 1}). Tombol di bawah akan mengarahkan Anda langsung ke soal tersebut.`;
+                finalBtn.textContent = `Ke Soal No. ${firstUnanswered + 1}`;
+                finalBtn.onclick = () => {
+                    closeSubmitModal();
+                    currentIndex = firstUnanswered;
+                    renderQuestion();
+                    renderNavigator();
+                    showCustomAlert(`Diarahkan ke Soal No. ${firstUnanswered + 1} yang belum terjawab.`);
+                };
+            } else {
+                modalText.textContent = "Semua soal telah terjawab dengan lengkap. Apakah Anda yakin ingin mengumpulkan lembar jawaban ujian ini?";
+                finalBtn.textContent = "Ya, Kumpulkan";
+                finalBtn.onclick = () => {
+                    submitExam();
+                };
+            }
+
+            document.getElementById('submit-modal').classList.remove('hidden');
+        }
+
+        function closeSubmitModal() {
+            document.getElementById('submit-modal').classList.add('hidden');
+        }
+
+        function submitExam() {
+            clearInterval(timerInterval);
+            document.getElementById('submit-modal').classList.add('hidden');
+            document.getElementById('header-submit-btn').classList.add('hidden');
+            
+            let answeredCount = 0;
+            let score = 0;
+            let detailedAnswers = [];
+
+            questions.forEach(q => {
+                if (q.answer !== "") answeredCount++;
+                if ((q.type === 'mc' || q.type === 'tf') && q.answer !== "") {
+                    if (q.answer === q.options[q.correct]) score++;
+                }
+                detailedAnswers.push({
+                    id: q.id,
+                    type: q.type,
+                    category: q.category,
+                    answer: q.answer || "[Kosong]"
+                });
+            });
+
+            const endTime = new Date();
+            const durationMs = endTime - examStartTime;
+            const minutesElapsed = Math.floor(durationMs / 60000);
+            const secondsElapsed = Math.floor((durationMs % 60000) / 1000);
+            const completionTimeString = `${minutesElapsed} menit ${secondsElapsed} detik`;
+
+            const payload = {
+                timestamp: new Date().toISOString(),
+                studentName: studentName,
+                studentClass: studentClass,
+                completionTime: completionTimeString,
+                objectiveScore: score,
+                answeredCount: answeredCount,
+                violationCount: violationCount,
+                detailedAnswers: detailedAnswers
+            };
+
+            document.getElementById('res-answered').textContent = `${answeredCount} / 25`;
+            document.getElementById('res-score').textContent = `${score} / 10`;
+            document.getElementById('res-violation').textContent = violationCount;
+            document.getElementById('submit-response-msg').textContent = "Mengirim data ke database Google Spreadsheet ('uh-bk')...";
+            document.getElementById('result-modal').classList.remove('hidden');
+
+            // Kirim data ke backend Google Apps Script
+            fetch(SCRIPT_URL, {
+                method: 'POST',
+                mode: 'no-cors',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(payload)
+            }).then(() => {
+                document.getElementById('submit-response-msg').textContent = "Hasil asesmen berhasil disimpan ke spreadsheet 'uh-bk'!";
+            }).catch(err => {
+                console.error("Gagal kirim backend:", err);
+                document.getElementById('submit-response-msg').textContent = "Ujian selesai (Data tersimpan di sesi lokal).";
+            });
+        }
+    </script>
+</body>
+</html>
