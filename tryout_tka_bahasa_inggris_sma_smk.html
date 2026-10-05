@@ -1,0 +1,717 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tryout CBT TKA Bahasa Inggris SMA/SMK (Standar Pusmendik 25 Soal)</title>
+    <!-- Tailwind CSS untuk Desain Responsif & Modern -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @keyframes pulse-red {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.4; }
+        }
+        .animate-pulse-red {
+            animation: pulse-red 1s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f5f9;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 9999px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8;
+        }
+    </style>
+</head>
+<body class="bg-gradient-to-br from-slate-50 via-sky-50/20 to-slate-100 text-slate-800 font-sans min-h-screen flex flex-col antialiased selection:bg-sky-600 selection:text-white">
+
+    <!-- Header Ujian (Fixed & Responsive) -->
+    <header id="exam-header" class="bg-sky-900/95 backdrop-blur-md text-white shadow-lg sticky top-0 z-40 hidden border-b border-sky-800">
+        <div class="max-w-7xl mx-auto px-4 py-3 flex flex-col sm:flex-row justify-between items-center gap-3">
+            <div class="flex items-center space-x-3 w-full sm:w-auto justify-between sm:justify-start">
+                <div class="flex items-center space-x-2.5">
+                    <div class="w-8 h-8 rounded-lg bg-sky-600 flex items-center justify-center font-bold text-base shadow-inner">🌐</div>
+                    <div>
+                        <h1 class="font-bold text-xs sm:text-base tracking-wide truncate max-w-[200px] sm:max-w-md">TKA Bahasa Inggris SMA/SMK</h1>
+                        <p id="header-user-info" class="text-[11px] text-sky-300 font-medium truncate max-w-[200px] sm:max-w-xs">Participant: -</p>
+                    </div>
+                </div>
+            </div>
+            <div class="flex items-center justify-between w-full sm:w-auto space-x-3">
+                <div id="timer-box" class="bg-sky-950/80 border border-sky-700/60 px-3 py-1.5 rounded-xl font-mono text-xs sm:text-sm font-bold tracking-wider flex items-center space-x-2 text-sky-200 shadow-inner">
+                    <span>⏱️</span>
+                    <span id="time-display">50:00</span>
+                </div>
+                <button onclick="confirmSubmit()" class="bg-emerald-500 hover:bg-emerald-600 active:scale-95 text-white font-bold px-3.5 py-1.5 rounded-xl text-xs sm:text-sm shadow-lg shadow-emerald-600/25 transition-all">
+                    Submit Exam
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content Wrapper -->
+    <main class="flex-grow max-w-7xl w-full mx-auto p-3 sm:p-6 flex flex-col justify-center">
+
+        <!-- STEP 1: Verifikasi Identitas -->
+        <section id="step-identity" class="max-w-md mx-auto w-full bg-white/90 backdrop-blur-xl rounded-3xl shadow-2xl p-5 sm:p-8 border border-white/80 transition-all duration-300 my-auto">
+            <div class="text-center mb-6">
+                <div class="inline-flex p-3.5 bg-sky-50 text-sky-600 rounded-2xl text-2xl mb-3 shadow-sm border border-sky-100">🎓</div>
+                <h2 class="text-xl sm:text-2xl font-black text-slate-900 tracking-tight">Tryout TKA Bahasa Inggris</h2>
+                <p class="text-xs sm:text-sm text-slate-500 mt-1 font-medium">Pusmendik Standard Assessment (25 Multiple Choice Questions)</p>
+            </div>
+
+            <form id="identity-form" onsubmit="startExam(event)" class="space-y-4">
+                <div>
+                    <label class="block text-xs font-bold uppercase tracking-wider text-slate-600 mb-1.5">Full Name (Nama Lengkap)</label>
+                    <input type="text" id="student-name" required placeholder="Example: Sarah Jenkins" 
+                        class="w-full px-4 py-3 rounded-2xl border border-slate-200 bg-slate-50/50 focus:bg-white focus:ring-2 focus:ring-sky-500/20 focus:border-sky-600 focus:outline-none text-sm font-medium transition-all">
+                </div>
+                <div>
+                    <label class="block text-xs font-bold uppercase tracking-wider text-slate-600 mb-1.5">School Name (Asal Sekolah)</label>
+                    <input type="text" id="student-school" required placeholder="Example: SMA Negeri 1 Bandung" 
+                        class="w-full px-4 py-3 rounded-2xl border border-slate-200 bg-slate-50/50 focus:bg-white focus:ring-2 focus:ring-sky-500/20 focus:border-sky-600 focus:outline-none text-sm font-medium transition-all">
+                </div>
+
+                <div class="bg-amber-50/80 border border-amber-200/80 p-3.5 rounded-2xl text-xs text-amber-900 space-y-1.5">
+                    <p class="font-bold flex items-center space-x-1"><span>⚠️</span> <span>Exam Regulations & Guidelines:</span></p>
+                    <ul class="list-disc list-inside space-y-1 text-amber-800/90 font-medium">
+                        <li>Focus areas: Reading Comprehension, Structure & Written Expression, Vocabulary in Context.</li>
+                        <li>Browser tab switching is monitored (Max 3 warnings).</li>
+                    </ul>
+                </div>
+
+                <button type="submit" class="w-full bg-sky-600 hover:bg-sky-700 active:scale-[0.98] text-white font-bold py-3.5 rounded-2xl transition-all shadow-xl shadow-sky-600/25 flex items-center justify-center space-x-2 text-sm tracking-wide">
+                    <span>Start Test Now (25 Items)</span>
+                    <span>→</span>
+                </button>
+            </form>
+        </section>
+
+        <!-- STEP 2: Pengerjaan Ujian (Hidden by Default) -->
+        <section id="step-exam" class="hidden grid grid-cols-1 lg:grid-cols-4 gap-4 sm:gap-6 items-start">
+            <!-- Area Stimulus & Soal Utama -->
+            <div class="lg:col-span-3 bg-white/95 backdrop-blur-md rounded-2xl sm:rounded-3xl shadow-xl border border-slate-200/80 p-4 sm:p-8 flex flex-col justify-between min-h-[560px]">
+                <div>
+                    <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center border-b border-slate-100 pb-3 mb-4 sm:mb-6 gap-2">
+                        <span id="question-badge" class="bg-sky-50 text-sky-700 border border-sky-100 text-xs font-bold px-3 py-1.5 rounded-xl shadow-sm">Question No. 1 of 25</span>
+                        <span id="question-type-badge" class="text-xs font-bold uppercase tracking-wider text-slate-500 bg-slate-100 px-3 py-1 rounded-lg">Reading Comprehension</span>
+                    </div>
+
+                    <!-- Kotak Stimulus Teks Bahasa Inggris -->
+                    <div id="stimulus-container" class="mb-5 p-3.5 sm:p-5 bg-slate-50 border border-slate-200/80 rounded-2xl text-xs sm:text-sm text-slate-800 leading-relaxed hidden shadow-inner max-h-60 overflow-y-auto">
+                        <p class="font-bold text-sky-900 text-xs uppercase tracking-wider mb-2 flex items-center space-x-1"><span>📌</span> <span>Reading Text / Context:</span></p>
+                        <div id="stimulus-text" class="space-y-2 text-slate-700 italic font-normal"></div>
+                    </div>
+
+                    <!-- Container Pertanyaan -->
+                    <div id="question-text" class="text-sm sm:text-base md:text-lg font-semibold text-slate-900 mb-5 leading-relaxed"></div>
+
+                    <!-- Container Opsi / Input Jawaban -->
+                    <div id="answer-options-container" class="space-y-2.5 mb-6"></div>
+                </div>
+
+                <!-- Navigasi Bawah Soal -->
+                <div class="flex justify-between items-center pt-4 border-t border-slate-100 mt-auto">
+                    <button onclick="prevQuestion()" id="btn-prev" class="px-4 sm:px-5 py-2.5 rounded-xl border border-slate-200 bg-white text-slate-700 font-bold text-xs sm:text-sm hover:bg-slate-50 active:scale-95 disabled:opacity-30 disabled:cursor-not-allowed transition-all shadow-sm">
+                        ← Previous
+                    </button>
+                    <button onclick="nextQuestion()" id="btn-next" class="px-5 sm:px-6 py-2.5 rounded-xl bg-sky-600 hover:bg-sky-700 active:scale-95 text-white font-bold text-xs sm:text-sm shadow-lg shadow-sky-600/20 transition-all">
+                        Next →
+                    </button>
+                </div>
+            </div>
+
+            <!-- Sidebar Navigasi Grid Nomor Soal -->
+            <div class="bg-white/95 backdrop-blur-md rounded-2xl sm:rounded-3xl shadow-xl border border-slate-200/80 p-4 sm:p-6 flex flex-col h-fit">
+                <h3 class="font-bold text-slate-900 text-sm mb-3 flex items-center justify-between">
+                    <span>Question Navigator</span>
+                    <span class="text-xs text-sky-600 font-semibold bg-sky-50 px-2 py-0.5 rounded-md">25 Items</span>
+                </h3>
+                <div id="grid-nav-container" class="grid grid-cols-5 gap-2 mb-4 max-h-[240px] sm:max-h-[300px] overflow-y-auto p-1"></div>
+                <div class="border-t border-slate-100 pt-3 text-xs text-slate-600 space-y-2 font-medium">
+                    <div class="flex items-center space-x-2">
+                        <span class="w-3.5 h-3.5 bg-sky-600 rounded-md inline-block shadow-sm"></span>
+                        <span>Current Question</span>
+                    </div>
+                    <div class="flex items-center space-x-2">
+                        <span class="w-3.5 h-3.5 bg-emerald-500 rounded-md inline-block shadow-sm"></span>
+                        <span>Answered</span>
+                    </div>
+                    <div class="flex items-center space-x-2">
+                        <span class="w-3.5 h-3.5 bg-slate-200 rounded-md inline-block shadow-sm"></span>
+                        <span>Unanswered</span>
+                    </div>
+                </div>
+                <div class="mt-4 bg-red-50 p-3 rounded-xl border border-red-100 text-red-700 text-xs font-semibold flex items-center justify-between">
+                    <span>⚠️ Tab Switch Alert:</span>
+                    <span id="violation-count" class="bg-red-200/80 px-2 py-0.5 rounded-lg font-bold">0</span> / 3
+                </div>
+            </div>
+        </section>
+
+        <!-- STEP 3: Hasil & Pembahasan (Hidden by Default) -->
+        <section id="step-result" class="hidden max-w-4xl mx-auto w-full space-y-6">
+            <div class="bg-white/95 backdrop-blur-md rounded-3xl shadow-2xl p-6 sm:p-10 text-center border border-slate-200/80">
+                <div class="inline-flex p-4 bg-emerald-50 text-emerald-600 rounded-3xl text-4xl mb-3 shadow-sm border border-emerald-100">🎯</div>
+                <h2 class="text-xl sm:text-3xl font-black text-slate-900 tracking-tight mb-1">English TKA Score Report & Review</h2>
+                <p class="text-xs sm:text-sm text-slate-500 mb-6 font-medium">Detailed breakdown of your English language proficiency and thorough explanations.</p>
+
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 max-w-2xl mx-auto text-left mb-6">
+                    <div class="bg-slate-50 p-4 rounded-2xl border border-slate-200/60 shadow-sm">
+                        <span class="block text-[11px] font-bold text-slate-400 uppercase tracking-wider mb-1">Examinee</span>
+                        <span id="res-name" class="font-bold text-slate-900 text-sm truncate block"></span>
+                    </div>
+                    <div class="bg-slate-50 p-4 rounded-2xl border border-slate-200/60 shadow-sm">
+                        <span class="block text-[11px] font-bold text-slate-400 uppercase tracking-wider mb-1">TKA English Score</span>
+                        <span id="res-score" class="font-black text-sky-600 text-lg sm:text-xl"></span>
+                    </div>
+                    <div class="bg-slate-50 p-4 rounded-2xl border border-slate-200/60 shadow-sm">
+                        <span class="block text-[11px] font-bold text-slate-400 uppercase tracking-wider mb-1">Tab Violations</span>
+                        <span id="res-violation" class="font-bold text-red-600 text-sm"></span>
+                    </div>
+                </div>
+
+                <button onclick="location.reload()" class="bg-slate-900 hover:bg-slate-800 active:scale-95 text-white font-bold px-7 py-3 rounded-2xl transition-all shadow-xl shadow-slate-900/10 text-xs sm:text-sm">
+                    Retake English TKA
+                </button>
+            </div>
+
+            <!-- Kotak Pembahasan Per Soal -->
+            <div class="bg-white/95 backdrop-blur-md rounded-3xl shadow-2xl p-6 sm:p-10 border border-slate-200/80">
+                <h3 class="text-lg sm:text-xl font-black text-slate-900 mb-6 border-b border-slate-100 pb-4 flex items-center space-x-2">
+                    <span>📚</span>
+                    <span>Comprehensive Answer Review & Explanations (25 Questions)</span>
+                </h3>
+                <div id="review-container" class="space-y-6"></div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Modal Konfirmasi Submit -->
+    <div id="submit-modal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-white rounded-3xl max-w-md w-full p-6 sm:p-8 shadow-2xl border border-slate-100">
+            <div class="w-12 h-12 rounded-2xl bg-amber-50 text-amber-600 flex items-center justify-center text-xl mb-4 font-bold border border-amber-100">💡</div>
+            <h3 class="text-lg sm:text-xl font-black text-slate-900 mb-2">Confirm Exam Submission</h3>
+            <p id="submit-modal-text" class="text-xs sm:text-sm text-slate-600 mb-6 leading-relaxed">Are you sure you want to finish and submit your English TKA answer sheet?</p>
+            <div class="flex space-x-3">
+                <button onclick="closeSubmitModal()" class="flex-1 bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold py-3 rounded-2xl text-xs sm:text-sm transition-all">Review Again</button>
+                <button onclick="executeFinalSubmit()" class="flex-1 bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-3 rounded-2xl text-xs sm:text-sm transition-all shadow-lg shadow-emerald-600/25">Yes, Submit</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Database 25 Soal Multiple Choice TKA Bahasa Inggris SMA/SMK & Logika Skrip -->
+    <script>
+        const questions = [
+            {
+                id: 1, type: "pg", category: "Reading Comprehension (Main Idea)",
+                stimulus: "Ecotourism is defined as responsible travel to natural areas that conserves the environment, sustains the well-being of the local people, and involves interpretation and education. Unlike mass tourism, which often degrades local ecosystems and commercializes indigenous cultures, ecotourism emphasizes low-impact, small-scale lodging and direct financial contributions to conservation projects.",
+                question: "What is the primary focus of ecotourism according to the passage?",
+                options: [
+                    "Maximizing commercial profit from natural landscapes",
+                    "Promoting large-scale resorts in remote wilderness",
+                    "Conserving the environment and supporting local communities",
+                    "Encouraging mass travel for cultural assimilation",
+                    "Reducing educational programs for tourists"
+                ],
+                answer: "Conserving the environment and supporting local communities",
+                discussion: "The text explicitly states that ecotourism 'conserves the environment, sustains the well-being of the local people, and involves interpretation and education'."
+            },
+            {
+                id: 2, type: "pg", category: "Reading Comprehension (Specific Detail)",
+                stimulus: "Despite significant advancements in artificial intelligence and automation, human emotional intelligence (EQ) remains irreplaceable in leadership roles. While AI can analyze vast datasets and execute repetitive tasks with high precision, it lacks empathy, moral reasoning, and the ability to inspire trust among team members.",
+                question: "According to the passage, why cannot artificial intelligence fully replace human leaders?",
+                options: [
+                    "AI is unable to process large volumes of numerical data.",
+                    "AI lacks empathy, moral reasoning, and the ability to inspire trust.",
+                    "AI executes repetitive tasks too slowly compared to humans.",
+                    "AI cannot connect to the internet in leadership environments.",
+                    "AI requires too much electricity to operate in offices."
+                ],
+                answer: "AI lacks empathy, moral reasoning, and the ability to inspire trust.",
+                discussion: "The passage notes that while AI excels at data analysis, 'it lacks empathy, moral reasoning, and the ability to inspire trust among team members'."
+            },
+            {
+                id: 3, type: "pg", category: "Vocabulary in Context",
+                stimulus: "The ancient manuscript discovered in the cave was so fragile that historians had to handle it with extreme caution to prevent any damage to its delicate pages.",
+                question: "The word 'fragile' in the sentence is closest in meaning to...",
+                options: ["Sturdy", "Delicate", "Permanent", "Valuable", "Complex"],
+                answer: "Delicate",
+                discussion: "'Fragile' means easily broken or damaged, which is synonymous with 'delicate' as supported by the phrase 'prevent any damage to its delicate pages'."
+            },
+            {
+                id: 4, type: "pg", category: "Grammar & Structure (Passive Voice)",
+                stimulus: "Complete the sentence with the correct passive form:\n'A new renewable energy research center ... in the capital city next year.'",
+                options: [
+                    "will build",
+                    "is built",
+                    "will be built",
+                    "has been built",
+                    "was building"
+                ],
+                answer: "will be built",
+                discussion: "The time marker 'next year' indicates future tense, and the subject ('A new renewable energy research center') receives the action, requiring future passive ('will be built')."
+            },
+            {
+                id: 5, type: "pg", category: "Grammar & Structure (Conditional Sentences)",
+                stimulus: "Choose the correct verb form for the conditional sentence:\n'If the government had invested earlier in electric public transportation, urban air pollution ... significantly lower today.'",
+                options: [
+                    "would be",
+                    "will be",
+                    "would have been",
+                    "is",
+                    "had been"
+                ],
+                answer: "would be",
+                discussion: "This is a mixed conditional sentence (Type 3 in the if-clause referring to the past 'had invested', and Type 2 in the main clause referring to the present 'today', taking 'would be')."
+            },
+            {
+                id: 6, type: "pg", category: "Reading Comprehension (Inference)",
+                stimulus: "Marine biologists have observed a sharp decline in coral reef populations along the coast due to rising ocean temperatures and coastal pollution. When corals experience prolonged thermal stress, they expel the symbiotic algae living in their tissues, turning completely white—a phenomenon known as coral bleaching.",
+                question: "What can be inferred about coral bleaching from the passage?",
+                options: [
+                    "It occurs when ocean temperatures drop significantly below normal.",
+                    "It is a natural sign of healthy coral growth and reproduction.",
+                    "It is triggered by environmental stressors like elevated water temperatures.",
+                    "It prevents algae from living inside coral tissues permanently.",
+                    "It only affects deep-sea trenches rather than coastal regions."
+                ],
+                answer: "It is triggered by environmental stressors like elevated water temperatures.",
+                discussion: "The text explains that 'prolonged thermal stress' causes corals to expel algae and turn white, indicating that elevated temperatures trigger the bleaching process."
+            },
+            {
+                id: 7, type: "pg", category: "Grammar & Structure (Relative Clauses)",
+                stimulus: "Fill in the blank with the appropriate relative pronoun:\n'The scientist ... research on renewable biofuels won the international award gave an inspiring speech yesterday.'",
+                options: ["who", "whom", "whose", "which", "where"],
+                answer: "whose",
+                discussion: "The pronoun 'whose' indicates possession between the scientist and her research ('research on renewable biofuels')."
+            },
+            {
+                id: 8, type: "pg", category: "Vocabulary (Synonym)",
+                stimulus: "The CEO emphasized that innovation is paramount for the company's survival in an increasingly competitive global marketplace.",
+                question: "The word 'paramount' is closest in meaning to...",
+                options: ["Secondary", "Supreme", "Obsolete", "Optional", "Temporary"],
+                answer: "Supreme",
+                discussion: "'Paramount' means more important than anything else; supreme, chief, or of highest importance."
+            },
+            {
+                id: 9, type: "pg", category: "Reading Comprehension (Author's Purpose)",
+                stimulus: "Read the announcement:\n'Attention all employees: Due to scheduled electrical maintenance, the main office building will be closed this Saturday. All staff members are required to work remotely and ensure their digital backup files are fully synchronized before logging off on Friday evening.'",
+                question: "What is the main purpose of this announcement?",
+                options: [
+                    "To invite employees to a weekend office party",
+                    "To inform staff about office closure and remote work requirements due to maintenance",
+                    "To announce a permanent shift to remote work for all departments",
+                    "To warn employees about an emergency power outage",
+                    "To schedule a mandatory IT training seminar on Friday"
+                ],
+                answer: "To inform staff about office closure and remote work requirements due to maintenance",
+                discussion: "The text clearly instructs employees about the Saturday office closure for maintenance and the requirement to work remotely."
+            },
+            {
+                id: 10, type: "pg", category: "Grammar & Structure (Gerund vs Infinitive)",
+                stimulus: "Choose the correct option:\n'Despite facing numerous technical obstacles, the engineering team succeeded in ... the prototype before the deadline.'",
+                options: ["finish", "finishing", "to finish", "finished", "finishes"],
+                answer: "finishing",
+                discussion: "Prepositions and phrasal verbs like 'succeed in' are always followed by a gerund ('-ing' form)."
+            },
+            {
+                id: 11, type: "pg", category: "Reading Comprehension (Cause and Effect)",
+                stimulus: "Urbanization has led to rapid conversion of agricultural land into residential and industrial zones. Consequently, natural rainwater infiltration has drastically decreased, resulting in frequent urban flash floods during heavy downpours.",
+                question: "What is the direct cause of frequent urban flash floods mentioned in the text?",
+                options: [
+                    "Increased agricultural productivity in rural districts",
+                    "Decreased natural rainwater infiltration due to land conversion",
+                    "Excessive planting of trees in metropolitan areas",
+                    "Higher ocean tides during the rainy season",
+                    "Lower demand for industrial infrastructure"
+                ],
+                answer: "Decreased natural rainwater infiltration due to land conversion",
+                discussion: "The text links the decrease in natural rainwater infiltration (caused by turning land into residential/industrial zones) directly to frequent urban flash floods."
+            },
+            {
+                id: 12, type: "pg", category: "Vocabulary (Antonym)",
+                stimulus: "The manager's candid feedback during the performance review helped the staff understand their actual strengths and weaknesses.",
+                question: "The word 'candid' in the sentence is closest in antonym (opposite) to...",
+                options: ["Honest", "Direct", "Deceptive", "Transparent", "Sincere"],
+                answer: "Deceptive",
+                discussion: "'Candid' means truthful and straightforward (honest/transparent). Its antonym among the choices is 'deceptive' or misleading."
+            },
+            {
+                id: 13, type: "pg", category: "Grammar & Structure (Cause Markers)",
+                stimulus: "Choose the correct conjunction:\n'... the heavy traffic congestion on the highway, Dr. Evans managed to arrive at the conference venue on time.'",
+                options: ["Because", "Although", "In spite of", "Because of", "Unless"],
+                answer: "In spite of",
+                discussion: "'In spite of' (or 'Despite') is followed by a noun phrase ('the heavy traffic congestion') and expresses contrast/concession."
+            },
+            {
+                id: 14, type: "pg", category: "Reading Comprehension (Reference Word)",
+                stimulus: "In recent decades, digital streaming platforms have revolutionized how people consume media. They offer on-demand access to thousands of movies and TV series, which has gradually replaced traditional television broadcasting.",
+                question: "What does the word 'They' in the second sentence refer to?",
+                options: [
+                    "Recent decades",
+                    "Digital streaming platforms",
+                    "Movies and TV series",
+                    "Traditional television broadcasting",
+                    "Media consumers"
+                ],
+                answer: "Digital streaming platforms",
+                discussion: "The pronoun 'They' refers back to the subject of the previous sentence: 'digital streaming platforms'."
+            },
+            {
+                id: 15, type: "pg", category: "Grammar & Structure (Subjunctive)",
+                stimulus: "Choose the correct form:\n'The board of directors recommended that every proposal ... reviewed thoroughly before budget allocation.'",
+                options: ["is", "was", "be", "were", "has been"],
+                answer: "be",
+                discussion: "After verbs/nouns of demand or recommendation (like 'recommended that'), the base form of the verb (subjunctive) is used for all subjects."
+            },
+            {
+                id: 16, type: "pg", category: "Reading Comprehension (Data Interpretation)",
+                stimulus: "A recent survey on student study habits showed that 65% of high school seniors prefer digital e-books over printed textbooks, citing portability and searchability as the primary reasons, while 35% still prefer physical paper books.",
+                question: "Based on the survey data, what is the main reason students prefer digital e-books?",
+                options: [
+                    "Lower cost of internet subscriptions",
+                    "Portability and searchability features",
+                    "Mandatory school regulations",
+                    "Inability to access physical libraries",
+                    "Better physical eye health protection"
+                ],
+                answer: "Portability and searchability features",
+                discussion: "The text explicitly states students cited 'portability and searchability as the primary reasons'."
+            },
+            {
+                id: 17, type: "pg", category: "Grammar & Structure (Modals of Deduction)",
+                stimulus: "Complete the dialogue:\nA: 'Mark did not attend the physics Olympiad selection test this morning.'\nB: 'He ... sick because I saw him coughing severely yesterday.'",
+                options: [
+                    "must have been",
+                    "cannot have been",
+                    "should be",
+                    "might not be",
+                    "will be"
+                ],
+                answer: "must have been",
+                discussion: "'Must have been' is used for a logical deduction or strong certainty about a past event based on evidence (coughing severely yesterday)."
+            },
+            {
+                id: 18, type: "pg", category: "Vocabulary in Context",
+                stimulus: "To mitigate the risks of cybersecurity breaches, the IT department implemented multi-factor authentication across all staff user accounts.",
+                question: "The word 'mitigate' most nearly means...",
+                options: ["Worsen", "Alleviate / Reduce", "Ignore", "Complicate", "Expose"],
+                answer: "Alleviate / Reduce",
+                discussion: "'Mitigate' means to make less severe, serious, or painful (reduce/alleviate risks)."
+            },
+            {
+                id: 19, type: "pg", category: "Reading Comprehension (Tone & Attitude)",
+                stimulus: "While critics argue that space exploration diverts vital funds from terrestrial problems, proponents contend that orbital research yields crucial technological spin-offs, meteorological data, and deep scientific insights that ultimately benefit humanity as a whole.",
+                question: "What is the overall tone of the passage regarding space exploration?",
+                options: [
+                    "Biased and dismissive",
+                    "Objective and balanced",
+                    "Overly emotional and dramatic",
+                    "Sarcastic and pessimistic",
+                    "Indifferent and apathetic"
+                ],
+                answer: "Objective and balanced",
+                discussion: "The passage presents both sides of the argument ('While critics argue...' and 'proponents contend...'), maintaining an objective and balanced tone."
+            },
+            {
+                id: 20, type: "pg", category: "Grammar & Structure (Parallel Structure)",
+                stimulus: "Choose the grammatically correct sentence:\n'Effective time management involves setting clear priorities, eliminating daily distractions, and ... regular breaks.'",
+                options: [
+                    "to take",
+                    "taking",
+                    "take",
+                    "took",
+                    "taken"
+                ],
+                answer: "taking",
+                discussion: "Parallel structure requires items in a list to match grammatical forms ('setting', 'eliminating', and 'taking')."
+            },
+            {
+                id: 21, type: "pg", category: "Reading Comprehension (Summary)",
+                stimulus: "Sleep deprivation impairs cognitive performance, weakens immune response, and negatively affects mood regulation. Research indicates that adolescents require 8 to 10 hours of quality sleep nightly for optimal physical and mental development.",
+                question: "Which of the following best summarizes the passage?",
+                options: [
+                    "Teens should study more and sleep less during exam weeks.",
+                    "Adequate sleep is vital for teenagers' health and cognitive functioning.",
+                    "Immune systems function independently of daily sleep duration.",
+                    "Adults need fewer sleeping hours than adolescents.",
+                    "Lack of sleep improves emotional stability and focus."
+                ],
+                answer: "Adequate sleep is vital for teenagers' health and cognitive functioning.",
+                discussion: "The passage highlights the negative impacts of sleep deprivation and emphasizes teenagers' sleep requirement for optimal development."
+            },
+            {
+                id: 22, type: "pg", category: "Grammar & Structure (Prepositions)",
+                stimulus: "Fill in the appropriate preposition:\n'The research team succeeded ... discovering a new species of orchid in the dense tropical rainforest.'",
+                options: ["on", "at", "in", "with", "for"],
+                answer: "in",
+                discussion: "The verb 'succeed' is standardly followed by the preposition 'in' (+ gerund)."
+            },
+            {
+                id: 23, type: "pg", category: "Vocabulary (Idiomatic Expression)",
+                stimulus: "Instead of arguing about minor details, let's cut to the chase and discuss the core budget proposal.",
+                question: "The idiom 'cut to the chase' means...",
+                options: [
+                    "To delay the meeting",
+                    "To run away quickly",
+                    "To get straight to the main point",
+                    "To cut expenses in half",
+                    "To review past mistakes"
+                ],
+                answer: "To get straight to the main point",
+                discussion: "'Cut to the chase' is an idiom meaning to arrive at the most important part without wasting time on preliminaries."
+            },
+            {
+                id: 24, type: "pg", category: "Reading Comprehension (Logical Sequence)",
+                stimulus: "Paragraph 1: Renewable energy sources like solar and wind power are transforming global power grids.\nParagraph 2: Consequently, investments in fossil fuel infrastructure are declining worldwide.\nParagraph 3: However, grid reliability still depends on efficient energy storage battery systems.\nWhat is the logical relationship between Paragraph 2 and Paragraph 3?",
+                question: "Paragraph 3 provides ... to the trend discussed in Paragraph 2.",
+                options: [
+                    "a contradictory limitation or condition",
+                    "an identical restatement",
+                    "a chronological timeline of events",
+                    "a historical background",
+                    "a direct personal opinion"
+                ],
+                answer: "a contradictory limitation or condition",
+                discussion: "Paragraph 2 shows the rise of renewables and decline of fossil fuels, while Paragraph 3 uses 'However' to introduce a technical challenge or limitation regarding grid reliability and storage."
+            },
+            {
+                id: 25, type: "pg", category: "Grammar & Structure (Inversion)",
+                stimulus: "Choose the correct inverted sentence structure:\n'Not only ... the environmental standards, but the factory also reduced its operational energy costs.'",
+                options: [
+                    "did the company meet",
+                    "the company met",
+                    "meets the company",
+                    "has met the company",
+                    "does meet the company"
+                ],
+                answer: "did the company meet",
+                discussion: "When a negative or restrictive correlative phrase like 'Not only' starts a sentence for emphasis, subject-auxiliary inversion is required ('did the company meet')."
+            }
+        ];
+
+        let currentIdx = 0;
+        let studentAnswers = {};
+        let violations = 0;
+        let maxViolations = 3;
+        let examActive = false;
+        let timeLeft = 50 * 60; // 50 Menit untuk 25 Soal Bahasa Inggris
+        let timerInterval = null;
+        let studentData = { name: "", schoolName: "" };
+
+        function startExam(e) {
+            e.preventDefault();
+            studentData.name = document.getElementById("student-name").value.trim();
+            studentData.schoolName = document.getElementById("student-school").value.trim();
+
+            if(!studentData.name || !studentData.schoolName) return;
+
+            document.getElementById("step-identity").classList.add("hidden");
+            document.getElementById("step-exam").classList.remove("hidden");
+            document.getElementById("exam-header").classList.remove("hidden");
+            document.getElementById("header-user-info").innerText = `Participant: ${studentData.name} | ${studentData.schoolName}`;
+
+            examActive = true;
+            initGridNav();
+            loadQuestion(0);
+            startTimer();
+            initAntiCheat();
+        }
+
+        function startTimer() {
+            timerInterval = setInterval(() => {
+                timeLeft--;
+                let m = Math.floor(timeLeft / 60);
+                let s = timeLeft % 60;
+                let display = `${m < 10 ? '0':''}${m}:${s < 10 ? '0':''}${s}`;
+                document.getElementById("time-display").innerText = display;
+
+                if(timeLeft <= 300) {
+                    document.getElementById("timer-box").classList.add("animate-pulse-red", "bg-red-950", "border-red-600");
+                }
+                if(timeLeft <= 0) {
+                    clearInterval(timerInterval);
+                    alert("Exam time is up! The system is automatically submitting your answers.");
+                    executeFinalSubmit();
+                }
+            }, 1000);
+        }
+
+        function initGridNav() {
+            const container = document.getElementById("grid-nav-container");
+            container.innerHTML = "";
+            questions.forEach((q, idx) => {
+                let btn = document.createElement("button");
+                btn.id = `grid-btn-${idx}`;
+                btn.innerText = q.id;
+                btn.className = "h-9 sm:h-10 rounded-xl font-bold text-xs border border-slate-200 bg-slate-50 text-slate-700 hover:bg-slate-100 transition-all shadow-sm";
+                btn.onclick = () => loadQuestion(idx);
+                container.appendChild(btn);
+            });
+            updateGridNavStyles();
+        }
+
+        function updateGridNavStyles() {
+            questions.forEach((q, idx) => {
+                let btn = document.getElementById(`grid-btn-${idx}`);
+                if(!btn) return;
+                if(idx === currentIdx) {
+                    btn.className = "h-9 sm:h-10 rounded-xl font-bold text-xs bg-sky-600 text-white shadow-md ring-2 ring-sky-300/50 scale-105 transition-transform";
+                } else if(studentAnswers[idx] !== undefined && studentAnswers[idx] !== "") {
+                    btn.className = "h-9 sm:h-10 rounded-xl font-bold text-xs bg-emerald-500 text-white shadow-sm hover:bg-emerald-600 transition-colors";
+                } else {
+                    btn.className = "h-9 sm:h-10 rounded-xl font-bold text-xs bg-slate-50 text-slate-700 border border-slate-200 hover:bg-slate-100 transition-colors";
+                }
+            });
+        }
+
+        function loadQuestion(idx) {
+            currentIdx = idx;
+            let q = questions[idx];
+
+            document.getElementById("question-badge").innerText = `Question No. ${q.id} of ${questions.length}`;
+            document.getElementById("question-type-badge").innerText = q.category || 'English Proficiency';
+            document.getElementById("question-text").innerText = q.question;
+
+            // Handle Stimulus
+            let stimulusBox = document.getElementById("stimulus-container");
+            let stimulusText = document.getElementById("stimulus-text");
+            if(q.stimulus) {
+                stimulusBox.classList.remove("hidden");
+                stimulusText.innerText = q.stimulus;
+            } else {
+                stimulusBox.classList.add("hidden");
+            }
+
+            let optContainer = document.getElementById("answer-options-container");
+            optContainer.innerHTML = "";
+
+            q.options.forEach(opt => {
+                let isChecked = studentAnswers[idx] === opt ? "checked" : "";
+                let label = document.createElement("label");
+                label.className = `flex items-center space-x-3 p-3.5 sm:p-4 rounded-2xl border cursor-pointer transition-all ${isChecked ? 'border-sky-600 bg-sky-50/70 shadow-sm ring-1 ring-sky-500/30' : 'border-slate-200/80 bg-white hover:bg-slate-50/80'}`;
+                label.innerHTML = `
+                    <input type="radio" name="answer-opt" value="${opt}" ${isChecked} onchange="saveAnswer('${opt}')" class="w-4 h-4 text-sky-600 focus:ring-sky-500 shrink-0">
+                    <span class="text-xs sm:text-sm font-semibold text-slate-800">${opt}</span>
+                `;
+                optContainer.appendChild(label);
+            });
+
+            document.getElementById("btn-prev").disabled = currentIdx === 0;
+            document.getElementById("btn-next").innerText = currentIdx === questions.length - 1 ? "Finish / Review" : "Next →";
+            updateGridNavStyles();
+        }
+
+        function saveAnswer(val) {
+            studentAnswers[currentIdx] = val;
+            updateGridNavStyles();
+        }
+
+        function prevQuestion() {
+            if(currentIdx > 0) loadQuestion(currentIdx - 1);
+        }
+
+        function nextQuestion() {
+            if(currentIdx < questions.length - 1) {
+                loadQuestion(currentIdx + 1);
+            } else {
+                confirmSubmit();
+            }
+        }
+
+        function confirmSubmit() {
+            let unansweredCount = questions.filter((_, idx) => studentAnswers[idx] === undefined || studentAnswers[idx] === "").length;
+            let modalText = document.getElementById("submit-modal-text");
+            if(unansweredCount > 0) {
+                modalText.innerHTML = `⚠️ Notice: There are still <span class="text-red-600 font-bold">${unansweredCount} unanswered questions</span>. Are you sure you want to submit?`;
+            } else {
+                modalText.innerText = "All questions have been answered. Are you ready to submit your exam?";
+            }
+            document.getElementById("submit-modal").classList.remove("hidden");
+        }
+
+        function closeSubmitModal() {
+            document.getElementById("submit-modal").classList.add("hidden");
+        }
+
+        function executeFinalSubmit() {
+            clearInterval(timerInterval);
+            closeSubmitModal();
+            document.getElementById("step-exam").classList.add("hidden");
+            document.getElementById("exam-header").classList.add("hidden");
+            document.getElementById("step-result").classList.remove("hidden");
+
+            // Penilaian TKA Bahasa Inggris 25 Soal PG
+            let correctCount = 0;
+            questions.forEach((q, idx) => {
+                if(studentAnswers[idx] === q.answer) {
+                    correctCount++;
+                }
+            });
+
+            let finalScore = Math.round((correctCount / questions.length) * 100);
+
+            document.getElementById("res-name").innerText = studentData.name + ` (${studentData.schoolName})`;
+            document.getElementById("res-score").innerText = `${finalScore} / 100 Points (${correctCount}/${questions.length} Correct)`;
+            document.getElementById("res-violation").innerText = `${violations} Times`;
+
+            // Render Pembahasan TKA Bahasa Inggris ke Halaman Hasil
+            let reviewContainer = document.getElementById("review-container");
+            reviewContainer.innerHTML = "";
+
+            questions.forEach((q, idx) => {
+                let userAns = studentAnswers[idx] || "(Not answered)";
+                let isCorrect = (userAns === q.answer);
+                
+                let card = document.createElement("div");
+                card.className = "p-5 sm:p-6 rounded-2xl border border-slate-200/80 bg-slate-50/50 space-y-3 shadow-sm";
+                card.innerHTML = `
+                    <div class="flex justify-between items-start gap-2">
+                        <span class="font-bold text-slate-900 text-xs sm:text-sm">Question No. ${q.id} <span class="text-slate-500 font-normal">(${q.category})</span></span>
+                        <span class="text-[11px] font-bold px-2.5 py-1 rounded-xl shrink-0 ${isCorrect ? 'bg-emerald-100 text-emerald-800 border border-emerald-200' : 'bg-red-100 text-red-800 border border-red-200'}">
+                            ${isCorrect ? '✔ Correct' : '✖ Incorrect'}
+                        </span>
+                    </div>
+                    ${q.stimulus ? `<div class="p-3 bg-white rounded-xl border border-slate-200/60 text-xs text-slate-700 italic">"${q.stimulus}"</div>` : ''}
+                    <p class="text-xs sm:text-sm font-semibold text-slate-900 leading-relaxed">${q.question}</p>
+                    <div class="text-xs space-y-1.5 bg-white p-3.5 rounded-xl border border-slate-200/60 shadow-sm">
+                        <p><span class="text-slate-400 font-bold uppercase tracking-wider">Your Answer:</span> <span class="font-semibold text-slate-800">${userAns}</span></p>
+                        <p><span class="text-slate-400 font-bold uppercase tracking-wider">Correct Answer:</span> <span class="font-bold text-sky-600">${q.answer}</span></p>
+                    </div>
+                    <div class="text-xs bg-sky-50/80 p-3.5 rounded-xl border border-sky-100 text-sky-950 space-y-1.5 shadow-sm">
+                        <p class="font-bold flex items-center space-x-1"><span>💡</span> <span>Explanation & Analysis:</span></p>
+                        <p class="leading-relaxed font-medium text-sky-900">${q.discussion}</p>
+                    </div>
+                `;
+                reviewContainer.appendChild(card);
+            });
+        }
+
+        // Proteksi Anti-Kecurangan (Tab-Switch)
+        function initAntiCheat() {
+            document.addEventListener("visibilitychange", () => {
+                if(document.hidden && examActive) {
+                    violations++;
+                    document.getElementById("violation-count").innerText = violations;
+                    alert(`🚨 WARNING: CHEATING DETECTED (${violations}/${maxViolations})!\nYou left the exam tab.`);
+                    
+                    if(violations >= maxViolations) {
+                        alert("Maximum violation limit reached. The exam has been automatically submitted.");
+                        executeFinalSubmit();
+                    }
+                }
+            });
+        }
+    </script>
+</body>
+</html>
