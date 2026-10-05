@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="id">
 <head>
@@ -487,6 +488,7 @@
         let timerInterval = null;
         let timeLeft = 45 * 60; // 45 Menit
         let examStartTime = null;
+        let isSubmitted = false; // Flag pengaman agar submit hanya tereksekusi sekali
 
         // Gatekeeper: Cek Koneksi Server saat halaman dimuat
         window.onload = function() {
@@ -499,7 +501,6 @@
             errorBox.classList.add('hidden');
             statusText.textContent = "Menghubungkan ke backend database Google Spreadsheet ('uh-bk')...";
 
-            // Gunakan mode 'no-cors' atau fetch standar
             fetch(SCRIPT_URL, { method: 'GET', mode: 'cors' })
                 .then(response => {
                     if (!response.ok) throw new Error("HTTP error status: " + response.status);
@@ -507,7 +508,6 @@
                 })
                 .then(data => {
                     if (data.status === "success" || data.spreadsheetName) {
-                        // Koneksi Berhasil: Sembunyikan step koneksi, tampilkan step identitas
                         document.getElementById('step-connection').classList.add('hidden');
                         document.getElementById('step-identity').classList.remove('hidden');
                         showCustomAlert("Koneksi ke database spreadsheet 'uh-bk' berhasil!");
@@ -516,11 +516,7 @@
                     }
                 })
                 .catch(err => {
-                    // Jika CORS block di browser, coba tangani atau tampilkan error interaktif
-                    // Catatan: Google Apps Script kadang membutuhkan penanganan khusus atau direktori doGet valid
                     console.warn("Peringatan koneksi:", err);
-                    // Asalkan URL terjangkau, kita izinkan masuk atau tampilkan tombol bypass jika CORS terjadi
-                    // Untuk memastikan keamanan aplikasi tidak berjalan jika belum terkoneksi, kita tampilkan kotak error jika gagal total:
                     document.getElementById('connection-error-detail').textContent = err.toString() + " (Pastikan deploy web app 'Anyone' sudah benar).";
                     errorBox.classList.remove('hidden');
                     statusText.textContent = "Gagal memverifikasi koneksi server.";
@@ -556,7 +552,7 @@
             document.getElementById('step-exam').classList.remove('hidden');
             document.getElementById('step-exam').classList.add('grid');
 
-            document.getElementById('header-submit-btn').classList.remove('hidden');
+            document.getElementById('floating-submit-container').classList.remove('hidden');
 
             renderQuestion();
             renderNavigator();
@@ -584,18 +580,20 @@
 
         function initAntiCheat() {
             document.addEventListener('visibilitychange', () => {
-                if (document.hidden) {
+                if (document.hidden && !isSubmitted) {
                     triggerViolation("Anda terdeteksi meninggalkan halaman atau berpindah tab browser.");
                 }
             });
 
             window.addEventListener('blur', () => {
-                triggerViolation("Jendela ujian kehilangan fokus (terdeteksi membuka aplikasi lain).");
+                if (!isSubmitted) {
+                    triggerViolation("Jendela ujian kehilangan fokus (terdeteksi membuka aplikasi lain).");
+                }
             });
         }
 
         function triggerViolation(reason) {
-            if (document.getElementById('step-exam').classList.contains('hidden')) return;
+            if (isSubmitted || document.getElementById('step-exam').classList.contains('hidden')) return;
             violationCount++;
             document.getElementById('violation-counter').textContent = `${violationCount} / 3`;
             document.getElementById('res-violation').textContent = violationCount;
@@ -688,6 +686,19 @@
                     if ((e.ctrlKey || e.metaKey) && (e.key === 'v' || e.key === 'V' || e.key === 'insert')) {
                         blockPasteAction(e);
                     }
+                    if (e.key === 'Process' || e.keyCode === 229) {
+                        setTimeout(() => {
+                            if (textarea.value.length - previousValue.length > 3) {
+                                showCustomAlert("Terdeteksi penempelan riwayat keyboard! Kolom dikosongkan.");
+                                textarea.value = previousValue;
+                                questions[currentIndex].answer = previousValue;
+                            } else {
+                                previousValue = textarea.value;
+                                questions[currentIndex].answer = previousValue;
+                                renderNavigator();
+                            }
+                        }, 50);
+                    }
                 });
 
                 container.appendChild(textarea);
@@ -751,6 +762,7 @@
         }
 
         function confirmSubmit() {
+            if (isSubmitted) return;
             const firstUnanswered = questions.findIndex(q => q.answer === "" || q.answer === null || q.answer === undefined);
             const modalText = document.getElementById('submit-confirm-text');
             const finalBtn = document.getElementById('final-submit-btn');
@@ -781,9 +793,12 @@
         }
 
         function submitExam() {
+            if (isSubmitted) return; // Mencegah duplikasi pengiriman data
+            isSubmitted = true;
+
             clearInterval(timerInterval);
             document.getElementById('submit-modal').classList.add('hidden');
-            document.getElementById('header-submit-btn').classList.add('hidden');
+            document.getElementById('floating-submit-container').classList.add('hidden');
             
             let answeredCount = 0;
             let score = 0;
@@ -825,7 +840,7 @@
             document.getElementById('submit-response-msg').textContent = "Mengirim data ke database Google Spreadsheet ('uh-bk')...";
             document.getElementById('result-modal').classList.remove('hidden');
 
-            // Kirim data ke backend Google Apps Script
+            // Kirim data ke backend Google Apps Script secara aman (1x eksekusi)
             fetch(SCRIPT_URL, {
                 method: 'POST',
                 mode: 'no-cors',
