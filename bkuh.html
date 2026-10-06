@@ -39,7 +39,7 @@
                     <span id="timer-display">45:00</span>
                 </div>
                 
-                <button id="header-submit-btn" onclick="confirmSubmit()" class="hidden bg-emerald-600 hover:bg-emerald-700 text-white font-medium px-3 sm:px-4 py-1.5 sm:py-2 rounded-lg text-xs sm:text-sm shadow-md transition transform active:scale-95 flex items-center space-x-1">
+                <button id="header-submit-btn" onclick="confirmSubmit()" class="hidden bg-emerald-600 hover:bg-emerald-700 text-white font-medium px-3 sm:px-4 py-1.5 sm:py-2 rounded-lg text-xs sm:text-sm shadow-md transition transform active:scale-95 items-center space-x-1">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 hidden sm:inline-block" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
                     </svg>
@@ -192,6 +192,16 @@
         </div>
 
     </main>
+
+    <!-- Floating Submit Button Container (Mobile & Desktop Responsive) -->
+    <div id="floating-submit-container" class="hidden fixed bottom-4 right-4 z-40">
+        <button onclick="confirmSubmit()" class="bg-emerald-600 hover:bg-emerald-700 text-white font-bold px-5 py-3 rounded-2xl shadow-2xl border-2 border-white flex items-center space-x-2 text-xs sm:text-sm transition transform hover:scale-105 active:scale-95">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+            </svg>
+            <span>Selesai & Kumpulkan Ujian</span>
+        </button>
+    </div>
 
     <div id="submit-modal" class="fixed inset-0 bg-slate-900/50 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
         <div class="bg-white rounded-2xl max-w-md w-full p-6 shadow-xl border border-slate-200 space-y-4">
@@ -553,6 +563,8 @@
             document.getElementById('step-exam').classList.add('grid');
 
             document.getElementById('floating-submit-container').classList.remove('hidden');
+            document.getElementById('header-submit-btn').classList.remove('hidden');
+            document.getElementById('header-submit-btn').classList.add('flex');
 
             renderQuestion();
             renderNavigator();
@@ -796,9 +808,10 @@
             if (isSubmitted) return; // Mencegah duplikasi pengiriman data
             isSubmitted = true;
 
-            clearInterval(timerInterval);
+            if (timerInterval) clearInterval(timerInterval);
             document.getElementById('submit-modal').classList.add('hidden');
             document.getElementById('floating-submit-container').classList.add('hidden');
+            document.getElementById('header-submit-btn').classList.add('hidden');
             
             let answeredCount = 0;
             let score = 0;
