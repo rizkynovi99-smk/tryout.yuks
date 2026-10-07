@@ -2,7 +2,7 @@
 <html lang="id" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Untuk Annisa Yuniar Yasmin - Terima Kasih Telah Bersamaku</title>
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -47,262 +47,249 @@
             background-color: #fdf8f6;
             color: #4a1525;
             overflow-x: hidden;
+            -webkit-tap-highlight-color: transparent;
         }
         .font-serif-custom {
             font-family: 'Playfair Display', serif;
         }
-        .envelope-flap {
-            transition: transform 0.8s ease-in-out;
-            transform-origin: top;
-        }
-        .envelope-open .envelope-flap {
-            transform: rotateX(180deg);
-        }
         @keyframes float {
             0% { transform: translateY(0px) rotate(0deg); opacity: 0.8; }
-            50% { transform: translateY(-20px) rotate(10deg); opacity: 1; }
+            50% { transform: translateY(-15px) rotate(8deg); opacity: 1; }
             100% { transform: translateY(0px) rotate(0deg); opacity: 0.8; }
         }
         .floating-heart {
             animation: float 4s ease-in-out infinite;
         }
+        .step-transition {
+            transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+        }
         ::-webkit-scrollbar {
-            width: 8px;
+            width: 6px;
         }
         ::-webkit-scrollbar-track {
             background: #fbe8e3;
         }
         ::-webkit-scrollbar-thumb {
             background: #df8771;
-            border-radius: 4px;
+            border-radius: 3px;
         }
     </style>
 </head>
-<body class="relative min-h-screen selection:bg-roseGold-200 selection:text-maroonTheme-deep">
+<body class="relative min-h-screen selection:bg-roseGold-200 selection:text-maroonTheme-deep flex flex-col justify-between">
 
-    <div class="fixed inset-0 pointer-events-none overflow-hidden z-0 opacity-30">
-        <div class="absolute top-10 left-10 text-roseGold-400 text-2xl floating-heart" style="animation-delay: 0s;"><i class="fa-solid fa-heart"></i></div>
-        <div class="absolute top-1/4 right-16 text-roseGold-300 text-3xl floating-heart" style="animation-delay: 1.5s;"><i class="fa-solid fa-heart"></i></div>
-        <div class="absolute bottom-20 left-1/4 text-roseGold-400 text-xl floating-heart" style="animation-delay: 0.8s;"><i class="fa-solid fa-heart"></i></div>
-        <div class="absolute bottom-1/3 right-1/4 text-roseGold-300 text-4xl floating-heart" style="animation-delay: 2s;"><i class="fa-solid fa-heart"></i></div>
+    <div class="fixed inset-0 pointer-events-none overflow-hidden z-0 opacity-25">
+        <div class="absolute top-8 left-6 text-roseGold-400 text-xl floating-heart" style="animation-delay: 0s;"><i class="fa-solid fa-heart"></i></div>
+        <div class="absolute top-1/4 right-8 text-roseGold-300 text-2xl floating-heart" style="animation-delay: 1.2s;"><i class="fa-solid fa-heart"></i></div>
+        <div class="absolute bottom-16 left-12 text-roseGold-400 text-lg floating-heart" style="animation-delay: 0.6s;"><i class="fa-solid fa-heart"></i></div>
+        <div class="absolute bottom-1/3 right-12 text-roseGold-300 text-3xl floating-heart" style="animation-delay: 1.8s;"><i class="fa-solid fa-heart"></i></div>
     </div>
 
+    <!-- Audio Control Button -->
     <div class="fixed top-4 right-4 z-50">
-        <button id="musicToggle" onclick="toggleAudio()" class="bg-white/85 backdrop-blur-md border border-roseGold-300 text-maroonTheme-wine p-3 rounded-full shadow-lg hover:bg-roseGold-100 transition duration-300 flex items-center gap-2 px-4 text-sm font-medium">
+        <button id="musicToggle" onclick="toggleAudio()" class="bg-white/90 backdrop-blur-md border border-roseGold-300 text-maroonTheme-wine p-2.5 sm:px-4 sm:py-2.5 rounded-full shadow-lg hover:bg-roseGold-100 transition duration-300 flex items-center gap-2 text-xs sm:text-sm font-medium">
             <i id="musicIcon" class="fa-solid fa-volume-high animate-pulse"></i>
             <span id="musicText" class="hidden sm:inline">Musik Nyala</span>
         </button>
     </div>
 
-    <!-- ==================== SECTION 1: WELCOME & ENVELOPE OPENER ==================== -->
-    <div id="welcomeScreen" class="relative z-10 min-h-screen flex flex-col items-center justify-center p-4 transition-all duration-700">
-        <div class="text-center max-w-xl mx-auto mb-8">
-            <span class="text-roseGold-600 font-medium tracking-widest text-xs uppercase bg-roseGold-100 px-3 py-1 rounded-full border border-roseGold-200">Surat Cinta & Apresiasi</span>
-            <h1 class="font-serif-custom text-3xl sm:text-5xl font-bold text-maroonTheme-deep mt-4 mb-2">Untuk Istri Tercinta</h1>
-            <p class="text-gray-600 text-sm sm:text-base">Sentuh amplop di bawah ini untuk membuka ungkapan hati dari suamimu...</p>
-        </div>
+    <!-- MAIN CONTAINER FOR STEP-BY-STEP FLOW -->
+    <main class="relative z-10 w-full max-w-2xl mx-auto px-4 py-8 sm:py-12 flex-grow flex flex-col justify-center">
 
-        <!-- Interactive Envelope Component -->
-        <div class="relative w-full max-w-sm sm:max-w-md cursor-pointer group" onclick="openEnvelope()">
-            <div id="envelopeContainer" class="relative bg-gradient-to-br from-roseGold-100 to-roseGold-200 rounded-2xl shadow-2xl border-2 border-roseGold-300 p-8 pt-20 pb-12 transition-all duration-500 group-hover:scale-102 group-hover:shadow-roseGold-300/50">
-                <!-- Flap -->
-                <div id="envelopeFlap" class="absolute top-0 left-0 right-0 h-32 bg-gradient-to-b from-roseGold-300 to-roseGold-200 clip-path-flap rounded-t-2xl border-b border-roseGold-300 shadow-inner origin-top transition-transform duration-700 flex items-center justify-center">
-                    <div class="w-12 h-12 bg-maroonTheme-wine rounded-full flex items-center justify-center shadow-md border-2 border-roseGold-100 text-roseGold-100 text-lg">
-                        <i class="fa-solid fa-heart"></i>
+        <!-- ==================== STEP 1: WELCOME & ENVELOPE ==================== -->
+        <div id="step1" class="step-transition flex flex-col items-center text-center">
+            <span class="text-roseGold-600 font-medium tracking-widest text-[11px] sm:text-xs uppercase bg-roseGold-100 px-3 py-1 rounded-full border border-roseGold-200 mb-3">Surat Apresiasi Istimewa</span>
+            <h1 class="font-serif-custom text-2xl sm:text-4xl font-bold text-maroonTheme-deep mb-2">Untuk Istri Tercinta</h1>
+            <p class="text-gray-600 text-xs sm:text-sm max-w-sm mb-8">Sentuh amplop di bawah ini untuk membuka ungkapan hati yang tulus dari suamimu...</p>
+
+            <!-- Interactive Envelope Component -->
+            <div class="w-full max-w-xs sm:max-w-sm cursor-pointer group" onclick="goToStep(2)">
+                <div class="relative bg-gradient-to-br from-roseGold-100 to-roseGold-200 rounded-2xl shadow-xl border-2 border-roseGold-300 p-6 pt-16 pb-8 transition-transform duration-300 group-hover:scale-105">
+                    <div class="absolute top-0 left-0 right-0 h-28 bg-gradient-to-b from-roseGold-300 to-roseGold-200 rounded-t-2xl border-b border-roseGold-300 flex items-center justify-center">
+                        <div class="w-10 h-10 bg-maroonTheme-wine rounded-full flex items-center justify-center shadow-md border-2 border-roseGold-100 text-roseGold-100 text-sm">
+                            <i class="fa-solid fa-heart"></i>
+                        </div>
                     </div>
-                </div>
-
-                <!-- Envelope Content Preview / Label -->
-                <div class="text-center bg-white/70 backdrop-blur-sm p-6 rounded-xl border border-roseGold-200 shadow-sm mt-4">
-                    <span class="text-xs uppercase tracking-wider text-roseGold-600 font-semibold">Kepada Istriku Sholihah</span>
-                    <p class="font-serif-custom italic text-maroonTheme-deep text-lg font-bold mt-1">Annisa Yuniar Yasmin</p>
-                    <p class="text-xs text-gray-500 mt-1">Ibu dari Muhammad Dzikri Al Faqih</p>
-                    <p class="text-xs text-gray-500 mt-2">Dari: Rizky Novikusyandi Pratama</p>
-                    <div class="mt-4 inline-flex items-center gap-2 bg-maroonTheme-wine text-white px-5 py-2.5 rounded-full text-xs font-medium shadow-md group-hover:bg-maroonTheme-accent transition">
-                        <span>Buka Surat</span>
-                        <i class="fa-solid fa-arrow-right-long animate-bounce"></i>
+                    <div class="text-center bg-white/80 backdrop-blur-sm p-5 rounded-xl border border-roseGold-200 shadow-sm mt-2">
+                        <span class="text-[10px] uppercase tracking-wider text-roseGold-600 font-semibold">Istriku Sholihah</span>
+                        <p class="font-serif-custom italic text-maroonTheme-deep text-base sm:text-lg font-bold mt-0.5">Annisa Yuniar Yasmin</p>
+                        <p class="text-[11px] text-gray-500 mt-0.5">Ibu dari Muhammad Dzikri Al Faqih</p>
+                        <div class="mt-3 inline-flex items-center gap-1.5 bg-maroonTheme-wine text-white px-4 py-2 rounded-full text-xs font-medium shadow">
+                            <span>Buka Surat</span>
+                            <i class="fa-solid fa-arrow-right animate-bounce"></i>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
 
-    <!-- ==================== SECTION 2: MAIN CONTENT (HIDDEN INITIALLY) ==================== -->
-    <div id="mainContent" class="hidden relative z-10 max-w-4xl mx-auto px-4 py-12 transition-opacity duration-1000 opacity-0">
+        <!-- ==================== STEP 2: PHOTO FRAME ==================== -->
+        <div id="step2" class="step-transition hidden flex flex-col items-center text-center">
+            <span class="text-roseGold-600 font-medium tracking-widest text-[11px] uppercase bg-roseGold-100 px-3 py-1 rounded-full border border-roseGold-200 mb-2">Kenangan Kita</span>
+            <h2 class="font-serif-custom text-xl sm:text-3xl font-bold text-maroonTheme-deep mb-6">Susah Senang Bersama</h2>
 
-        <!-- Header Banner -->
-        <div class="text-center mb-10">
-            <span class="inline-block bg-roseGold-200 text-maroonTheme-wine text-xs uppercase tracking-widest font-semibold px-4 py-1.5 rounded-full mb-3 shadow-sm">
-                <i class="fa-solid fa-infinity mr-1"></i> Perjalanan Kita Bersama
-            </span>
-            <h2 class="font-serif-custom text-3xl sm:text-5xl font-bold text-maroonTheme-deep">Annisa Yuniar Yasmin</h2>
-            <p class="text-xs sm:text-sm text-maroonTheme-wine font-medium mt-1">Ibu hebat dari Muhammad Dzikri Al Faqih</p>
-            <p class="text-gray-600 mt-2 text-sm sm:text-base">Terima kasih telah membersamai dan selalu setia di kala susah maupun senang.</p>
-        </div>
-
-        <!-- ==================== PHOTO FRAME SECTION ==================== -->
-        <!-- Bingkai Foto untuk kita.jpg (Silakan ganti src dengan file foto Anda) -->
-        <div class="mb-12 flex justify-center">
-            <div class="relative bg-white p-4 pb-12 rounded-2xl shadow-xl border-2 border-roseGold-300 max-w-md w-full transform rotate-1 hover:rotate-0 transition duration-300">
-                <div class="overflow-hidden rounded-xl bg-roseGold-50 aspect-[4/3] flex items-center justify-center border border-roseGold-200 relative group">
-                    <!-- FOTO UTAMA: Masukkan file foto Anda dengan nama 'kita.jpg' di folder yang sama atau ganti path src -->
-                    <img src="kita.jpeg" alt="Kenangan Kita Bersama" class="w-full h-full object-cover" onerror="this.style.display='none'; document.getElementById('photoFallback').style.display='flex';">
-
-                    <!-- Fallback jika file kita.jpg belum dimasukkan -->
-                    <div id="photoFallback" class="absolute inset-0 flex-col items-center justify-center p-6 text-center text-roseGold-500 bg-roseGold-100/80" style="display: none;">
-                        <i class="fa-solid fa-camera-retro text-4xl mb-2"></i>
+            <div class="bg-white p-3 pb-8 rounded-2xl shadow-lg border-2 border-roseGold-300 max-w-sm w-full mb-6">
+                <div class="overflow-hidden rounded-xl bg-roseGold-50 aspect-[4/3] flex items-center justify-center border border-roseGold-200 relative">
+                    <!-- FOTO UTAMA: Masukkan file foto dengan nama 'kita.jpg' -->
+                    <img src="kita.jpg" alt="Kenangan Kita Bersama" class="w-full h-full object-cover" onerror="this.style.display='none'; document.getElementById('photoFallback').style.display='flex';">
+                    
+                    <div id="photoFallback" class="absolute inset-0 flex flex-col items-center justify-center p-4 text-center text-roseGold-500 bg-roseGold-100/90" style="display: none;">
+                        <i class="fa-solid fa-camera-retro text-3xl mb-2"></i>
                         <p class="text-xs font-semibold text-maroonTheme-deep">Bingkai Foto Kita</p>
-                        <p class="text-[11px] text-gray-600 mt-1">Masukkan foto berformat <code class="bg-white px-1.5 py-0.5 rounded font-mono text-maroonTheme-wine font-bold">kita.jpg</code> ke satu folder dengan file web ini.</p>
+                        <p class="text-[10px] text-gray-600 mt-1">Masukkan file <code class="bg-white px-1 py-0.5 rounded font-mono text-maroonTheme-wine font-bold">kita.jpg</code> di folder web ini.</p>
                     </div>
                 </div>
-                <div class="text-center mt-4 font-serif-custom italic text-maroonTheme-wine text-sm">
-                    "Susah senang kita hadapi bersama..."
+                <div class="text-center mt-3 font-serif-custom italic text-maroonTheme-wine text-xs sm:text-sm">
+                    "Setiap langkah berat terasa ringan karena ada kamu..."
                 </div>
             </div>
+
+            <button onclick="goToStep(3)" class="bg-maroonTheme-wine hover:bg-maroonTheme-accent text-white px-6 py-2.5 rounded-full text-xs sm:text-sm font-medium shadow-md transition flex items-center gap-2">
+                <span>Lanjut Baca Pesan Hati</span>
+                <i class="fa-solid fa-arrow-right"></i>
+            </button>
         </div>
 
-        <!-- The Heartfelt Letter Card -->
-        <div class="bg-white/90 backdrop-blur-md rounded-3xl shadow-xl border border-roseGold-200 p-6 sm:p-10 mb-12 relative overflow-hidden">
-            <div class="absolute top-0 right-0 w-32 h-32 bg-roseGold-100 rounded-bl-full pointer-events-none opacity-50"></div>
+        <!-- ==================== STEP 3: THE HEARTFELT LETTER ==================== -->
+        <div id="step3" class="step-transition hidden flex flex-col items-center">
+            <div class="text-center mb-4">
+                <span class="text-roseGold-600 font-medium tracking-widest text-[11px] uppercase bg-roseGold-100 px-3 py-1 rounded-full border border-roseGold-200">Ungkapan Ketulusan</span>
+                <h3 class="font-serif-custom text-xl sm:text-2xl font-bold text-maroonTheme-deep mt-1">Terima Kasih Telah Bersamaku</h3>
+            </div>
 
-            <div class="relative z-10">
-                <div class="flex items-center gap-3 mb-6">
-                    <div class="w-10 h-10 rounded-full bg-roseGold-200 flex items-center justify-center text-maroonTheme-wine font-bold">
-                        <i class="fa-solid fa-envelope-open-text"></i>
-                    </div>
-                    <div>
-                        <h3 class="font-serif-custom font-bold text-xl text-maroonTheme-deep">Surat Cinta untuk Istriku Tercinta</h3>
-                        <p class="text-xs text-gray-500">Dari suamimu tercinta, Rizky Novikusyandi Pratama</p>
-                    </div>
+            <div class="bg-white/95 backdrop-blur-md rounded-2xl shadow-xl border border-roseGold-200 p-5 sm:p-8 mb-6 text-gray-700 leading-relaxed text-xs sm:text-sm font-light space-y-3.5 w-full">
+                <p>
+                    Istriku sholihah, <strong class="text-maroonTheme-deep font-medium">Annisa Yuniar Yasmin</strong>, ibunda tercinta dari <strong class="text-maroonTheme-deep font-medium">Muhammad Dzikri Al Faqih</strong>. Di setiap sujudku, aku selalu bersyukur kepada Allah atas kehadiranmu. Terima kasih karena kamu dengan tulus ikhlas terus membersamiku.
+                </p>
+                <div class="bg-roseGold-50 p-3.5 rounded-xl border-l-3 border-roseGold-500 italic text-maroonTheme-wine font-normal text-xs sm:text-sm">
+                    "Aku tahu persis, jika melihat kenyataan hari ini, perjalanan kita masih panjang dan saat ini pun kita masih menghadapi banyak 'susahnya'—ujian, keterbatasan, dan perjuangan hidup yang melelahkan."
                 </div>
-
-                <div class="space-y-4 text-gray-700 leading-relaxed text-sm sm:text-base font-light">
-                    <p>
-                        Istriku sholihah, Annisa Yuniar Yasmin, ibunda tercinta dari buah hati kita Muhammad Dzikri Al Faqih. Di setiap helaan napas dan sujudku, aku selalu menyisipkan rasa syukur yang mendalam kepada Allah SWT karena telah menghadirkanmu sebagai pendamping hidupku dan ibu yang luar biasa bagi anak kita. Terima kasih karena kamu telah dengan tulus ikhlas membersamiku, baik di kala suka kita tertawa bersama, maupun terkhusus di saat-saat tersulit dalam hidup kita.
-                    </p>
-                    <p class="bg-roseGold-50 p-4 rounded-xl border-l-4 border-roseGold-500 italic text-maroonTheme-wine font-normal">
-                        "Jujur, kalau kita melihat kenyataan hari ini, aku tahu perjalanan kita masih panjang dan saat ini pun kita masih menghadapi banyak 'susahnya'—banyak ujian, keterbatasan, perjuangan ekonomi, dan lelah yang harus kita pikul bersama demi masa depan Dzikri."
-                    </p>
-                    <p>
-                        Namun di balik segala kesusahan itu, kehadiranmulah yang membuat pundakku tidak roboh. Kesabaranmu, ketulusan senyumanmu, dan doa-doa malam yang kau panjatkan untukku dan Dzikri adalah sumber kekuatan terbesar yang membuatku terus bangkit setiap pagi. Kamu tidak pernah meninggalkan saat badai menerpa; justru tangan hangatmulah yang selalu menggenggam erat tanganku, meyakinkanku bahwa kita pasti bisa melaluinya.
-                    </p>
-                    <p>
-                        Terima kasih, Annisa, atas kesetiaan dan ketegaran hatimu membersamiku di saat susah ini. Aku berjanji di hadapan Allah, aku akan terus berjuang sekuat tenaga, membanting tulang, dan membersamimu hingga kelak kesulitan ini berganti menjadi kebahagiaan yang lapang, berkah, dan penuh tawa dalam keluarga kecil kita.
-                    </p>
-                </div>
-
-                <div class="mt-8 pt-6 border-t border-roseGold-100 flex flex-col sm:flex-row justify-between items-center gap-4">
-                    <div class="flex items-center gap-2 text-roseGold-600 text-sm">
-                        <i class="fa-solid fa-hands-holding-child"></i>
-                        <span>Susah senang kita hadapi bersama selamanya</span>
-                    </div>
-                    <div class="font-serif-custom font-bold text-maroonTheme-wine text-base sm:text-lg text-center sm:text-right">
-                        — Rizky Novikusyandi Pratama
-                    </div>
+                <p>
+                    Namun di balik segala kesusahan itu, kesabaranmu, ketulusan senyumanmu, dan doamu adalah kekuatan terbesarku untuk terus bangkit setiap hari. Kamu tidak pernah pergi saat badai menerpa; justru tangan hangatmulah yang selalu menguatkanku.
+                </p>
+                <p>
+                    Terima kasih telah setia di saat susah maupun senang. Aku berjanji akan terus berjuang sekuat tenaga demi masa depan kita.
+                </p>
+                <div class="pt-3 border-t border-roseGold-100 text-right font-serif-custom font-bold text-maroonTheme-wine text-xs sm:text-sm">
+                    — Rizky Novikusyandi Pratama
                 </div>
             </div>
+
+            <button onclick="goToStep(4)" class="bg-maroonTheme-wine hover:bg-maroonTheme-accent text-white px-6 py-2.5 rounded-full text-xs sm:text-sm font-medium shadow-md transition flex items-center gap-2">
+                <span>Lihat Kupon & Harapan</span>
+                <i class="fa-solid fa-arrow-right"></i>
+            </button>
         </div>
 
-        <!-- ==================== SECTION 3: INTERACTIVE LOVE COUPONS ==================== -->
-        <div class="mb-12">
-            <div class="text-center mb-8">
-                <span class="text-roseGold-600 font-medium tracking-wider text-xs uppercase bg-roseGold-100 px-3 py-1 rounded-full border border-roseGold-200">Kupon Penghargaan Suami</span>
-                <h3 class="font-serif-custom text-2xl sm:text-3xl font-bold text-maroonTheme-deep mt-2">Kupon Cinta Khusus Untukmu</h3>
-                <p class="text-gray-600 text-sm mt-1">Klik setiap kartu di bawah ini untuk melihat kupon spesial yang bisa kamu klaim kapan saja dari suamimu!</p>
+        <!-- ==================== STEP 4: LOVE COUPONS ==================== -->
+        <div id="step4" class="step-transition hidden flex flex-col items-center">
+            <div class="text-center mb-4">
+                <span class="text-roseGold-600 font-medium tracking-widest text-[11px] uppercase bg-roseGold-100 px-3 py-1 rounded-full border border-roseGold-200">Kupon Apresiasi</span>
+                <h3 class="font-serif-custom text-xl sm:text-2xl font-bold text-maroonTheme-deep mt-1">Kupon Cinta Khusus Untukmu</h3>
+                <p class="text-gray-600 text-xs mt-1">Sentuh kartu di bawah untuk membuka kupon spesial dari suamimu:</p>
             </div>
 
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-3.5 w-full mb-6">
                 <!-- Coupon 1 -->
-                <div onclick="openModal('Kupon Pundak untuk Bersandar', 'Kupon ini berlaku seumur hidup tanpa batas! Kapanpun hari terasa melelahkan, mengurus rumah atau merawat Dzikri membuatmu penat, gunakan kupon ini dan pundak suamimu siap jadi tempat bersandar ternyaman sambil ditemani teh hangat.')" class="bg-white p-6 rounded-2xl shadow-md border border-roseGold-200 hover:shadow-xl hover:border-roseGold-400 transition-all cursor-pointer group relative overflow-hidden">
-                    <div class="absolute top-0 right-0 bg-roseGold-100 w-16 h-16 rounded-bl-full flex items-start justify-end p-3 text-roseGold-600 group-hover:bg-roseGold-200 transition">
-                        <i class="fa-solid fa-gift"></i>
-                    </div>
-                    <div class="w-12 h-12 rounded-xl bg-roseGold-100 text-roseGold-600 flex items-center justify-center text-xl mb-4 group-hover:scale-110 transition">
+                <div onclick="openModal('Kupon Pundak untuk Bersandar', 'Kupon seumur hidup! Kapanpun lelah mengurus rumah atau merawat Dzikri, pundak suamimu siap jadi tempat bersandar ternyaman sambil ditemani teh hangat.')" class="bg-white p-4 rounded-xl shadow border border-roseGold-200 hover:border-roseGold-400 transition cursor-pointer relative">
+                    <div class="w-9 h-9 rounded-lg bg-roseGold-100 text-roseGold-600 flex items-center justify-center text-sm mb-2">
                         <i class="fa-solid fa-hands-holding-heart"></i>
                     </div>
-                    <h4 class="font-serif-custom font-bold text-lg text-maroonTheme-deep mb-2">Kupon Pundak Bersandar</h4>
-                    <p class="text-xs text-gray-500 line-clamp-2">Penawar lelah di saat hari terasa begitu berat dan penat...</p>
-                    <div class="mt-4 text-xs font-semibold text-roseGold-600 flex items-center gap-1">
-                        <span>Buka Kupon</span> <i class="fa-solid fa-chevron-right text-[10px]"></i>
-                    </div>
+                    <h4 class="font-serif-custom font-bold text-sm text-maroonTheme-deep mb-1">Pundak Bersandar</h4>
+                    <p class="text-[11px] text-gray-500 line-clamp-2">Penawar lelah di saat hari terasa begitu berat...</p>
                 </div>
 
                 <!-- Coupon 2 -->
-                <div onclick="openModal('Kupon Pendengar Setia Tanpa Menengah', 'Kadang kita hanya butuh didengar tanpa perlu dihakimi atau langsung diberi solusi. Dengan kupon ini, Rizky berjanji mendengarkan semua cerita, keluh kesah, atau unek-unekmu dalam mengasuh Dzikri dengan sepenuh hati.')" class="bg-white p-6 rounded-2xl shadow-md border border-roseGold-200 hover:shadow-xl hover:border-roseGold-400 transition-all cursor-pointer group relative overflow-hidden">
-                    <div class="absolute top-0 right-0 bg-roseGold-100 w-16 h-16 rounded-bl-full flex items-start justify-end p-3 text-roseGold-600 group-hover:bg-roseGold-200 transition">
-                        <i class="fa-solid fa-gift"></i>
-                    </div>
-                    <div class="w-12 h-12 rounded-xl bg-roseGold-100 text-roseGold-600 flex items-center justify-center text-xl mb-4 group-hover:scale-110 transition">
+                <div onclick="openModal('Kupon Pendengar Setia', 'Hak istimewa mencurahkan segala isi hati dan keluh kesah dalam mengasuh Dzikri tanpa dihakimi, didengarkan dengan sepenuh hati oleh Rizky.')" class="bg-white p-4 rounded-xl shadow border border-roseGold-200 hover:border-roseGold-400 transition cursor-pointer relative">
+                    <div class="w-9 h-9 rounded-lg bg-roseGold-100 text-roseGold-600 flex items-center justify-center text-sm mb-2">
                         <i class="fa-solid fa-comments"></i>
                     </div>
-                    <h4 class="font-serif-custom font-bold text-lg text-maroonTheme-deep mb-2">Kupon Pendengar Setia</h4>
-                    <p class="text-xs text-gray-500 line-clamp-2">Hak istimewa untuk mencurahkan isi hati tanpa interupsi...</p>
-                    <div class="mt-4 text-xs font-semibold text-roseGold-600 flex items-center gap-1">
-                        <span>Buka Kupon</span> <i class="fa-solid fa-chevron-right text-[10px]"></i>
-                    </div>
+                    <h4 class="font-serif-custom font-bold text-sm text-maroonTheme-deep mb-1">Pendengar Setia</h4>
+                    <p class="text-[11px] text-gray-500 line-clamp-2">Ruang aman untuk mencurahkan semua unek-unek...</p>
                 </div>
 
                 <!-- Coupon 3 -->
-                <div onclick="openModal('Kupon Doa di Setiap Sujud', 'Janji suamiku: aku akan selalu menyelipkan nama Annisa Yuniar Yasmin dan Muhammad Dzikri Al Faqih dalam setiap sujud sepertiga malamku. Memohon kepada Allah agar memberimu kesehatan, kesabaran, dan melapangkan rezeki keluarga kita.')" class="bg-white p-6 rounded-2xl shadow-md border border-roseGold-200 hover:shadow-xl hover:border-roseGold-400 transition-all cursor-pointer group relative overflow-hidden">
-                    <div class="absolute top-0 right-0 bg-roseGold-100 w-16 h-16 rounded-bl-full flex items-start justify-end p-3 text-roseGold-600 group-hover:bg-roseGold-200 transition">
-                        <i class="fa-solid fa-gift"></i>
-                    </div>
-                    <div class="w-12 h-12 rounded-xl bg-roseGold-100 text-roseGold-600 flex items-center justify-center text-xl mb-4 group-hover:scale-110 transition">
+                <div onclick="openModal('Kupon Doa Sepertiga Malam', 'Janji suamiku: selalu menyelipkan nama Annisa Yuniar Yasmin & Muhammad Dzikri Al Faqih dalam setiap sujud malamku untuk kelapangan rezeki.')" class="bg-white p-4 rounded-xl shadow border border-roseGold-200 hover:border-roseGold-400 transition cursor-pointer relative">
+                    <div class="w-9 h-9 rounded-lg bg-roseGold-100 text-roseGold-600 flex items-center justify-center text-sm mb-2">
                         <i class="fa-solid fa-hands-praying"></i>
                     </div>
-                    <h4 class="font-serif-custom font-bold text-lg text-maroonTheme-deep mb-2">Kupon Doa di Setiap Sujud</h4>
-                    <p class="text-xs text-gray-500 line-clamp-2">Senjata terkuat kita agar Allah mudahkan setiap langkah perjuangan...</p>
-                    <div class="mt-4 text-xs font-semibold text-roseGold-600 flex items-center gap-1">
-                        <span>Buka Kupon</span> <i class="fa-solid fa-chevron-right text-[10px]"></i>
+                    <h4 class="font-serif-custom font-bold text-sm text-maroonTheme-deep mb-1">Doa di Setiap Sujud</h4>
+                    <p class="text-[11px] text-gray-500 line-clamp-2">Senjata terkuat kita agar Allah mudahkan langkah...</p>
+                </div>
+            </div>
+
+            <button onclick="goToStep(5); triggerFinalCelebration();" class="bg-maroonTheme-wine hover:bg-maroonTheme-accent text-white px-6 py-2.5 rounded-full text-xs sm:text-sm font-medium shadow-md transition flex items-center gap-2">
+                <span>Lihat Tujuan Akhir Kita</span>
+                <i class="fa-solid fa-arrow-right"></i>
+            </button>
+        </div>
+
+        <!-- ==================== STEP 5: FINAL DESTINATION (BAITULLAH) ==================== -->
+        <div id="step5" class="step-transition hidden flex flex-col items-center text-center">
+            <div class="w-16 h-16 bg-roseGold-100 text-maroonTheme-wine rounded-full flex items-center justify-center text-2xl mx-auto mb-4 shadow-inner border border-roseGold-300">
+                <i class="fa-solid fa-kaaba"></i>
+            </div>
+            
+            <span class="text-roseGold-600 font-medium tracking-widest text-[11px] uppercase bg-roseGold-100 px-3 py-1 rounded-full border border-roseGold-200 mb-3">Impian & Doa Bersama</span>
+
+            <!-- TAMPILAN BESAR SESUAI PERMINTAAN -->
+            <div class="bg-gradient-to-br from-roseGold-100 via-white to-roseGold-100 p-6 sm:p-10 rounded-3xl shadow-xl border-2 border-roseGold-300 w-full mb-6 relative overflow-hidden">
+                <div class="absolute -right-10 -bottom-10 text-roseGold-200/50 text-9xl pointer-events-none">
+                    <i class="fa-solid fa-mosque"></i>
+                </div>
+                <h2 class="font-serif-custom text-xl sm:text-3xl font-extrabold text-maroonTheme-deep leading-tight mb-4">
+                    "Perjalanan Selanjutnya Ayo segera Kita berangkat ke Baitullah"
+                </h2>
+                <p class="text-xs sm:text-sm text-gray-700 max-w-md mx-auto font-light leading-relaxed mb-6">
+                    Ya Allah, mudahkanlah ikhtiar kami, lapangkanlah rezeki keluarga kecil kami (Rizky, Annisa, dan Faqih), dan takdirkan kami untuk bersimpuh di Baitullah bersama-sama dalam keadaan berkah.
+                </p>
+
+                <!-- 2 BINGKAI FOTO MAKKAH & MADINAH -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-4">
+                    <!-- Bingkai 1: Masjidil Haram -->
+                    <div class="bg-white p-2.5 rounded-2xl shadow-md border border-roseGold-300 flex flex-col">
+                        <div class="overflow-hidden rounded-xl aspect-[16/10] bg-roseGold-50 relative flex items-center justify-center">
+                            <img src="https://ziyarago.com:2053/media/general_media/images/article/where-to-stay-in-makkah-hotels-near-haram.jpg" alt="Masjidil Haram Makkah" class="w-full h-full object-cover hover:scale-105 transition duration-500" onerror="this.src='https://placehold.co/400x250/fbe8e3/4a1525?text=Masjidil+Haram';">
+                        </div>
+                        <p class="text-[11px] font-serif-custom italic text-maroonTheme-wine mt-2 font-medium">Masjidil Haram, Makkah Al-Mukarramah</p>
+                    </div>
+
+                    <!-- Bingkai 2: Masjid Nabawi -->
+                    <div class="bg-white p-2.5 rounded-2xl shadow-md border border-roseGold-300 flex flex-col">
+                        <div class="overflow-hidden rounded-xl aspect-[16/10] bg-roseGold-50 relative flex items-center justify-center">
+                            <img src="https://suaramuslim.net/wp-content/uploads/2020/02/Sejarah-Pembangunan-Masjid-Nabawi.jpeg" alt="Masjid Nabawi Madinah" class="w-full h-full object-cover hover:scale-105 transition duration-500" onerror="this.src='https://placehold.co/400x250/fbe8e3/4a1525?text=Masjid+Nabawi';">
+                        </div>
+                        <p class="text-[11px] font-serif-custom italic text-maroonTheme-wine mt-2 font-medium">Masjid Nabawi, Madinah Al-Munawwarah</p>
                     </div>
                 </div>
             </div>
+
+            <button onclick="goToStep(1)" class="text-xs text-roseGold-600 hover:text-maroonTheme-wine underline transition py-2">
+                <i class="fa-solid fa-rotate-right mr-1"></i> Mulai dari awal lagi
+            </button>
         </div>
 
-        <!-- ==================== SECTION 4: REASONS & TIMELINE ==================== -->
-        <div class="bg-gradient-to-r from-roseGold-100 via-roseGold-200 to-roseGold-100 rounded-3xl p-8 shadow-inner border border-roseGold-300 text-center mb-12">
-            <h3 class="font-serif-custom text-2xl font-bold text-maroonTheme-deep mb-2">Kenapa Aku Begitu Bersyukur Memilikimu?</h3>
-            <p class="text-xs text-gray-600 mb-6">Meskipun saat ini ujian dan kesusahan masih ada, tiga hal inilah yang membuatku bertahan dan optimis:</p>
-            <div class="grid grid-cols-1 sm:grid-cols-3 gap-6">
-                <div class="bg-white/80 backdrop-blur-sm p-5 rounded-2xl shadow-sm border border-roseGold-200">
-                    <div class="text-maroonTheme-wine text-2xl font-bold mb-1"><i class="fa-solid fa-anchor"></i></div>
-                    <h5 class="font-semibold text-maroonTheme-deep text-sm">Kesetiaan & Keikhlasan</h5>
-                    <p class="text-xs text-gray-600 mt-1">Kamu tetap berdiri tegar di sampingku walau kondisi ekonomi dan hidup penuh tantangan.</p>
-                </div>
-                <div class="bg-white/80 backdrop-blur-sm p-5 rounded-2xl shadow-sm border border-roseGold-200">
-                    <div class="text-maroonTheme-wine text-2xl font-bold mb-1"><i class="fa-solid fa-seedling"></i></div>
-                    <h5 class="font-semibold text-maroonTheme-deep text-sm">Ibu Hebat untuk Dzikri</h5>
-                    <p class="text-xs text-gray-600 mt-1">Ketulusanmu mendidik Muhammad Dzikri Al Faqih adalah kebanggaan terbesar dalam hidupku.</p>
-                </div>
-                <div class="bg-white/80 backdrop-blur-sm p-5 rounded-2xl shadow-sm border border-roseGold-200">
-                    <div class="text-maroonTheme-wine text-2xl font-bold mb-1"><i class="fa-solid fa-sun"></i></div>
-                    <h5 class="font-semibold text-maroonTheme-deep text-sm">Harapan Masa Depan</h5>
-                    <p class="text-xs text-gray-600 mt-1">Aku yakin badai ini sementara, dan Allah sedang menyiapkan kebahagiaan besar untuk keluarga kita.</p>
-                </div>
-            </div>
-        </div>
+    </main>
 
-        <!-- Footer Love Note -->
-        <div class="text-center text-xs text-gray-500 py-6 border-t border-roseGold-200">
-            <p>Dibuat dengan sepenuh hati oleh <span class="font-semibold text-maroonTheme-wine">Rizky Novikusyandi Pratama</span> untuk istri tercinta <span class="font-semibold text-maroonTheme-wine">Annisa Yuniar Yasmin</span> (Ibunda Muhammad Dzikri Al Faqih).</p>
-        </div>
-    </div>
+    <!-- Footer -->
+    <footer class="relative z-10 text-center text-[10px] sm:text-xs text-gray-500 py-4 border-t border-roseGold-200 bg-white/55 backdrop-blur-sm">
+        <p>Dibuat dengan sepenuh cinta oleh <span class="font-semibold text-maroonTheme-wine">Rizky Novikusyandi Pratama</span> untuk <span class="font-semibold text-maroonTheme-wine">Annisa Yuniar Yasmin</span> & <span class="font-semibold text-maroonTheme-wine">Muhammad Dzikri Al Faqih</span>.</p>
+    </footer>
 
     <!-- ==================== POPUP MODAL ==================== -->
     <div id="loveModal" class="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm opacity-0 pointer-events-none transition-opacity duration-300 p-4">
-        <div id="modalContentBox" class="bg-white w-full max-w-md rounded-3xl p-6 sm:p-8 shadow-2xl border border-roseGold-300 transform scale-95 transition-transform duration-300 relative">
-            <button onclick="closeModal()" class="absolute top-4 right-4 w-8 h-8 rounded-full bg-roseGold-100 text-maroonTheme-wine flex items-center justify-center hover:bg-roseGold-200 transition">
+        <div id="modalContentBox" class="bg-white w-full max-w-sm rounded-2xl p-6 shadow-2xl border border-roseGold-300 transform scale-95 transition-transform duration-300 relative">
+            <button onclick="closeModal()" class="absolute top-3 right-3 w-7 h-7 rounded-full bg-roseGold-100 text-maroonTheme-wine flex items-center justify-center text-xs hover:bg-roseGold-200 transition">
                 <i class="fa-solid fa-xmark"></i>
             </button>
             <div class="text-center">
-                <div class="w-14 h-14 bg-roseGold-100 text-maroonTheme-wine rounded-2xl flex items-center justify-center text-2xl mx-auto mb-4 shadow-sm">
-                    <i class="fa-solid fa-heart-pulse"></i>
+                <div class="w-12 h-12 bg-roseGold-100 text-maroonTheme-wine rounded-xl flex items-center justify-center text-xl mx-auto mb-3 shadow-sm">
+                    <i class="fa-solid fa-gift"></i>
                 </div>
-                <h4 id="modalTitle" class="font-serif-custom font-bold text-2xl text-maroonTheme-deep mb-3">Judul Kupon</h4>
-                <p id="modalDesc" class="text-gray-600 text-sm sm:text-base leading-relaxed mb-6">Isi pesan atau kupon akan tampil di sini...</p>
-                <button onclick="claimCoupon()" class="w-full bg-maroonTheme-wine hover:bg-maroonTheme-accent text-white py-3 rounded-xl font-medium text-sm shadow-md transition duration-300 flex items-center justify-center gap-2">
+                <h4 id="modalTitle" class="font-serif-custom font-bold text-lg text-maroonTheme-deep mb-2">Judul Kupon</h4>
+                <p id="modalDesc" class="text-gray-600 text-xs sm:text-sm leading-relaxed mb-5">Isi pesan...</p>
+                <button onclick="claimCoupon()" class="w-full bg-maroonTheme-wine hover:bg-maroonTheme-accent text-white py-2.5 rounded-xl font-medium text-xs shadow transition flex items-center justify-center gap-1.5">
                     <i class="fa-solid fa-check"></i>
-                    <span>Klaim Kupon Ini ke Suami</span>
+                    <span>Klaim Kupon ke Suami</span>
                 </button>
             </div>
         </div>
@@ -314,6 +301,7 @@
         let isPlaying = false;
         let oscillatorInterval = null;
 
+        // Auto play audio on load
         window.addEventListener('DOMContentLoaded', () => {
             startAudioAutomatically();
         });
@@ -327,7 +315,7 @@
                 playAmbientChime();
                 isPlaying = true;
             } catch (e) {
-                console.log("Audio autoplay prevented by browser policy");
+                console.log("Audio autoplay prevented");
             }
         }
 
@@ -346,21 +334,14 @@
 
             if (!isPlaying) {
                 try {
-                    if (!audioCtx) {
-                        audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-                    } else if (audioCtx.state === 'suspended') {
-                        audioCtx.resume();
-                    }
+                    if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+                    if (audioCtx.state === 'suspended') audioCtx.resume();
                     playAmbientChime();
                     isPlaying = true;
                     updateAudioButtonUI(true);
-                } catch (e) {
-                    console.log("Audio error");
-                }
+                } catch (e) {}
             } else {
-                if (audioCtx) {
-                    audioCtx.suspend();
-                }
+                if (audioCtx) audioCtx.suspend();
                 isPlaying = false;
                 updateAudioButtonUI(false);
             }
@@ -370,21 +351,18 @@
             const icon = document.getElementById('musicIcon');
             const text = document.getElementById('musicText');
             if (playing) {
-                icon.classList.remove('fa-music');
-                icon.classList.add('fa-volume-high');
-                text.innerText = 'Musik Nyala';
+                icon.className = "fa-solid fa-volume-high animate-pulse";
+                if(text) text.innerText = 'Musik Nyala';
             } else {
-                icon.classList.remove('fa-volume-high');
-                icon.classList.add('fa-music');
-                text.innerText = 'Musik Mati';
+                icon.className = "fa-solid fa-music";
+                if(text) text.innerText = 'Musik Mati';
             }
         }
 
         function playAmbientChime() {
             if (!audioCtx) return;
-            const notes = [261.63, 329.63, 392.00, 523.25, 587.33]; // C major soothing notes
+            const notes = [261.63, 329.63, 392.00, 523.25, 587.33];
             let index = 0;
-
             if (oscillatorInterval) clearInterval(oscillatorInterval);
 
             oscillatorInterval = setInterval(() => {
@@ -392,51 +370,56 @@
                 try {
                     const osc = audioCtx.createOscillator();
                     const gain = audioCtx.createGain();
-
                     osc.type = 'sine';
                     osc.frequency.value = notes[index % notes.length];
                     index++;
-
-                    gain.gain.setValueAtTime(0.025, audioCtx.currentTime);
-                    gain.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + 3.5);
-
+                    gain.gain.setValueAtTime(0.02, audioCtx.currentTime);
+                    gain.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + 3);
                     osc.connect(gain);
                     gain.connect(audioCtx.destination);
-
                     osc.start();
-                    osc.stop(audioCtx.currentTime + 3.5);
+                    osc.stop(audioCtx.currentTime + 3);
                 } catch(e) {}
-            }, 2800);
+            }, 3000);
         }
 
-        function openEnvelope() {
-            const flap = document.getElementById('envelopeFlap');
-            const container = document.getElementById('envelopeContainer');
-            const welcomeScreen = document.getElementById('welcomeScreen');
-            const mainContent = document.getElementById('mainContent');
-
-            if (!isPlaying) {
-                startAudioAutomatically();
-                updateAudioButtonUI(true);
+        // STEP-BY-STEP NAVIGATION
+        function goToStep(stepNumber) {
+            for (let i = 1; i <= 5; i++) {
+                const el = document.getElementById('step' + i);
+                if (el) {
+                    el.classList.add('hidden');
+                    el.style.opacity = '0';
+                }
             }
 
-            flap.style.transform = 'rotateX(180deg)';
-            container.classList.add('scale-105', 'opacity-0');
-
-            confetti({
-                particleCount: 100,
-                spread: 90,
-                origin: { y: 0.6 },
-                colors: ['#d16247', '#f5d5cc', '#6B1D2F', '#ebb5a6']
-            });
-
-            setTimeout(() => {
-                welcomeScreen.style.display = 'none';
-                mainContent.classList.remove('hidden');
+            const target = document.getElementById('step' + stepNumber);
+            if (target) {
+                target.classList.remove('hidden');
                 setTimeout(() => {
-                    mainContent.classList.remove('opacity-0');
+                    target.style.opacity = '1';
                 }, 50);
-            }, 600);
+            }
+
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+
+            if (stepNumber === 2 || stepNumber === 3) {
+                confetti({
+                    particleCount: 50,
+                    spread: 60,
+                    origin: { y: 0.5 },
+                    colors: ['#d16247', '#f5d5cc', '#6B1D2F']
+                });
+            }
+        }
+
+        function triggerFinalCelebration() {
+            confetti({
+                particleCount: 120,
+                spread: 100,
+                origin: { y: 0.6 },
+                colors: ['#d16247', '#f5d5cc', '#6B1D2F', '#ebb5a6', '#gold']
+            });
         }
 
         function openModal(title, desc) {
@@ -444,7 +427,6 @@
             const box = document.getElementById('modalContentBox');
             document.getElementById('modalTitle').innerText = title;
             document.getElementById('modalDesc').innerText = desc;
-
             modal.classList.remove('opacity-0', 'pointer-events-none');
             box.classList.remove('scale-95');
             box.classList.add('scale-100');
@@ -453,7 +435,6 @@
         function closeModal() {
             const modal = document.getElementById('loveModal');
             const box = document.getElementById('modalContentBox');
-
             modal.classList.add('opacity-0', 'pointer-events-none');
             box.classList.remove('scale-100');
             box.classList.add('scale-95');
@@ -461,13 +442,13 @@
 
         function claimCoupon() {
             confetti({
-                particleCount: 70,
+                particleCount: 60,
                 spread: 70,
                 origin: { y: 0.7 },
                 colors: ['#d16247', '#6B1D2F']
             });
-            alert("Yeay! Kupon berhasil diklaim untuk Annisa Yuniar Yasmin. Silakan tagih langsung ke suamimu (Rizky) ya sayang! ❤️");
             closeModal();
+            alert("Yeay! Kupon berhasil diklaim untuk Annisa Yuniar Yasmin. Silakan tagih ke Suami (Rizky) ya! ❤️");
         }
     </script>
 </body>
