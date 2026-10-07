@@ -1,13 +1,14 @@
+
 <!DOCTYPE html>
 <html lang="id" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Untuk Annisa Yuniar Yasmin - Terima Kasih Telah Bersamaku</title>
+    <title>Paspor Cinta & Tiket Baitullah - Annisa Yuniar Yasmin</title>
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Google Fonts: Playfair Display & Poppins -->
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Poppins:wght@300;400;500;600;700&family=Courier+Prime:wght@400;700&display=swap" rel="stylesheet">
     <!-- FontAwesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <!-- Canvas Confetti for Celebration Effects -->
@@ -17,25 +18,23 @@
             theme: {
                 extend: {
                     colors: {
-                        roseGold: {
-                            50: '#fdf8f6',
-                            100: '#fbe8e3',
-                            200: '#f5d5cc',
-                            300: '#ebb5a6',
-                            400: '#df8771',
-                            500: '#d16247',
-                            600: '#b8482f',
-                            700: '#9b3a27',
+                        passport: {
+                            green: '#12372A',
+                            gold: '#D4AF37',
+                            lightGold: '#FBFAD8',
+                            darkGreen: '#0A2218'
                         },
-                        maroonTheme: {
-                            deep: '#4a1525',
-                            wine: '#6B1D2F',
-                            accent: '#8A2D41'
+                        saudia: {
+                            green: '#00643C',
+                            gold: '#C5A059',
+                            cream: '#F4F1EA',
+                            dark: '#111827'
                         }
                     },
                     fontFamily: {
                         playfair: ['"Playfair Display"', 'serif'],
                         poppins: ['Poppins', 'sans-serif'],
+                        mono: ['"Courier Prime"', 'monospace']
                     }
                 }
             }
@@ -44,17 +43,39 @@
     <style>
         body {
             font-family: 'Poppins', sans-serif;
-            background-color: #fdf8f6;
-            color: #4a1525;
+            background-color: #0d281e;
+            color: #12372A;
             overflow-x: hidden;
             -webkit-tap-highlight-color: transparent;
         }
         .font-serif-custom {
             font-family: 'Playfair Display', serif;
         }
+        .passport-cover {
+            background: linear-gradient(135deg, #12372A 0%, #081a13 100%);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.5), inset 0 0 30px rgba(212,175,55,0.15);
+            border: 4px solid #D4AF37;
+        }
+        .passport-page {
+            background-color: #FBFAD8;
+            background-image: radial-gradient(#d4af37 0.75px, transparent 0.75px);
+            background-size: 16px 16px;
+        }
+        .ticket-card {
+            background: #ffffff;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+            border-top: 6px solid #00643C;
+        }
+        .ticket-cutout-left, .ticket-cutout-right {
+            position: absolute;
+            width: 24px;
+            height: 24px;
+            background-color: #0d281e;
+            border-radius: 50%;
+        }
         @keyframes float {
             0% { transform: translateY(0px) rotate(0deg); opacity: 0.8; }
-            50% { transform: translateY(-15px) rotate(8deg); opacity: 1; }
+            50% { transform: translateY(-12px) rotate(6deg); opacity: 1; }
             100% { transform: translateY(0px) rotate(0deg); opacity: 0.8; }
         }
         .floating-heart {
@@ -67,100 +88,109 @@
             width: 6px;
         }
         ::-webkit-scrollbar-track {
-            background: #fbe8e3;
+            background: #081a13;
         }
         ::-webkit-scrollbar-thumb {
-            background: #df8771;
+            background: #D4AF37;
             border-radius: 3px;
         }
     </style>
 </head>
-<body class="relative min-h-screen selection:bg-roseGold-200 selection:text-maroonTheme-deep flex flex-col justify-between">
+<body class="relative min-h-screen selection:bg-yellow-200 selection:text-green-900 flex flex-col justify-between">
 
-    <div class="fixed inset-0 pointer-events-none overflow-hidden z-0 opacity-25">
-        <div class="absolute top-8 left-6 text-roseGold-400 text-xl floating-heart" style="animation-delay: 0s;"><i class="fa-solid fa-heart"></i></div>
-        <div class="absolute top-1/4 right-8 text-roseGold-300 text-2xl floating-heart" style="animation-delay: 1.2s;"><i class="fa-solid fa-heart"></i></div>
-        <div class="absolute bottom-16 left-12 text-roseGold-400 text-lg floating-heart" style="animation-delay: 0.6s;"><i class="fa-solid fa-heart"></i></div>
-        <div class="absolute bottom-1/3 right-12 text-roseGold-300 text-3xl floating-heart" style="animation-delay: 1.8s;"><i class="fa-solid fa-heart"></i></div>
+    <!-- Hidden YouTube Audio Embed for Auto-play music -->
+    <div id="youtubePlayerContainer" class="fixed -top-96 -left-96 opacity-0 pointer-events-none">
+        <iframe id="ytAudioFrame" width="100" height="100" src="https://www.youtube.com/embed/mJE0ROBWPvY?enablejsapi=1&autoplay=1&loop=1&playlist=mJE0ROBWPvY" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    </div>
+
+    <!-- Background glowing particles -->
+    <div class="fixed inset-0 pointer-events-none overflow-hidden z-0 opacity-20">
+        <div class="absolute top-8 left-6 text-yellow-300 text-xl floating-heart" style="animation-delay: 0s;"><i class="fa-solid fa-passport"></i></div>
+        <div class="absolute top-1/4 right-8 text-yellow-400 text-2xl floating-heart" style="animation-delay: 1.2s;"><i class="fa-solid fa-plane"></i></div>
+        <div class="absolute bottom-16 left-12 text-yellow-300 text-lg floating-heart" style="animation-delay: 0.6s;"><i class="fa-solid fa-heart"></i></div>
+        <div class="absolute bottom-1/3 right-12 text-yellow-400 text-3xl floating-heart" style="animation-delay: 1.8s;"><i class="fa-solid fa-kaaba"></i></div>
     </div>
 
     <!-- Audio Control Button -->
     <div class="fixed top-4 right-4 z-50">
-        <button id="musicToggle" onclick="toggleAudio()" class="bg-white/90 backdrop-blur-md border border-roseGold-300 text-maroonTheme-wine p-2.5 sm:px-4 sm:py-2.5 rounded-full shadow-lg hover:bg-roseGold-100 transition duration-300 flex items-center gap-2 text-xs sm:text-sm font-medium">
+        <button id="musicToggle" onclick="toggleAudio()" class="bg-[#12372A]/90 backdrop-blur-md border border-[#D4AF37] text-yellow-300 p-2.5 sm:px-4 sm:py-2.5 rounded-full shadow-lg hover:bg-green-900 transition duration-300 flex items-center gap-2 text-xs sm:text-sm font-medium">
             <i id="musicIcon" class="fa-solid fa-volume-high animate-pulse"></i>
             <span id="musicText" class="hidden sm:inline">Musik Nyala</span>
         </button>
     </div>
 
-    <!-- MAIN CONTAINER FOR STEP-BY-STEP FLOW -->
-    <main class="relative z-10 w-full max-w-2xl mx-auto px-4 py-8 sm:py-12 flex-grow flex flex-col justify-center">
+    <!-- MAIN CONTAINER FOR STEP-BY-STEP PASSPORT FLOW -->
+    <main class="relative z-10 w-full max-w-xl mx-auto px-4 py-8 sm:py-12 flex-grow flex flex-col justify-center">
 
-        <!-- ==================== STEP 1: WELCOME & ENVELOPE ==================== -->
+        <!-- ==================== STEP 1: PASSPORT COVER ==================== -->
         <div id="step1" class="step-transition flex flex-col items-center text-center">
-            <span class="text-roseGold-600 font-medium tracking-widest text-[11px] sm:text-xs uppercase bg-roseGold-100 px-3 py-1 rounded-full border border-roseGold-200 mb-3">Surat Apresiasi Istimewa</span>
-            <h1 class="font-serif-custom text-2xl sm:text-4xl font-bold text-maroonTheme-deep mb-2">Untuk Istri Tercinta</h1>
-            <p class="text-gray-600 text-xs sm:text-sm max-w-sm mb-8">Sentuh amplop di bawah ini untuk membuka ungkapan hati yang tulus dari suamimu...</p>
+            <span class="text-yellow-300 font-medium tracking-widest text-[11px] sm:text-xs uppercase bg-[#12372A] px-4 py-1 rounded-full border border-[#D4AF37] mb-3 shadow">Dokumen Perjalanan Cinta</span>
+            <h1 class="font-serif-custom text-2xl sm:text-4xl font-bold text-yellow-200 mb-2">Paspor Keluarga Bahagia</h1>
+            <p class="text-yellow-100/75 text-xs sm:text-sm max-w-sm mb-8">Sentuh paspor di bawah ini untuk membuka dokumen sah perjalanan cinta dan impian suci kita...</p>
 
-            <!-- Interactive Envelope Component -->
+            <!-- Interactive Passport Cover Component -->
             <div class="w-full max-w-xs sm:max-w-sm cursor-pointer group" onclick="goToStep(2)">
-                <div class="relative bg-gradient-to-br from-roseGold-100 to-roseGold-200 rounded-2xl shadow-xl border-2 border-roseGold-300 p-6 pt-16 pb-8 transition-transform duration-300 group-hover:scale-105">
-                    <div class="absolute top-0 left-0 right-0 h-28 bg-gradient-to-b from-roseGold-300 to-roseGold-200 rounded-t-2xl border-b border-roseGold-300 flex items-center justify-center">
-                        <div class="w-10 h-10 bg-maroonTheme-wine rounded-full flex items-center justify-center shadow-md border-2 border-roseGold-100 text-roseGold-100 text-sm">
-                            <i class="fa-solid fa-heart"></i>
-                        </div>
+                <div class="passport-cover rounded-2xl p-8 pt-10 pb-10 text-center transition-transform duration-300 group-hover:scale-105 relative overflow-hidden">
+                    <div class="absolute top-2 right-2 text-yellow-500/20 text-7xl"><i class="fa-solid fa-globe"></i></div>
+                    
+                    <div class="w-16 h-16 mx-auto mb-4 bg-[#D4AF37] rounded-full flex items-center justify-center text-green-950 text-2xl shadow-lg border-2 border-yellow-200">
+                        <i class="fa-solid fa-kaaba"></i>
                     </div>
-                    <div class="text-center bg-white/80 backdrop-blur-sm p-5 rounded-xl border border-roseGold-200 shadow-sm mt-2">
-                        <span class="text-[10px] uppercase tracking-wider text-roseGold-600 font-semibold">Istriku Sholihah</span>
-                        <p class="font-serif-custom italic text-maroonTheme-deep text-base sm:text-lg font-bold mt-0.5">Annisa Yuniar Yasmin</p>
-                        <p class="text-[11px] text-gray-500 mt-0.5">Ibu dari Muhammad Dzikri Al Faqih</p>
-                        <div class="mt-3 inline-flex items-center gap-1.5 bg-maroonTheme-wine text-white px-4 py-2 rounded-full text-xs font-medium shadow">
-                            <span>Buka Surat</span>
-                            <i class="fa-solid fa-arrow-right animate-bounce"></i>
-                        </div>
+                    
+                    <h3 class="text-[11px] uppercase tracking-[0.25em] text-yellow-300 font-bold">REPUBLIK CINTA KELUARGA</h3>
+                    <div class="my-3 border-t border-yellow-400/40 w-32 mx-auto"></div>
+                    <h2 class="font-serif-custom text-xl sm:text-2xl font-bold text-yellow-100 mb-1">PASPOR RIZKY & ANNISA</h2>
+                    <p class="text-[10px] text-yellow-300 tracking-wider uppercase">Bersama Buah Hati: Muhammad Dzikri Al Faqih</p>
+                    
+                    <div class="mt-8 inline-flex items-center gap-2 bg-[#D4AF37] text-green-950 px-5 py-2.5 rounded-full text-xs font-bold shadow-md hover:bg-yellow-300 transition">
+                        <span>Buka Paspor (Visa Cinta)</span>
+                        <i class="fa-solid fa-arrow-right animate-bounce"></i>
                     </div>
                 </div>
             </div>
         </div>
 
-        <!-- ==================== STEP 2: PHOTO FRAME ==================== -->
+        <!-- ==================== STEP 2: PHOTO FRAME (PASSPORT PAGE 1) ==================== -->
         <div id="step2" class="step-transition hidden flex flex-col items-center text-center">
-            <span class="text-roseGold-600 font-medium tracking-widest text-[11px] uppercase bg-roseGold-100 px-3 py-1 rounded-full border border-roseGold-200 mb-2">Kenangan Kita</span>
-            <h2 class="font-serif-custom text-xl sm:text-3xl font-bold text-maroonTheme-deep mb-6">Susah Senang Bersama</h2>
+            <span class="text-yellow-800 font-medium tracking-widest text-[11px] uppercase bg-yellow-200 px-3 py-1 rounded-full border border-yellow-400 mb-2">Halaman Identitas & Kenangan</span>
+            <h2 class="font-serif-custom text-xl sm:text-3xl font-bold text-green-900 mb-6">Susah Senang Bersama</h2>
 
-            <div class="bg-white p-3 pb-8 rounded-2xl shadow-lg border-2 border-roseGold-300 max-w-sm w-full mb-6">
-                <div class="overflow-hidden rounded-xl bg-roseGold-50 aspect-[4/3] flex items-center justify-center border border-roseGold-200 relative">
+            <div class="passport-page p-4 pb-8 rounded-2xl shadow-xl border-2 border-[#D4AF37] max-w-sm w-full mb-6 relative">
+                <div class="absolute top-3 left-3 text-xs font-mono text-green-800/60 uppercase">Visa No: ID-2026-ARZ</div>
+                <div class="overflow-hidden rounded-xl bg-white aspect-[4/3] flex items-center justify-center border-2 border-[#D4AF37]/50 relative mt-6 shadow-inner">
                     <!-- FOTO UTAMA: Masukkan file foto dengan nama 'kita.jpg' -->
-                    <img src="kita.jpeg" alt="Kenangan Kita Bersama" class="w-full h-full object-cover" onerror="this.style.display='none'; document.getElementById('photoFallback').style.display='flex';">
+                    <img src="kita.jpg" alt="Kenangan Kita Bersama" class="w-full h-full object-cover" onerror="this.style.display='none'; document.getElementById('photoFallback').style.display='flex';">
                     
-                    <div id="photoFallback" class="absolute inset-0 flex flex-col items-center justify-center p-4 text-center text-roseGold-500 bg-roseGold-100/90" style="display: none;">
-                        <i class="fa-solid fa-camera-retro text-3xl mb-2"></i>
-                        <p class="text-xs font-semibold text-maroonTheme-deep">Bingkai Foto Kita</p>
-                        <p class="text-[10px] text-gray-600 mt-1">Masukkan file <code class="bg-white px-1 py-0.5 rounded font-mono text-maroonTheme-wine font-bold">kita.jpg</code> di folder web ini.</p>
+                    <div id="photoFallback" class="absolute inset-0 flex flex-col items-center justify-center p-4 text-center text-green-800 bg-yellow-100/95" style="display: none;">
+                        <i class="fa-solid fa-camera-retro text-3xl mb-2 text-[#12372A]"></i>
+                        <p class="text-xs font-semibold text-green-900">Bingkai Foto Kita</p>
+                        <p class="text-[10px] text-gray-700 mt-1">Masukkan file <code class="bg-white px-1 py-0.5 rounded font-mono text-green-900 font-bold">kita.jpeg</code> di folder web ini.</p>
                     </div>
                 </div>
-                <div class="text-center mt-3 font-serif-custom italic text-maroonTheme-wine text-xs sm:text-sm">
-                    "Setiap langkah berat terasa ringan karena ada kamu..."
+                <div class="text-center mt-3 font-serif-custom italic text-green-900 text-xs sm:text-sm font-medium">
+                    "Setiap langkah berat terasa ringan karena ada kamu di sisi..."
                 </div>
             </div>
 
-            <button onclick="goToStep(3)" class="bg-maroonTheme-wine hover:bg-maroonTheme-accent text-white px-6 py-2.5 rounded-full text-xs sm:text-sm font-medium shadow-md transition flex items-center gap-2">
-                <span>Lanjut Baca Pesan Hati</span>
+            <button onclick="goToStep(3)" class="bg-[#12372A] hover:bg-green-900 text-yellow-300 border border-[#D4AF37] px-6 py-2.5 rounded-full text-xs sm:text-sm font-medium shadow-md transition flex items-center gap-2">
+                <span>Lanjut Baca Visa Apresiasi</span>
                 <i class="fa-solid fa-arrow-right"></i>
             </button>
         </div>
 
-        <!-- ==================== STEP 3: THE HEARTFELT LETTER ==================== -->
+        <!-- ==================== STEP 3: THE HEARTFELT LETTER (PASSPORT PAGE 2) ==================== -->
         <div id="step3" class="step-transition hidden flex flex-col items-center">
             <div class="text-center mb-4">
-                <span class="text-roseGold-600 font-medium tracking-widest text-[11px] uppercase bg-roseGold-100 px-3 py-1 rounded-full border border-roseGold-200">Ungkapan Ketulusan</span>
-                <h3 class="font-serif-custom text-xl sm:text-2xl font-bold text-maroonTheme-deep mt-1">Terima Kasih Telah Bersamaku</h3>
+                <span class="text-yellow-800 font-medium tracking-widest text-[11px] uppercase bg-yellow-200 px-3 py-1 rounded-full border border-yellow-400">Lembar Catatan Perjalanan</span>
+                <h3 class="font-serif-custom text-xl sm:text-2xl font-bold text-green-900 mt-1">Terima Kasih Telah Bersamaku</h3>
             </div>
 
-            <div class="bg-white/95 backdrop-blur-md rounded-2xl shadow-xl border border-roseGold-200 p-5 sm:p-8 mb-6 text-gray-700 leading-relaxed text-xs sm:text-sm font-light space-y-3.5 w-full">
-                <p>
-                    Istriku sholihah, <strong class="text-maroonTheme-deep font-medium">Annisa Yuniar Yasmin</strong>, ibunda tercinta dari <strong class="text-maroonTheme-deep font-medium">Muhammad Dzikri Al Faqih</strong>. Di setiap sujudku, aku selalu bersyukur kepada Allah atas kehadiranmu. Terima kasih karena kamu dengan tulus ikhlas terus membersamiku.
+            <div class="passport-page rounded-2xl shadow-xl border-2 border-[#D4AF37] p-5 sm:p-8 mb-6 text-green-950 leading-relaxed text-xs sm:text-sm font-light space-y-3.5 w-full relative">
+                <div class="absolute top-3 right-3 text-xs font-mono text-green-800/60 uppercase"><i class="fa-solid fa-stamp text-[#D4AF37]"></i> Verified</div>
+                <p class="pt-2">
+                    Istriku sholihah, <strong class="text-green-900 font-semibold">Annisa Yuniar Yasmin</strong>, ibunda tercinta dari <strong class="text-green-900 font-semibold">Muhammad Dzikri Al Faqih</strong>. Di setiap sujudku, aku selalu bersyukur kepada Allah atas kehadiranmu. Terima kasih karena kamu dengan tulus ikhlas terus membersamiku.
                 </p>
-                <div class="bg-roseGold-50 p-3.5 rounded-xl border-l-3 border-roseGold-500 italic text-maroonTheme-wine font-normal text-xs sm:text-sm">
+                <div class="bg-yellow-100/80 p-3.5 rounded-xl border-l-4 border-[#12372A] italic text-green-900 font-normal text-xs sm:text-sm shadow-sm">
                     "Aku tahu persis, jika melihat kenyataan hari ini, perjalanan kita masih panjang dan saat ini pun kita masih menghadapi banyak 'susahnya'—ujian, keterbatasan, dan perjuangan hidup yang melelahkan."
                 </div>
                 <p>
@@ -169,13 +199,13 @@
                 <p>
                     Terima kasih telah setia di saat susah maupun senang. Aku berjanji akan terus berjuang sekuat tenaga demi masa depan kita.
                 </p>
-                <div class="pt-3 border-t border-roseGold-100 text-right font-serif-custom font-bold text-maroonTheme-wine text-xs sm:text-sm">
+                <div class="pt-3 border-t border-yellow-400/50 text-right font-serif-custom font-bold text-green-900 text-xs sm:text-sm">
                     — Rizky Novikusyandi Pratama
                 </div>
             </div>
 
-            <button onclick="goToStep(4)" class="bg-maroonTheme-wine hover:bg-maroonTheme-accent text-white px-6 py-2.5 rounded-full text-xs sm:text-sm font-medium shadow-md transition flex items-center gap-2">
-                <span>Lihat Kupon & Harapan</span>
+            <button onclick="goToStep(4)" class="bg-[#12372A] hover:bg-green-900 text-yellow-300 border border-[#D4AF37] px-6 py-2.5 rounded-full text-xs sm:text-sm font-medium shadow-md transition flex items-center gap-2">
+                <span>Lihat Visa Kupon & Harapan</span>
                 <i class="fa-solid fa-arrow-right"></i>
             </button>
         </div>
@@ -183,113 +213,180 @@
         <!-- ==================== STEP 4: LOVE COUPONS ==================== -->
         <div id="step4" class="step-transition hidden flex flex-col items-center">
             <div class="text-center mb-4">
-                <span class="text-roseGold-600 font-medium tracking-widest text-[11px] uppercase bg-roseGold-100 px-3 py-1 rounded-full border border-roseGold-200">Kupon Apresiasi</span>
-                <h3 class="font-serif-custom text-xl sm:text-2xl font-bold text-maroonTheme-deep mt-1">Kupon Cinta Khusus Untukmu</h3>
-                <p class="text-gray-600 text-xs mt-1">Sentuh kartu di bawah untuk membuka kupon spesial dari suamimu:</p>
+                <span class="text-yellow-800 font-medium tracking-widest text-[11px] uppercase bg-yellow-200 px-3 py-1 rounded-full border border-yellow-400">Visa Khusus Keluarga</span>
+                <h3 class="font-serif-custom text-xl sm:text-2xl font-bold text-green-900 mt-1">Kupon Cinta Khusus Untukmu</h3>
+                <p class="text-yellow-100/80 text-xs mt-1">Sentuh kartu di bawah untuk membuka kupon spesial dari suamimu:</p>
             </div>
 
             <div class="grid grid-cols-1 sm:grid-cols-3 gap-3.5 w-full mb-6">
                 <!-- Coupon 1 -->
-                <div onclick="openModal('Kupon Pundak untuk Bersandar', 'Kupon seumur hidup! Kapanpun lelah mengurus rumah atau merawat Dzikri, pundak suamimu siap jadi tempat bersandar ternyaman sambil ditemani teh hangat.')" class="bg-white p-4 rounded-xl shadow border border-roseGold-200 hover:border-roseGold-400 transition cursor-pointer relative">
-                    <div class="w-9 h-9 rounded-lg bg-roseGold-100 text-roseGold-600 flex items-center justify-center text-sm mb-2">
+                <div onclick="openModal('Kupon Pundak untuk Bersandar', 'Kupon seumur hidup! Kapanpun lelah mengurus rumah atau merawat Dzikri, pundak suamimu siap jadi tempat bersandar ternyaman sambil ditemani teh hangat.')" class="passport-page p-4 rounded-xl shadow border border-[#D4AF37] hover:border-green-900 transition cursor-pointer relative">
+                    <div class="w-9 h-9 rounded-lg bg-[#12372A] text-yellow-300 flex items-center justify-center text-sm mb-2 shadow">
                         <i class="fa-solid fa-hands-holding-heart"></i>
                     </div>
-                    <h4 class="font-serif-custom font-bold text-sm text-maroonTheme-deep mb-1">Pundak Bersandar</h4>
-                    <p class="text-[11px] text-gray-500 line-clamp-2">Penawar lelah di saat hari terasa begitu berat...</p>
+                    <h4 class="font-serif-custom font-bold text-sm text-green-900 mb-1">Pundak Bersandar</h4>
+                    <p class="text-[11px] text-gray-700 line-clamp-2">Penawar lelah di saat hari terasa begitu berat...</p>
                 </div>
 
                 <!-- Coupon 2 -->
-                <div onclick="openModal('Kupon Pendengar Setia', 'Hak istimewa mencurahkan segala isi hati dan keluh kesah dalam mengasuh Dzikri tanpa dihakimi, didengarkan dengan sepenuh hati oleh Rizky.')" class="bg-white p-4 rounded-xl shadow border border-roseGold-200 hover:border-roseGold-400 transition cursor-pointer relative">
-                    <div class="w-9 h-9 rounded-lg bg-roseGold-100 text-roseGold-600 flex items-center justify-center text-sm mb-2">
+                <div onclick="openModal('Kupon Pendengar Setia', 'Hak istimewa mencurahkan segala isi hati dan keluh kesah dalam mengasuh Dzikri tanpa dihakimi, didengarkan dengan sepenuh hati oleh Rizky.')" class="passport-page p-4 rounded-xl shadow border border-[#D4AF37] hover:border-green-900 transition cursor-pointer relative">
+                    <div class="w-9 h-9 rounded-lg bg-[#12372A] text-yellow-300 flex items-center justify-center text-sm mb-2 shadow">
                         <i class="fa-solid fa-comments"></i>
                     </div>
-                    <h4 class="font-serif-custom font-bold text-sm text-maroonTheme-deep mb-1">Pendengar Setia</h4>
-                    <p class="text-[11px] text-gray-500 line-clamp-2">Ruang aman untuk mencurahkan semua unek-unek...</p>
+                    <h4 class="font-serif-custom font-bold text-sm text-green-900 mb-1">Pendengar Setia</h4>
+                    <p class="text-[11px] text-gray-700 line-clamp-2">Ruang aman untuk mencurahkan semua unek-unek...</p>
                 </div>
 
                 <!-- Coupon 3 -->
-                <div onclick="openModal('Kupon Doa Sepertiga Malam', 'Janji suamiku: selalu menyelipkan nama Annisa Yuniar Yasmin & Muhammad Dzikri Al Faqih dalam setiap sujud malamku untuk kelapangan rezeki.')" class="bg-white p-4 rounded-xl shadow border border-roseGold-200 hover:border-roseGold-400 transition cursor-pointer relative">
-                    <div class="w-9 h-9 rounded-lg bg-roseGold-100 text-roseGold-600 flex items-center justify-center text-sm mb-2">
+                <div onclick="openModal('Kupon Doa Sepertiga Malam', 'Janji suamiku: selalu menyelipkan nama Annisa Yuniar Yasmin & Muhammad Dzikri Al Faqih dalam setiap sujud malamku untuk kelapangan rezeki.')" class="passport-page p-4 rounded-xl shadow border border-[#D4AF37] hover:border-green-900 transition cursor-pointer relative">
+                    <div class="w-9 h-9 rounded-lg bg-[#12372A] text-yellow-300 flex items-center justify-center text-sm mb-2 shadow">
                         <i class="fa-solid fa-hands-praying"></i>
                     </div>
-                    <h4 class="font-serif-custom font-bold text-sm text-maroonTheme-deep mb-1">Doa di Setiap Sujud</h4>
-                    <p class="text-[11px] text-gray-500 line-clamp-2">Senjata terkuat kita agar Allah mudahkan langkah...</p>
+                    <h4 class="font-serif-custom font-bold text-sm text-green-900 mb-1">Doa di Setiap Sujud</h4>
+                    <p class="text-[11px] text-gray-700 line-clamp-2">Senjata terkuat kita agar Allah mudahkan langkah...</p>
                 </div>
             </div>
 
-            <button onclick="goToStep(5); triggerFinalCelebration();" class="bg-maroonTheme-wine hover:bg-maroonTheme-accent text-white px-6 py-2.5 rounded-full text-xs sm:text-sm font-medium shadow-md transition flex items-center gap-2">
-                <span>Lihat Tujuan Akhir Kita</span>
-                <i class="fa-solid fa-arrow-right"></i>
+            <button onclick="goToStep(5); triggerFinalCelebration();" class="bg-[#12372A] hover:bg-green-900 text-yellow-300 border border-[#D4AF37] px-6 py-2.5 rounded-full text-xs sm:text-sm font-medium shadow-md transition flex items-center gap-2">
+                <span>Cetak Tiket Penerbangan Baitullah</span>
+                <i class="fa-solid fa-plane-departure"></i>
             </button>
         </div>
 
-        <!-- ==================== STEP 5: FINAL DESTINATION (BAITULLAH) ==================== -->
+        <!-- ==================== STEP 5: SAUDI AIRLINES BOARDING PASS TICKET ==================== -->
         <div id="step5" class="step-transition hidden flex flex-col items-center text-center">
-            <div class="w-16 h-16 bg-roseGold-100 text-maroonTheme-wine rounded-full flex items-center justify-center text-2xl mx-auto mb-4 shadow-inner border border-roseGold-300">
-                <i class="fa-solid fa-kaaba"></i>
-            </div>
             
-            <span class="text-roseGold-600 font-medium tracking-widest text-[11px] uppercase bg-roseGold-100 px-3 py-1 rounded-full border border-roseGold-200 mb-3">Impian & Doa Bersama</span>
+            <span class="text-yellow-300 font-medium tracking-widest text-[11px] uppercase bg-[#12372A] px-4 py-1 rounded-full border border-[#D4AF37] mb-3 shadow">Boarding Pass Eksklusif</span>
+            <h2 class="font-serif-custom text-xl sm:text-2xl font-bold text-yellow-200 mb-4">
+                "Perjalanan Selanjutnya Ayo segera Kita berangkat ke Baitullah"
+            </h2>
 
-            <!-- TAMPILAN BESAR SESUAI PERMINTAAN -->
-            <div class="bg-gradient-to-br from-roseGold-100 via-white to-roseGold-100 p-6 sm:p-10 rounded-3xl shadow-xl border-2 border-roseGold-300 w-full mb-6 relative overflow-hidden">
-                <div class="absolute -right-10 -bottom-10 text-roseGold-200/50 text-9xl pointer-events-none">
-                    <i class="fa-solid fa-mosque"></i>
+            <!-- SAUDI AIRLINES TICKET STYLING -->
+            <div class="ticket-card rounded-2xl w-full max-w-md text-left relative overflow-hidden mb-6 border border-[#C5A059]">
+                <!-- Ticket Header -->
+                <div class="bg-[#00643C] text-white p-4 sm:p-5 flex justify-between items-center relative">
+                    <div>
+                        <div class="text-[10px] tracking-widest uppercase text-yellow-300 font-bold">SAUDI ARABIAN AIRLINES</div>
+                        <div class="font-serif-custom text-lg sm:text-xl font-bold">BOARDING PASS / TIKET UTAMA</div>
+                    </div>
+                    <div class="w-10 h-10 bg-white/10 rounded-full flex items-center justify-center text-yellow-300 text-xl border border-yellow-300/40">
+                        <i class="fa-solid fa-plane"></i>
+                    </div>
                 </div>
-                <h2 class="font-serif-custom text-xl sm:text-3xl font-extrabold text-maroonTheme-deep leading-tight mb-4">
-                    "Perjalanan Selanjutnya Ayo segera Kita berangkat ke Baitullah"
-                </h2>
-                <p class="text-xs sm:text-sm text-gray-700 max-w-md mx-auto font-light leading-relaxed mb-6">
-                    Ya Allah, mudahkanlah ikhtiar kami, lapangkanlah rezeki keluarga kecil kami (Rizky, Annisa, dan Faqih), dan takdirkan kami untuk bersimpuh di Baitullah bersama-sama dalam keadaan berkah.
-                </p>
 
-                <!-- 2 BINGKAI FOTO MAKKAH & MADINAH -->
-                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-4">
-                    <!-- Bingkai 1: Masjidil Haram -->
-                    <div class="bg-white p-2.5 rounded-2xl shadow-md border border-roseGold-300 flex flex-col">
-                        <div class="overflow-hidden rounded-xl aspect-[16/10] bg-roseGold-50 relative flex items-center justify-center">
-                            <img src="https://ziyarago.com:2053/media/general_media/images/article/where-to-stay-in-makkah-hotels-near-haram.jpg" alt="Masjidil Haram Makkah" class="w-full h-full object-cover hover:scale-105 transition duration-500" onerror="this.src='https://placehold.co/400x250/fbe8e3/4a1525?text=Masjidil+Haram';">
+                <!-- Ticket Body -->
+                <div class="p-5 sm:p-6 bg-white space-y-4 relative">
+                    <!-- Cutout notches for ticket feel -->
+                    <div class="ticket-cutout-left -left-3 top-1/2 -translate-y-1/2"></div>
+                    <div class="ticket-cutout-right -right-3 top-1/2 -translate-y-1/2"></div>
+
+                    <!-- Passenger Names -->
+                    <div class="grid grid-cols-2 gap-3 pb-3 border-b border-dashed border-gray-300">
+                        <div>
+                            <span class="text-[10px] uppercase text-gray-400 font-semibold block">PASSENGER NAME (1)</span>
+                            <span class="font-bold text-xs sm:text-sm text-gray-800">MR RIZKY N. PRATAMA</span>
                         </div>
-                        <p class="text-[11px] font-serif-custom italic text-maroonTheme-wine mt-2 font-medium">Masjidil Haram, Makkah Al-Mukarramah</p>
+                        <div>
+                            <span class="text-[10px] uppercase text-gray-400 font-semibold block">PASSENGER NAME (2)</span>
+                            <span class="font-bold text-xs sm:text-sm text-gray-800">MRS ANNISA Y. YASMIN</span>
+                        </div>
                     </div>
 
-                    <!-- Bingkai 2: Masjid Nabawi -->
-                    <div class="bg-white p-2.5 rounded-2xl shadow-md border border-roseGold-300 flex flex-col">
-                        <div class="overflow-hidden rounded-xl aspect-[16/10] bg-roseGold-50 relative flex items-center justify-center">
-                            <img src="https://suaramuslim.net/wp-content/uploads/2020/02/Sejarah-Pembangunan-Masjid-Nabawi.jpeg" alt="Masjid Nabawi Madinah" class="w-full h-full object-cover hover:scale-105 transition duration-500" onerror="this.src='https://placehold.co/400x250/fbe8e3/4a1525?text=Masjid+Nabawi';">
+                    <!-- Child Passenger -->
+                    <div class="pb-3 border-b border-dashed border-gray-300">
+                        <span class="text-[10px] uppercase text-gray-400 font-semibold block">INFANT / CHILD PASSENGER (3)</span>
+                        <span class="font-bold text-xs sm:text-sm text-gray-800">MUHAMMAD DZIKRI AL FAQIH</span>
+                    </div>
+
+                    <!-- Flight Route & Details -->
+                    <div class="grid grid-cols-3 gap-2 py-2 text-center bg-gray-50 p-3 rounded-xl border border-gray-200">
+                        <div>
+                            <span class="text-[9px] uppercase text-gray-400 font-semibold block">FROM</span>
+                            <span class="font-bold text-sm sm:text-base text-green-900">CGK</span>
+                            <span class="text-[9px] text-gray-500 block">Jakarta</span>
                         </div>
-                        <p class="text-[11px] font-serif-custom italic text-maroonTheme-wine mt-2 font-medium">Masjid Nabawi, Madinah Al-Munawwarah</p>
+                        <div class="flex flex-col items-center justify-center text-green-800">
+                            <i class="fa-solid fa-plane text-lg animate-pulse text-[#00643C]"></i>
+                            <span class="text-[9px] font-mono mt-1 text-gray-500">DIRECT FAITH</span>
+                        </div>
+                        <div>
+                            <span class="text-[9px] uppercase text-gray-400 font-semibold block">TO</span>
+                            <span class="font-bold text-sm sm:text-base text-green-900">JED / MED</span>
+                            <span class="text-[9px] text-gray-500 block">Baitullah</span>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-3 gap-2 text-xs pt-1">
+                        <div>
+                            <span class="text-[9px] uppercase text-gray-400 font-semibold block">CLASS</span>
+                            <span class="font-bold text-green-900">FIRST LOVE CLASS</span>
+                        </div>
+                        <div>
+                            <span class="text-[9px] uppercase text-gray-400 font-semibold block">SEAT</span>
+                            <span class="font-bold text-green-900">FAMILY VIP</span>
+                        </div>
+                        <div>
+                            <span class="text-[9px] uppercase text-gray-400 font-semibold block">STATUS</span>
+                            <span class="font-bold text-green-700">CONFIRMED (DOA)</span>
+                        </div>
+                    </div>
+
+                    <!-- Barcode simulation -->
+                    <div class="pt-2 border-t border-dashed border-gray-300 flex flex-col items-center justify-center">
+                        <div class="font-mono tracking-widest text-xs text-gray-700 bg-gray-100 py-1.5 px-4 rounded w-full text-center">
+                            ||||| | |||| ||| |||||| |||| |||||
+                        </div>
+                        <span class="text-[9px] text-gray-400 mt-1">SAUDI ARABIAN AIRLINES • Bismillah Menuju Baitullah</span>
                     </div>
                 </div>
             </div>
 
-            <button onclick="goToStep(1)" class="text-xs text-roseGold-600 hover:text-maroonTheme-wine underline transition py-2">
-                <i class="fa-solid fa-rotate-right mr-1"></i> Mulai dari awal lagi
+            <!-- 2 BINGKAI FOTO MAKKAH & MADINAH -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 w-full mb-6">
+                <!-- Bingkai 1: Masjidil Haram -->
+                <div class="passport-page p-2.5 rounded-2xl shadow-md border border-[#D4AF37] flex flex-col text-left">
+                    <div class="overflow-hidden rounded-xl aspect-[16/10] bg-white relative flex items-center justify-center border border-[#D4AF37]/40">
+                        <img src="https://ziyarago.com:2053/media/general_media/images/article/where-to-stay-in-makkah-hotels-near-haram.jpg" alt="Masjidil Haram Makkah" class="w-full h-full object-cover hover:scale-105 transition duration-500" onerror="this.src='https://placehold.co/400x250/FBFAD8/12372A?text=Masjidil+Haram';">
+                    </div>
+                    <p class="text-[11px] font-serif-custom italic text-green-900 mt-2 font-bold">Masjidil Haram, Makkah Al-Mukarramah</p>
+                </div>
+
+                <!-- Bingkai 2: Masjid Nabawi -->
+                <div class="passport-page p-2.5 rounded-2xl shadow-md border border-[#D4AF37] flex flex-col text-left">
+                    <div class="overflow-hidden rounded-xl aspect-[16/10] bg-white relative flex items-center justify-center border border-[#D4AF37]/40">
+                        <img src="https://suaramuslim.net/wp-content/uploads/2020/02/Sejarah-Pembangunan-Masjid-Nabawi.jpeg" alt="Masjid Nabawi Madinah" class="w-full h-full object-cover hover:scale-105 transition duration-500" onerror="this.src='https://placehold.co/400x250/FBFAD8/12372A?text=Masjid+Nabawi';">
+                    </div>
+                    <p class="text-[11px] font-serif-custom italic text-green-900 mt-2 font-bold">Masjid Nabawi, Madinah Al-Munawwarah</p>
+                </div>
+            </div>
+
+            <button onclick="goToStep(1)" class="text-xs text-yellow-300 hover:text-white underline transition py-2 font-medium">
+                <i class="fa-solid fa-rotate-right mr-1"></i> Buka Paspor dari Awal Lagi
             </button>
         </div>
 
     </main>
 
     <!-- Footer -->
-    <footer class="relative z-10 text-center text-[10px] sm:text-xs text-gray-500 py-4 border-t border-roseGold-200 bg-white/55 backdrop-blur-sm">
-        <p>Dibuat dengan sepenuh cinta oleh <span class="font-semibold text-maroonTheme-wine">Rizky Novikusyandi Pratama</span> untuk <span class="font-semibold text-maroonTheme-wine">Annisa Yuniar Yasmin</span> & <span class="font-semibold text-maroonTheme-wine">Muhammad Dzikri Al Faqih</span>.</p>
+    <footer class="relative z-10 text-center text-[10px] sm:text-xs text-yellow-200/80 py-4 border-t border-[#D4AF37]/30 bg-[#081a13]/90 backdrop-blur-sm">
+        <p>Paspor Cinta dibuat dengan sepenuh hati oleh <span class="font-semibold text-yellow-300">Rizky Novikusyandi Pratama</span> untuk <span class="font-semibold text-yellow-300">Annisa Yuniar Yasmin</span> & <span class="font-semibold text-yellow-300">Muhammad Dzikri Al Faqih</span>.</p>
     </footer>
 
     <!-- ==================== POPUP MODAL ==================== -->
-    <div id="loveModal" class="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm opacity-0 pointer-events-none transition-opacity duration-300 p-4">
-        <div id="modalContentBox" class="bg-white w-full max-w-sm rounded-2xl p-6 shadow-2xl border border-roseGold-300 transform scale-95 transition-transform duration-300 relative">
-            <button onclick="closeModal()" class="absolute top-3 right-3 w-7 h-7 rounded-full bg-roseGold-100 text-maroonTheme-wine flex items-center justify-center text-xs hover:bg-roseGold-200 transition">
+    <div id="loveModal" class="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm opacity-0 pointer-events-none transition-opacity duration-300 p-4">
+        <div id="modalContentBox" class="passport-page w-full max-w-sm rounded-2xl p-6 shadow-2xl border-2 border-[#D4AF37] transform scale-95 transition-transform duration-300 relative">
+            <button onclick="closeModal()" class="absolute top-3 right-3 w-7 h-7 rounded-full bg-[#12372A] text-yellow-300 flex items-center justify-center text-xs hover:bg-green-900 transition">
                 <i class="fa-solid fa-xmark"></i>
             </button>
             <div class="text-center">
-                <div class="w-12 h-12 bg-roseGold-100 text-maroonTheme-wine rounded-xl flex items-center justify-center text-xl mx-auto mb-3 shadow-sm">
-                    <i class="fa-solid fa-gift"></i>
+                <div class="w-12 h-12 bg-[#12372A] text-yellow-300 rounded-xl flex items-center justify-center text-xl mx-auto mb-3 shadow-sm border border-[#D4AF37]">
+                    <i class="fa-solid fa-stamp"></i>
                 </div>
-                <h4 id="modalTitle" class="font-serif-custom font-bold text-lg text-maroonTheme-deep mb-2">Judul Kupon</h4>
-                <p id="modalDesc" class="text-gray-600 text-xs sm:text-sm leading-relaxed mb-5">Isi pesan...</p>
-                <button onclick="claimCoupon()" class="w-full bg-maroonTheme-wine hover:bg-maroonTheme-accent text-white py-2.5 rounded-xl font-medium text-xs shadow transition flex items-center justify-center gap-1.5">
+                <h4 id="modalTitle" class="font-serif-custom font-bold text-lg text-green-900 mb-2">Judul Visa Kupon</h4>
+                <p id="modalDesc" class="text-green-950 text-xs sm:text-sm leading-relaxed mb-5 font-light">Isi pesan...</p>
+                <button onclick="claimCoupon()" class="w-full bg-[#12372A] hover:bg-green-900 text-yellow-300 border border-[#D4AF37] py-2.5 rounded-xl font-medium text-xs shadow transition flex items-center justify-center gap-1.5">
                     <i class="fa-solid fa-check"></i>
-                    <span>Klaim Kupon ke Suami</span>
+                    <span>Klaim Visa Kupon ke Suami</span>
                 </button>
             </div>
         </div>
@@ -297,53 +394,45 @@
 
     <!-- ==================== JAVASCRIPT LOGIC ==================== -->
     <script>
-        let audioCtx = null;
-        let isPlaying = false;
-        let oscillatorInterval = null;
+        let isPlaying = true;
+        let ytPlayer = null;
 
-        // Auto play audio on load
-        window.addEventListener('DOMContentLoaded', () => {
-            startAudioAutomatically();
-        });
+        // Load YouTube IFrame API script dynamically
+        const tag = document.createElement('script');
+        tag.src = "https://www.youtube.com/iframe_api";
+        const firstScriptTag = document.getElementsByTagName('script')[0];
+        firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 
-        function startAudioAutomatically() {
-            try {
-                audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-                if (audioCtx.state === 'suspended') {
-                    audioCtx.resume();
+        // Required callback for YouTube IFrame API
+        function onYouTubeIframeAPIReady() {
+            ytPlayer = new YT.Player('ytAudioFrame', {
+                events: {
+                    'onReady': (event) => {
+                        event.target.playVideo();
+                    }
                 }
-                playAmbientChime();
-                isPlaying = true;
-            } catch (e) {
-                console.log("Audio autoplay prevented");
-            }
+            });
         }
 
+        // Fallback user interaction listener to trigger audio if browser blocks autoplay
         document.body.addEventListener('click', function initAudioOnClick() {
-            if (!isPlaying && audioCtx) {
-                audioCtx.resume();
-                playAmbientChime();
+            if (ytPlayer && typeof ytPlayer.playVideo === 'function') {
+                ytPlayer.playVideo();
                 isPlaying = true;
                 updateAudioButtonUI(true);
             }
         }, { once: true });
 
         function toggleAudio() {
-            const icon = document.getElementById('musicIcon');
-            const text = document.getElementById('musicText');
-
-            if (!isPlaying) {
-                try {
-                    if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-                    if (audioCtx.state === 'suspended') audioCtx.resume();
-                    playAmbientChime();
-                    isPlaying = true;
-                    updateAudioButtonUI(true);
-                } catch (e) {}
-            } else {
-                if (audioCtx) audioCtx.suspend();
+            if (!ytPlayer) return;
+            if (isPlaying) {
+                ytPlayer.pauseVideo();
                 isPlaying = false;
                 updateAudioButtonUI(false);
+            } else {
+                ytPlayer.playVideo();
+                isPlaying = true;
+                updateAudioButtonUI(true);
             }
         }
 
@@ -357,30 +446,6 @@
                 icon.className = "fa-solid fa-music";
                 if(text) text.innerText = 'Musik Mati';
             }
-        }
-
-        function playAmbientChime() {
-            if (!audioCtx) return;
-            const notes = [261.63, 329.63, 392.00, 523.25, 587.33];
-            let index = 0;
-            if (oscillatorInterval) clearInterval(oscillatorInterval);
-
-            oscillatorInterval = setInterval(() => {
-                if (!isPlaying || !audioCtx || audioCtx.state === 'suspended') return;
-                try {
-                    const osc = audioCtx.createOscillator();
-                    const gain = audioCtx.createGain();
-                    osc.type = 'sine';
-                    osc.frequency.value = notes[index % notes.length];
-                    index++;
-                    gain.gain.setValueAtTime(0.02, audioCtx.currentTime);
-                    gain.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + 3);
-                    osc.connect(gain);
-                    gain.connect(audioCtx.destination);
-                    osc.start();
-                    osc.stop(audioCtx.currentTime + 3);
-                } catch(e) {}
-            }, 3000);
         }
 
         // STEP-BY-STEP NAVIGATION
@@ -403,22 +468,22 @@
 
             window.scrollTo({ top: 0, behavior: 'smooth' });
 
-            if (stepNumber === 2 || stepNumber === 3) {
+            if (stepNumber === 2 || stepNumber === 3 || stepNumber === 4) {
                 confetti({
-                    particleCount: 50,
+                    particleCount: 45,
                     spread: 60,
                     origin: { y: 0.5 },
-                    colors: ['#d16247', '#f5d5cc', '#6B1D2F']
+                    colors: ['#D4AF37', '#12372A', '#FBFAD8']
                 });
             }
         }
 
         function triggerFinalCelebration() {
             confetti({
-                particleCount: 120,
+                particleCount: 140,
                 spread: 100,
                 origin: { y: 0.6 },
-                colors: ['#d16247', '#f5d5cc', '#6B1D2F', '#ebb5a6', '#gold']
+                colors: ['#D4AF37', '#12372A', '#00643C', '#FBFAD8', '#ffffff']
             });
         }
 
@@ -445,10 +510,22 @@
                 particleCount: 60,
                 spread: 70,
                 origin: { y: 0.7 },
-                colors: ['#d16247', '#6B1D2F']
+                colors: ['#D4AF37', '#12372A']
             });
             closeModal();
-            alert("Yeay! Kupon berhasil diklaim untuk Annisa Yuniar Yasmin. Silakan tagih ke Suami (Rizky) ya! ❤️");
+            // Custom dialog box without alert()
+            const msgBox = document.createElement('div');
+            msgBox.className = "fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4";
+            msgBox.innerHTML = `
+                <div class="passport-page rounded-2xl p-6 max-w-xs text-center shadow-xl border-2 border-[#D4AF37]">
+                    <div class="w-10 h-10 bg-[#12372A] text-yellow-300 rounded-full flex items-center justify-center mx-auto mb-3 border border-[#D4AF37]">
+                        <i class="fa-solid fa-stamp"></i>
+                    </div>
+                    <p class="text-xs text-green-900 font-semibold mb-4">Visa Kupon berhasil diklaim untuk Annisa Yuniar Yasmin. Silakan tagih ke Suami (Rizky) ya! ❤️</p>
+                    <button onclick="this.parentElement.parentElement.remove()" class="bg-[#12372A] text-yellow-300 border border-[#D4AF37] px-4 py-2 rounded-xl text-xs font-medium w-full">Tutup</button>
+                </div>
+            `;
+            document.body.appendChild(msgBox);
         }
     </script>
 </body>
